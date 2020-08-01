@@ -1,0 +1,17 @@
+<footer>
+  <ul class="footer-ul ls--n">
+    <li class="footer-li"><a href="{{ site.contact.tw1 }}" class="footer-a">Twitter</a></li>
+    <li class="footer-li"><a href="{{ site.contact.insta }}" class="footer-a">Instagram</a></li>
+    <li class="footer-li"><a href="{{ site.contact.fb }}" class="footer-a">Facebook</a></li>
+    <li class="footer-li"><a href="{{ site.contact.chatwork }}" class="footer-a">Chatwork</a></li>
+    <li class="footer-li"><a href="mailto:{{ site.contact.mail }}" class="footer-a">メール</a></li>
+  </ul>
+</footer>
+
+<script nonce="<?=$page->nonce; ?>">
+  trustedTypes.createPolicy('default', {
+    createHTML: (unsafeValue) => {
+      return unsafeValue.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+  });
+</script>

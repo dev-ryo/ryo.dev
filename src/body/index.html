@@ -1,0 +1,95 @@
+---
+desc: RYO.devは常にユーザー視点に立っています。ユーザーにとって使いやすいWebページを作ることが僕の目的です。
+---
+
+{% set css %}
+  {% include 'resetCSS/v1.css' %}
+  {% include 'header/v1.css' %}
+  {% include './style.css' %}
+  {% include 'footer/v1.css' %}
+{% endset %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta name="description" content="{{ desc }}">
+  <meta name="twitter:card" content="{{ site.twCard.type }}">
+  <meta name="twitter:site" content="{{ site.twCard.site }}">
+  <meta property="og:description" content="{{ desc }}">
+  <meta property="og:title" content="{{ site.bizName }}">
+  <meta property="og:url" content="{{ site.hp }}">
+  <meta property="og:image" content="{{ site.twCard.img }}">
+  <meta http-equiv="Content-Security-Policy" content="{{ site.csp | safe }}">
+  <style>
+    {{ css | cssmin | safe }}
+  </style>
+  <link rel="canonical" href="{{ site.hp }}">
+  <title>{{ site.bizName }}</title>
+  <link rel="icon" href="{{ site.img.icon }}">
+  <link rel="apple-touch-icon" href="{{ site.img.appleIcon }}">
+  <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "url": "{{ site.hp }}",
+        "logo": "{{ site.twCard.img }}"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "{{ site.hp }}",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "{{ site.hp }}search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  </script>
+</head>
+ <body>
+  {% include 'header/v1.html' %}
+
+  <main>
+    <div class="h1-C">
+      <h1>What is best <br>for users?</h1>
+      <p class="sec-cont">「ユーザーにとって何がベストか」<br>これは、僕がWebページを作るときに常に考えていることです。あなたがWebページで情報またはサービスを公開する目的とは？その目的は、ユーザーの利便性を欠いたWebページでも達成できますか？Webページは、ユーザーにとって使いやすいものであるべきです。</p>
+    </div>
+
+    <section>
+      <h2 data-secTitle="PROFILE">プロフィール</h2>
+      <p class="sec-cont">個人事業主としてWebページの制作・修正・改良やコーディングのレクチャーの仕事を主に引き受けている宮本亮です。茨城県つくば市在住です。<a href="http://www.capinew.jp/">CAPIN</a>のボランティアとして保護猫のお世話をしたり、人間中心設計の啓蒙や研究、ビジネスへの適用の支援などを行う団体である<a href="https://www.hcdnet.org/">HCD-Net</a>に入会していたりします。</p>
+    </section>
+
+    <section>
+      <h2 data-secTitle="SERVICE">提供サービス</h2>
+      <ul class="sec-cont ls--n">
+        <li class="sec-cont-li"><a href="work/" class="ul-a">提供可能サービス、料金と納期、流れ、特定商取引法に基づく表記</a></li>
+        <li class="sec-cont-li"><a href="article/thinking/work_policy/" class="ul-a">制作ポリシー</a></li>
+        <li class="sec-cont-li"><a href="work/production" class="ul-a">実績</a></li>
+        <li class="sec-cont-li"><a href="work/rating" class="ul-a">依頼主さんからの評価・口コミ</a></li>
+        <li class="sec-cont-li"><a href="work/terms_of_service" class="ul-a">利用規約</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 data-secTitle="ARTICLE">記事</h2>
+      <ul class="sec-cont ls--n">
+        <?php foreach($me['articleCategory'] as $cate): ?>
+          <li class="sec-cont-li"><a href="/<?=str_replace($me['hp'], "", $cate['link']); ?>" class="ul-a"><?=$cate['name']; ?></a></li>
+        <?php endforeach; ?>
+      </ul>
+    </section>
+
+    <section>
+      <h2 data-secTitle="CONTACT">お問い合わせ</h2>
+      <p class="sec-cont">フッターに載せているSNS、チャットツール、メールのいずれかを使ってご連絡ください。24時間以内に返信します。もし僕からの返信がなかった場合、お手数ですが、再度ご連絡いただけますと幸いです。</p>
+    </section>
+  </main>
+
+  {% include 'footer/v1.html' %}
+ </body>
+ </html>

@@ -1,0 +1,35 @@
+a,article,blockquote,button,code,div,dl,dd,dt,figcaption, figure,footer,h1,h2,h3,header,input,li,main,nav,ol,p,pre,section,span,svg,table,td,th,textarea,ul {box-sizing: border-box;}
+body,blockquote,figure,h1,h2,h3,p,pre {margin: 0;}
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  color: #262626;
+  background: #fff;
+  font-family: Arial, "Hiragino Kaku Gothic Pro", "BIZ UDPGothic", Meiryo, sans-serif;
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+}
+button,cite,code,dfn,input,kbd,select,textarea,var {font: inherit;}
+button,dialog,input,select,textarea {
+  color: inherit;
+  -webkit-appearance: none;
+}
+code,kbd,var {font-family: "Lucida Console","Courier New",monospace;}
+main {
+  width: 90%;
+  margin: 0 auto;
+}
+h1,h2,h3 {color: #000;}
+a:not([class]) {color: #1a73e8;}
+a:not([class]):focus,
+a:not([class]):hover {text-decoration: none;}
+table {border-collapse: collapse;}
+th {text-align: left;}
+button {cursor: pointer;}
+ul,ol {
+  padding: 0;
+  margin: 0;
+}

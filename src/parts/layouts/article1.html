@@ -1,0 +1,119 @@
+---
+schemaArticleImg:
+  - https://ryo.dev/img/schema1-1.png
+  - https://ryo.dev/img/schema4-3.png
+  - https://ryo.dev/img/schema16-9.png
+---
+
+{% set css %}
+  {% include 'resetCSS/v1.css' %}
+  {% include 'header/v1.css' %}
+  {% include 'article/v1.css' %}
+  {% if originalCSS %}
+    {% include '../../body' + page.url + 'style.css' %}
+  {% endif %}
+  {% include 'footer/v1.css' %}
+  {% include 'resetCSS/v1-1.css' %}
+{% endset %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta name="description" content="{{ desc }}">
+  <meta name="twitter:card" content="{{ site.twCard.type }}">
+  <meta name="twitter:site" content="{{ site.twCard.site }}">
+  <meta property="og:description" content="{{ desc }}">
+  <meta property="og:title" content="{{ title }} | {{ site.bizName }}">
+  <meta property="og:url" content="{{ url }}">
+  <meta property="og:image" content="{{ site.twCard.img }}">
+  <meta http-equiv="Content-Security-Policy" content="{{ site.csp | safe }}">
+  <style>
+    {{ css | cssmin | safe }}
+  </style>
+  <link rel="canonical" href="{{ url }}">
+  <title>{{ title }} | {{ site.bizName }}</title>
+  <link rel="icon" href="{{ site.img.icon }}">
+  <link rel="apple-touch-icon" href="{{ site.img.appleIcon }}">
+  <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{ url }}"
+        },
+        "headline": "{{ title }}",
+        "description": "{{ desc }}",
+        "image": ["{{ schemaArticleImg[0] }}", "{{ schemaArticleImg[1] }}", "{{ schemaArticleImg[2] }}"],
+        "author": {
+          "@type": "Person",
+          "name": "{{ site.activityName }}"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "{{ site.bizName }}",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://ryo.dev/img/publisherLogo.png",
+            "width": 600,
+            "height": 60
+          }
+        },
+        "datePublished": "{{ datePublished }}",
+        "dateModified": "{{ dateModified }}"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "ホーム",
+            "item": "{{ site.hp }}"
+          }, {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "記事",
+            "item": "{{ site.hp }}article/?category=all&p=1"
+          }, {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ tagJpName }}",
+            "item": "{{ site.hp }}article/?category={{ tag }}&p=1"
+          }
+        ]
+      }
+    ]
+  </script>
+</head>
+
+<body>
+  {% include 'header/v1.html' %}
+
+  <main>
+    <div class="h1_c">
+      <ul aria-label="パンくずリスト" class="breadcrumbs_c">
+        <li class="breadcrumbs-list"><a href="/" class="breadcrumbs-list-link">ホーム</a></li>
+        <li class="breadcrumbs-list"><a href="/article/?category=all&p=1" class="breadcrumbs-list-link">記事</a></li>
+        <li class="breadcrumbs-list"><a href="/article/?category={{ tag }}&p=1" class="breadcrumbs-list-link">{{ tagJpName }}</a></li>
+      </ul>
+      <p class="lastUpdated">最終更新日：<time datetime="{{ dateModified }}">{{ dateModified }}</time></p>
+      <h1>{{ title }}</h1>
+
+      <ol class="tableOfContents" aria-label="目次">
+        {% for h2 in heading %}
+          <li class="toc-li"><a href="#{{ headingId[loop.index0] }}" class="toc-a">{{ h2 }}</a></li>
+        {% endfor %}
+        <li class="toc-li"><a href="#contact" class="toc-a">お問い合わせ</a></li>
+      </ol>
+    </div>
+    {{ layoutContent | safe }}
+  </main>
+
+  {% include 'footer/v1.html' %}
+</body>
+</html>

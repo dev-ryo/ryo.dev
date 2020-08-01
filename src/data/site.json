@@ -1,0 +1,59 @@
+{
+  "activityName": "宮本亮",
+  "bizName": "RYO.dev",
+  "hp": "https://ryo.dev/",
+  "csp": "script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; trusted-types default",
+  "img": {
+    "logo": "/img/logo.jpg",
+    "icon": "/img/favicon.ico",
+    "appleIcon": "/img/appleTouchIcon.png"
+  },
+  "contact": {
+    "tw1": "https://twitter.com/ryoo_s_s",
+    "tw2": "https://twitter.com/ryoo20190328",
+    "insta": "https://www.instagram.com/ryo.dev/",
+    "fb": "https://www.facebook.com/ryo.dev.web",
+    "chatwork": "https://chatwork.com/ryoDev",
+    "github": "https://github.com/dev-ryo",
+    "mail": "roxen@ryo.dev"
+  },
+  "twCard": {
+    "type": "summary",
+    "site": "@ryoo_s_s",
+    "img": "https://ryo.dev/img/logo.jpg"
+  },
+  "articleCategory": {
+    "all": {
+      "name": "すべてのカテゴリー",
+      "link": "https://ryo.dev/article/?category=all&p=1"
+    },
+    "thinking": {
+      "name": "考え",
+      "link": "https://ryo.dev/article/?category=thinking&p=1"
+    },
+    "experience": {
+      "name": "経験",
+      "link": "https://ryo.dev/article/?category=experience&p=1"
+    },
+    "myWebServices": {
+      "name": "自作Webサービス",
+      "link": "https://ryo.dev/article/?category=myWebServices&p=1"
+    },
+    "achievements": {
+      "name": "実績",
+      "link": "https://ryo.dev/article/?category=achievements&p=1"
+    },
+    "coding": {
+      "name": "コーディング",
+      "link": "https://ryo.dev/article/?category=coding&p=1"
+    },
+    "js": {
+      "name": "JavaScript",
+      "link": "https://ryo.dev/article/?category=js&p=1"
+    },
+    "php": {
+      "name": "PHP",
+      "link": "https://ryo.dev/article/?category=php&p=1"
+    }
+  }
+}
