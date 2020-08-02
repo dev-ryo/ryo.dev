@@ -63,7 +63,7 @@ schemaArticleImg:
           }
         },
         "datePublished": "{{ datePublished }}",
-        "dateModified": "{{ dateModified }}"
+        "dateModified": "{{ page.date.toISOString().slice(0, 10) }}"
       },
       {
         "@context": "https://schema.org",
@@ -101,7 +101,7 @@ schemaArticleImg:
         <li class="breadcrumbs-list"><a href="/article/?category=all&p=1" class="breadcrumbs-list-link">記事</a></li>
         <li class="breadcrumbs-list"><a href="/article/?category={{ tag }}&p=1" class="breadcrumbs-list-link">{{ tagJpName }}</a></li>
       </ul>
-      <p class="lastUpdated">最終更新日：<time datetime="{{ dateModified }}">{{ dateModified }}</time></p>
+      <p class="lastUpdated">最終更新日：<time datetime="{{ page.date.toISOString().slice(0, 10) }}">{{ page.date.toISOString().slice(0, 10).replace('-', '.').replace('-', '.') }}</time></p>
       <h1>{{ title }}</h1>
 
       <ol class="tableOfContents" aria-label="目次">

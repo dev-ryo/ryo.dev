@@ -1,0 +1,49 @@
+---
+schemaArticleImg:
+  - https://ryo.dev/img/schema1-1.png
+  - https://ryo.dev/img/schema4-3.png
+  - https://ryo.dev/img/schema16-9.png
+---
+
+{% set css %}
+  {% include 'resetCSS/v1.css' %}
+  {% include 'header/v1.css' %}
+  {% if originalCSS %}
+    {% include '../../body' + page.url + 'style.css' %}
+  {% endif %}
+  {% include 'footer/v1.css' %}
+  {% include 'resetCSS/v1-1.css' %}
+{% endset %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta name="description" content="{{ desc }}">
+  <meta name="twitter:card" content="{{ site.twCard.type }}">
+  <meta name="twitter:site" content="{{ site.twCard.site }}">
+  <meta property="og:description" content="{{ desc }}">
+  <meta property="og:title" content="{{ title }} | {{ site.bizName }}">
+  <meta property="og:url" content="{{ url }}">
+  <meta property="og:image" content="{{ site.twCard.img }}">
+  <meta http-equiv="Content-Security-Policy" content="{{ site.csp | safe }}">
+  <style>
+    {{ css | cssmin | safe }}
+  </style>
+  <link rel="canonical" href="{{ url }}">
+  <title>{{ title }} | {{ site.bizName }}</title>
+  <link rel="icon" href="{{ site.img.icon }}">
+  <link rel="apple-touch-icon" href="{{ site.img.appleIcon }}">
+</head>
+
+<body>
+  {% include 'header/v1.html' %}
+
+  <main>
+    {{ layoutContent | safe }}
+  </main>
+
+  {% include 'footer/v1.html' %}
+</body>
+</html>
