@@ -1,0 +1,75 @@
+---
+title: ダステンフェルドのアルゴリズムを使ったランダムシャッフル
+desc: 多くの記事で紹介されているフィッシャー–イェーツのアルゴリズムって、ダステンフェルドのアルゴリズムですよね。ともかく、Wikipediaの解説を参考にしながらアルゴリズムを実現するコードを解説します。
+url: https://ryo.dev/article/js/random-shuffling-using-Dastenfeld's-algorithm/
+tags:
+ - js
+tagJpName: JavaScript
+heading:
+  - ランダムシャッフルに使うアルゴリズム
+  - ダステンフェルドのアルゴリズム
+headingId:
+  - fy
+  - d
+originalCSS: true
+datePublished: "2020-07-03"
+date: 2020-08-03
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>「javascript　ランダムシャッフル」とググって出てきた記事ではたいてい、<strong>フィッシャー–イェーツのシャッフル (Fisher–Yates shuffle)アルゴリズム</strong>を使ってランダムシャッフルを実現しています。</p>
+  <p><a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#:~:text=1%20%E3%81%8B%E3%82%89%20N%20,%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E9%A0%86%E5%88%97%E3%81%A8%E3%81%AA%E3%82%8B%E3%80%82">Wikipedia</a>では、このアルゴリズムを言語化して紹介しています。</p>
+  <blockquote cite="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E3%81%A8%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AB%E3%82%88%E3%82%8B%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0">
+    <ol>
+      <li>1 から <span class="fs--i">N</span> までの数字を書く。</li>
+      <li>まだ消されてない数字の数を数え、1 からその数以下までのランダムな数字 <span class="fs--i">k</span> を選ぶ。</li>
+      <li>残っている数字から k 番目の数字を消し、別の場所にその数字を書き出す。</li>
+      <li>すべての数字が消されるまで手順 2, 3 を繰り返す。</li>
+      <li>手順3で書かれた数列が元の数値からのランダム順列となる。</li>
+    </ol>
+  </blockquote>
+  <p>これと、<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E4%BE%8B">Wikipediaの例</a>をもとに、配列の要素をランダムシャッフルするコードを書いてみるとこうなります。</p>
+  <pre class="p2"><code class="blockCode_c"><span class="code-line"><span class="code-blue">const</span> <var class="code-purple">a</var> <span class="code-pink">=</span> [<span class="code-yellow">"a"</span>, <span class="code-yellow">"b"</span>, <span class="code-yellow">"c"</span>, <span class="code-yellow">"d"</span>];</span>
+<span class="code-line"><span class="code-blue">const</span> <var class="code-purple">N</var> <span class="code-pink">=</span> a.length;</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-pink">for</span>(<span class="code-blue">let</span> <var>i</var> <span class="code-pink">=</span> N; <var>i</var> <span class="code-pink">&gt;</span> <span class="code-purple">0</span>; <var>i</var><span class="code-pink">--</span>) {</span>
+<span class="code-line">  <span class="code-blue">const</span> <var class="code-purple">k</var> <span class="code-pink">=</span> <span class="code-blue">Math</span>.<span class="code-blue">floor</span>(<span class="code-blue">Math</span>.<span class="code-blue">random</span>() <span class="code-pink">*</span> <var>i</var>);</span>
+<span class="code-line">  <var>a</var>.<span class="code-blue">push</span>(<var>a</var>.<span class="code-blue">splice</span>(<var>k</var>, <span class="code-purple">1</span>).<span class="code-blue">toString</span>());</span>
+<span class="code-line">}</span></code></pre>
+<p><code class="inlineCode">a.splice(k, 1)</code>は、<code class="inlineCode">a[k]</code>の位置から1つの要素を取り除きます。<code class="inlineCode"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">splice()</a></code>メソッドは、取り除かれた要素を含む配列を返します。それを、<code class="inlineCode"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/toString">toString()</a></code>メソッドで文字列に変換します。<code class="inlineCode"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/push">push()</a></code>メソッドを使ってその文字列を配列<code class="inlineCode">a</code>の末尾に追加します。</p>
+<p>...どうですか？<br>あなたが見た記事で紹介されているコードと一緒ですか？</p>
+<p>違うはずです。</p>
+<p>しかし、これがフィッシャーとイェーツのアルゴリズムです。</p>
+<p>あなたがよく目にするコードは<strong>ダステンフェルド</strong>のアルゴリズムです。これは、<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#改良されたアルゴリズム:~:text=%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB%E3%81%AE%E6%94%B9%E8%89%AF%E3%81%95%E3%82%8C%E3%81%9F%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AF%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AE%E4%BD%BF%E7%94%A8%E3%82%92%E6%83%B3%E5%AE%9A%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%80%82%E3%81%9D%E3%82%8C%E3%81%AF%E3%83%AA%E3%83%81%E3%83%A3%E3%83%BC%E3%83%89%E3%83%BB%E3%83%80%E3%82%B9%E3%83%86%E3%83%B3%E3%83%95%E3%82%A7%E3%83%AB%E3%83%89%E3%81%AB%E3%82%88%E3%81%A3%E3%81%A61964%E5%B9%B4%E3%81%AB%E7%B4%B9%E4%BB%8B">コンピュータでの使用を想定してフィッシャーとイェーツのアルゴリズムを改良</a>したものです。</p>
+<p>次のセクションでダステンフェルドのアルゴリズムについて触れていきます。</p>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <p><a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E6%94%B9%E8%89%AF%E3%81%95%E3%82%8C%E3%81%9F%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0">Wikipedia</a>ではこのアルゴリズムについて次のように説明しています。</p>
+  <blockquote cite="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E6%94%B9%E8%89%AF%E3%81%95%E3%82%8C%E3%81%9F%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0">要素数が <span class="fs--i">n</span> の配列 <span class="fs--i">a</span> をシャッフルする(添字は0からn-1):
+    <div class="ml1rem"><span class="fs--i">i</span> を <span class="fs--i">n</span> - 1 から 1 まで減少させながら、以下を実行する</div>
+    <div class="ml2rem">
+      <span class="fs--i">j</span> に 0 以上 <span class="fs--i">i</span> 以下のランダムな整数を代入する<br>
+      <span class="fs--i">a</span>[<span class="fs--i">j</span>] と <span class="fs--i">a</span>[<span class="fs--i">i</span>]を交換する
+    </div>
+  </blockquote>
+  <p>では、これをコードで表現してみましょう。次のようになります。</p>
+  <pre><code class="blockCode_c"><span class="code-line"><span class="code-blue">const</span> <var class="code-purple">a</var> <span class="code-pink">=</span> [<span class="code-yellow">"a"</span>, <span class="code-yellow">"b"</span>, <span class="code-yellow">"c"</span>, <span class="code-yellow">"d"</span>];</span>
+<span class="code-line"><span class="code-blue">const</span> <var class="code-purple">n</var> <span class="code-pink">=</span> a.length;</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-pink">for</span>(<span class="code-blue">let</span> <var>i</var> <span class="code-pink">=</span> n <span class="code-pink">-</span> <span class="code-purple">1</span>; <var>i</var> <span class="code-pink">&gt;</span> <span class="code-purple">0</span>; <var>i</var><span class="code-pink">--</span>) {</span>
+  <span class="code-line">  <span class="code-blue">const</span> <var class="code-purple">j</var> <span class="code-pink">=</span> <span class="code-blue">Math</span>.<span class="code-blue">floor</span>(<span class="code-blue">Math</span>.<span class="code-blue">random</span>() <span class="code-pink">*</span> (<var>i</var> <span class="code-pink">+</span> <span class="code-purple">1</span>));</span>
+  <span class="code-line">  [<var>a</var>[i], <var>a</var>[j]] <span class="code-pink">=</span> [<var>a</var>[j], <var>a</var>[i]];</span>
+<span class="code-line">}</span></code></pre>
+  <p>「<span class="fs--i">a</span>[<span class="fs--i">j</span>] と <span class="fs--i">a</span>[<span class="fs--i">i</span>]を交換する」コードは以下のコードで実現しています。</p>
+  <pre><code class="blockCode_c"><span class="code-line">[<var>a</var>[i], <var>a</var>[j]] <span class="code-pink">=</span> [<var>a</var>[j], <var>a</var>[i]];</span></code></pre>
+  <p>これは<strong><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">分割代入</a></strong>という手法です。</p>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>ご意見やお聞きしたいことがございましたら、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>

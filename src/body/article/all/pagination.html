@@ -1,0 +1,10 @@
+---
+cateName: すべてのカテゴリー
+pagination:
+  data: collections.all
+  size: 30
+  reverse: true
+permalink: "article/all/{{ pagination.pageNumber + 1 }}/"
+eleventyExcludeFromCollections: true
+layout: layouts/archive.html
+---

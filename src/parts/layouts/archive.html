@@ -1,0 +1,127 @@
+---
+title: 記事
+desc: 他の人と同じ内容を公開してもそこに大きな価値は見出せません。僕はユニークな情報を公開します。
+url: https://ryo.dev/article/all/1/
+schemaArticleImg:
+  - https://ryo.dev/img/schema1-1.png
+  - https://ryo.dev/img/schema4-3.png
+  - https://ryo.dev/img/schema16-9.png
+---
+
+{% set css %}
+  {% include 'resetCSS/v1.css' %}
+  {% include 'header/v1.css' %}
+  {% include '../../body/article/style.css' %}
+  {% include 'footer/v1.css' %}
+  {% include 'resetCSS/v1-1.css' %}
+{% endset %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <meta name="description" content="{{ desc }}">
+  <meta name="twitter:card" content="{{ site.twCard.type }}">
+  <meta name="twitter:site" content="{{ site.twCard.site }}">
+  <meta property="og:description" content="{{ desc }}">
+  <meta property="og:title" content="{{ title }} | {{ site.bizName }}">
+  <meta property="og:url" content="{{ url }}">
+  <meta property="og:image" content="{{ site.twCard.img }}">
+  <meta http-equiv="Content-Security-Policy" content="{{ site.csp | safe }}">
+  <style>
+    {{ css | cssmin | safe }}
+  </style>
+  <link rel="canonical" href="{{ url }}">
+  <title>{{ title }} | {{ site.bizName }}</title>
+  <link rel="icon" href="{{ site.img.icon }}">
+  <link rel="apple-touch-icon" href="{{ site.img.appleIcon }}">
+</head>
+
+<body>
+  {% include 'header/v1.html' %}
+
+  <main>
+    <h1>{{ title }}</h1>
+    <div class="category_c">
+      <button type="button" class="btn-chooseCategory" id="categoryPanelTrigger" aria-label="カテゴリー選択メニューを開く" aria-haspopup="true" aria-expanded="false" aria-owns="categoryPanel">{{ cateName }}</button>
+
+      <div class="categoryPanel-beforeE" tabindex="-1"></div>
+      <button type="button" class="categoryPanel-mask" aria-label="カテゴリー選択メニューを閉じる"></button>
+      <ul class="categoryPanel_c" id="categoryPanel" aria-hidden="true">
+        {% for cateSlug, cateInfo in site.articleCategory -%}
+          <li><a href="/article/{{ cateSlug }}/1/" class="btn-eCategory">{{ cateInfo.name }}</a></li>
+        {% endfor -%}
+      </ul>
+      <div class="categoryPanel-afterE" tabindex="-1"></div>
+    </div>
+
+    <div class="articleList">
+      {%- for post in pagination.items %}
+      <article class="eArticle_c">
+        <h2><a href="{{ post.url }}" class="h2-link">{{ post.data.title }}</a></h2>
+        <p class="lastUpdated">最終更新日：<time datetime="{{ post.date.toISOString().slice(0, 10) }}">{{ post.date.toISOString().slice(0, 10).replace('-', '.').replace('-', '.') }}</time></p>
+        <p class="description">{{ post.data.desc }}</p>
+      </article>
+      {% endfor -%}
+
+      <div class="pagination">
+        {% if pagination.previousPageHref %}
+        <a href="{{ pagination.previousPageHref }}" class="arrowL" aria-label="前のページの記事一覧を見る"></a>
+        {% else %}
+        <span class="arrowL pagination-unavailable"></span>
+        {% endif %}
+
+        {% if pagination.nextPageHref %}
+        <a href="{{ pagination.nextPageHref }}" class="arrowR" aria-label="次のページの記事一覧を見る"></a>
+        {% else %}
+        <span class="arrowR pagination-unavailable"></span>
+        {% endif %}
+      </div>
+    </div>
+  </main>
+
+  {% include 'footer/v1.html' %}
+
+  <script>
+    const categorypanelBeforeE = document.querySelector('.categoryPanel-beforeE');
+    const categorypanelAfterE = document.querySelector('.categoryPanel-afterE');
+    const chooseCategoryBtnE = document.querySelector('.btn-chooseCategory');
+    const categorypanelE = document.querySelector('.categoryPanel_c');
+    const cateLinkE = document.querySelectorAll('.btn-eCategory');
+    const categorypanel_maskE = document.querySelector('.categoryPanel-mask');
+    let currentCategory = "";
+
+    chooseCategoryBtnE.addEventListener('click', () => {
+      categorypanelBeforeE.setAttribute('tabindex', '0');
+      categorypanelAfterE.setAttribute('tabindex', '0');
+      chooseCategoryBtnE.setAttribute('aria-expanded', true);
+      categorypanelE.setAttribute('aria-hidden', false);
+      categorypanelE.classList.add('categoryPanel-open');
+      categorypanel_maskE.style.display = "block";
+      cateLinkE[0].focus();
+
+      window.addEventListener('keydown', (e) => {
+        if(e.keyCode === 27) closeCategoryPanel();
+      });
+    });
+
+    categorypanel_maskE.addEventListener('click', () => {
+      categorypanelBeforeE.setAttribute('tabindex', '-1');
+      categorypanelAfterE.setAttribute('tabindex', '-1');
+      chooseCategoryBtnE.setAttribute('aria-expanded', false);
+      categorypanelE.setAttribute('aria-hidden', true);
+      categorypanelE.classList.remove('categoryPanel-open');
+      chooseCategoryBtnE.focus();
+      categorypanel_maskE.style.display = "none";
+    });
+
+    categorypanelBeforeE.addEventListener('focus', () => {
+      cateLinkE[cateLinkE.length - 1].focus()
+    });
+    categorypanelAfterE.addEventListener('focus', () => {
+      categorypanel_maskE.focus()
+    });
+  </script>
+</body>
+</html>

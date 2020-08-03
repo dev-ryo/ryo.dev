@@ -2,7 +2,8 @@
 title: 他人と比較すると成長できる
 desc: 他人と比較することで自分の知識やスキルの誤りや弱点、少なさ、未熟さを痛感することがあります。それはとても悔しいことです。その悔しさを糧にして、現状を打破する策を論理的に考え実践することで、成長できるのではないでしょうか。
 url: https://ryo.dev/article/thinking/compare-to-others/
-tag: thinking
+tags:
+  - thinking
 tagJpName: 考え
 heading:
   - 前置き
@@ -19,14 +20,12 @@ layout: layouts/article1.html
 
 <section id="{{ headingId[0] }}">
   <h2>{{ heading[0] }}</h2>
-  <p>{{ date.toISOString().slice(0, 10) }}</p>
-  <p>{{ date.toISOString().slice(0, 10).replace('-', '.').replace('-', '.') }}</p>
   <p>Aさんと遊んだときの話です。</p>
   <p>Aさんとはよく、スマホゲームで対戦をします。そのときは、「<a href="https://twitter.com/QuizKnockGames/status/1268817566614450176?s=20"><strong>Tonguess</strong></a>」で対戦をしました。</p>
   <p>Tonguessは、東大王の伊沢さんが中心となって運営しているYouTubeチャンネル・<strong>Quiznock</strong>の企画をゲーム化したものです。ルールはHit & Blowと似ています。</p>
   <p>両者は3文字または4文字の英単語を決めます。相手のアルファベットを先に当てた方が勝ちです。回答をするたびにヒントとして、文字と位置が当たっている個数（GET）と、文字のみが当たっている個数（TOUCH）が与えられます。</p>
-  <p class="m--0">例えば、正解が「CAT」だとします。その時の回答と、それにより与えられるヒントは次のようになります。</p>
-  <ol class="p2">
+  <p>例えば、正解が「CAT」だとします。その時の回答と、それにより与えられるヒントは次のようになります。</p>
+  <ol>
     <li>回答「WEB」、GET「0」、TOUCH「0」</li>
     <li>回答「TAP」、GET「1」、TOUCH「1」</li>
     <li>回答「TEA」、GET「0」、TOUCH「2」</li>

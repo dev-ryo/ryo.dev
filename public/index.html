@@ -102,7 +102,7 @@
   </ul>
 </footer>
 
-<script nonce="<?=$page->nonce; ?>">
+<script>
   trustedTypes.createPolicy('default', {
     createHTML: (unsafeValue) => {
       return unsafeValue.replace(/</g, '&lt;').replace(/>/g, '&gt;');

@@ -3,6 +3,7 @@ schemaArticleImg:
   - https://ryo.dev/img/schema1-1.png
   - https://ryo.dev/img/schema4-3.png
   - https://ryo.dev/img/schema16-9.png
+originalCSSFileName: style
 ---
 
 {% set css %}
@@ -10,7 +11,7 @@ schemaArticleImg:
   {% include 'header/v1.css' %}
   {% include 'article/v1.css' %}
   {% if originalCSS %}
-    {% include '../../body' + page.url + 'style.css' %}
+    {% include '../../body' + page.url + originalCSSFileName + '.css' %}
   {% endif %}
   {% include 'footer/v1.css' %}
   {% include 'resetCSS/v1-1.css' %}
@@ -83,7 +84,7 @@ schemaArticleImg:
             "@type": "ListItem",
             "position": 3,
             "name": "{{ tagJpName }}",
-            "item": "{{ site.hp }}article/?category={{ tag }}&p=1"
+            "item": "{{ site.hp }}article/?category={{ tags }}&p=1"
           }
         ]
       }
@@ -99,7 +100,7 @@ schemaArticleImg:
       <ul aria-label="パンくずリスト" class="breadcrumbs_c">
         <li class="breadcrumbs-list"><a href="/" class="breadcrumbs-list-link">ホーム</a></li>
         <li class="breadcrumbs-list"><a href="/article/?category=all&p=1" class="breadcrumbs-list-link">記事</a></li>
-        <li class="breadcrumbs-list"><a href="/article/?category={{ tag }}&p=1" class="breadcrumbs-list-link">{{ tagJpName }}</a></li>
+        <li class="breadcrumbs-list"><a href="/article/?category={{ tags }}&p=1" class="breadcrumbs-list-link">{{ tagJpName }}</a></li>
       </ul>
       <p class="lastUpdated">最終更新日：<time datetime="{{ page.date.toISOString().slice(0, 10) }}">{{ page.date.toISOString().slice(0, 10).replace('-', '.').replace('-', '.') }}</time></p>
       <h1>{{ title }}</h1>

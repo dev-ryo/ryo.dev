@@ -3,13 +3,14 @@ schemaArticleImg:
   - https://ryo.dev/img/schema1-1.png
   - https://ryo.dev/img/schema4-3.png
   - https://ryo.dev/img/schema16-9.png
+originalCSSFileName: style
 ---
 
 {% set css %}
   {% include 'resetCSS/v1.css' %}
   {% include 'header/v1.css' %}
   {% if originalCSS %}
-    {% include '../../body' + page.url + 'style.css' %}
+    {% include '../../body' + page.url + originalCSSFileName + '.css' %}
   {% endif %}
   {% include 'footer/v1.css' %}
   {% include 'resetCSS/v1-1.css' %}
