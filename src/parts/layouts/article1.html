@@ -36,7 +36,7 @@ originalCSSFileName: style
   <meta property="og:title" content="{{ title }} | {{ site.bizName }}">
   <meta property="og:url" content="{{ url }}">
   <meta property="og:image" content="{{ twCardImg }}">
-  <meta http-equiv="Content-Security-Policy" content="{{ site.csp | safe }}">
+  <meta http-equiv="Content-Security-Policy" content="{{ csp | safe }}">
   <style>
     {{ css | cssmin | safe }}
   </style>
