@@ -2,12 +2,6 @@
   "activityName": "宮本亮",
   "bizName": "RYO.dev",
   "hp": "https://ryo.dev/",
-  "csp": "script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; trusted-types default",
-  "img": {
-    "logo": "/img/logo.jpg",
-    "icon": "/img/favicon.ico",
-    "appleIcon": "/img/appleTouchIcon.png"
-  },
   "contact": {
     "tw1": "https://twitter.com/ryoDevWeb",
     "tw2": "https://twitter.com/webDevRyo",
@@ -16,11 +10,6 @@
     "chatwork": "https://chatwork.com/ryoDev",
     "github": "https://github.com/dev-ryo",
     "mail": "roxen@ryo.dev"
-  },
-  "twCard": {
-    "type": "summary",
-    "site": "@ryoo_s_s",
-    "img": "https://ryo.dev/img/logo.jpg"
   },
   "articleCategory": {
     "all": {

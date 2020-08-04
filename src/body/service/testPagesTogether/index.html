@@ -1,0 +1,114 @@
+---
+title: Caitoc
+desc: 読み込み速度、AMP、構造化データ、コードなど、オンライン上でWebページをテストするためのサービスは豊富にあります。それらのテストをワンクリックでまとめて行えるサービスです。
+url: https://ryo.dev/service/testPagesTogether/
+twCardType: summary
+twCardSite: "@ryoDevWeb"
+twCardImg: https://ryo.dev/img/logo.jpg
+csp: script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; trusted-types default
+icon: /img/favicon.ico
+appleIcon: /img/appleTouchIcon.png
+eleventyExcludeFromCollections: true
+---
+
+{% set css %}
+  {% include 'resetCSS/v1.css' %}
+  {% include 'header/v1.css' %}
+  {% include '../../../body' + page.url + 'style.css' %}
+  {% include 'resetCSS/v1-1.css' %}
+{% endset %}
+
+{% include 'head/v1.html' %}
+
+{% include 'header/v1.html' %}
+
+<main>
+  <h1>Caitoc</h1>
+  <p class="exp">コードの有効性、モバイルフレンドリー、読み込み速度、...。<br>Webページの使いやすさに関連したいくつかの項目をまとめてテストしよう！</p>
+  <div class="testSection">
+    <div class="ctrl-C">
+      <input type="url" class="input" name="url" placeholder="テストしたいURLを入力" aria-label="テストしたいURLを入力してください">
+      <button type="button" class="testBtn">テストする</button>
+    </div>
+    <ul class="resultLi-C ls--n"></ul>
+  </div>
+</main>
+
+<footer>
+  <ul class="footer-article-C">
+    <li><a href="/article/myWebServices/testPagesTogether/" class="footer-a">Caitocについて</a></li>
+    <li class="ml20"><a href="/article/thinking/testing-the-web-page/" class="footer-a">テストする意義</a></li>
+  </ul>
+</footer>
+
+<script>
+  trustedTypes.createPolicy('default', {
+    createHTML: (unsafeValue) => {
+      return unsafeValue.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+  });
+
+  const input = document.querySelector('.input');
+  const resultC = document.querySelector('.resultLi-C');
+  const testBtn = document.querySelector('.testBtn');
+  const fragment = document.createDocumentFragment();
+  const tool = [
+    {name: "HTMLの有効性", url: "https://validator.w3.org/nu/?doc=TARGETURL"},
+    {name: "CSSの有効性", url: "https://jigsaw.w3.org/css-validator/validator?uri=TARGETURL&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=ja"},
+    {name: "読み込み速度", url: "https://developers.google.com/speed/pagespeed/insights/?url=TARGETURL"},
+    {name: "モバイルフレンドリーの有効性", url: "https://search.google.com/test/mobile-friendly?url=TARGETURL"},
+    {name: "構造化データの有効性", url: "https://search.google.com/test/rich-results?url=TARGETURL&user_agent=1"},
+    {name: "Twitterカードの有効性", url: "https://cards-dev.twitter.com/validator"},
+    {name: "AMPの有効性", url: "https://search.google.com/test/amp?url=TARGETURL"},
+    {name: "全体的なパフォーマンス", url: "https://web.dev/measure/"}
+  ];
+  const numOfTool = tool.length;
+
+  for(let i = 0; i < numOfTool; i++) {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    li.classList.add('resultLi');
+    a.classList.add('toolLink');
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener noreferrer');
+    a.textContent = tool[i]["name"];
+    li.appendChild(a);
+    fragment.appendChild(li);
+  }
+  document.querySelector('ul').appendChild(fragment);
+  const toolLink = document.querySelectorAll('.toolLink');
+
+  const tgtUrl = location.search.substring(5);
+  if(tgtUrl !== "") {
+    genResultLi(tgtUrl, false);
+    history.replaceState(tgtUrl, "", `?url=${tgtUrl}`);
+  }
+  console.log(location.search.substring(5));
+
+  testBtn.addEventListener('click', () => {genResultLi(input.value);});
+  input.addEventListener('focus', (e) => {e.target.select();});
+  input.addEventListener('keydown', () => {if(event.keyCode === 13) genResultLi(input.value);});
+  input.addEventListener('input', () => {resultC.classList.remove('genUrl');});
+  window.addEventListener('popstate', (e) => {
+    if(e.state === null) {
+      resultC.classList.remove('genUrl');
+      input.value = "";
+    }
+    else {genResultLi(e.state, false);}
+  });
+
+  function genResultLi(url, pushstate = true) {
+    if(url === "") {alert('URLを入力してください。')}
+    else {
+      if(pushstate) {history.pushState(url, "", `?url=${url}`);}
+      resultC.classList.add('genUrl');
+      input.value = url;
+
+      for (let j = 0; j < numOfTool; j++) {
+        const href = tool[j]["url"].replace('TARGETURL', url);
+        toolLink[j].setAttribute('href', href);
+      }
+      setTimeout(() => {toolLink[0].focus();}, 500);
+    }
+  }
+</script>

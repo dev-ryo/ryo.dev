@@ -16,27 +16,27 @@ eleventyExcludeFromCollections: true
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
   <meta name="description" content="{{ desc }}">
-  <meta name="twitter:card" content="{{ site.twCard.type }}">
-  <meta name="twitter:site" content="{{ site.twCard.site }}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ryoDevWeb">
   <meta property="og:description" content="{{ desc }}">
   <meta property="og:title" content="{{ site.bizName }}">
   <meta property="og:url" content="{{ site.hp }}">
-  <meta property="og:image" content="{{ site.twCard.img }}">
-  <meta http-equiv="Content-Security-Policy" content="{{ site.csp | safe }}">
+  <meta property="og:image" content="https://ryo.dev/img/logo.jpg">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; trusted-types default">
   <style>
     {{ css | cssmin | safe }}
   </style>
   <link rel="canonical" href="{{ site.hp }}">
   <title>{{ site.bizName }}</title>
-  <link rel="icon" href="{{ site.img.icon }}">
-  <link rel="apple-touch-icon" href="{{ site.img.appleIcon }}">
+  <link rel="icon" href="/img/favicon.ico">
+  <link rel="apple-touch-icon" href="/img/appleTouchIcon.png">
   <script type="application/ld+json">
     [
       {
         "@context": "https://schema.org",
         "@type": "Organization",
         "url": "{{ site.hp }}",
-        "logo": "{{ site.twCard.img }}"
+        "logo": "https://ryo.dev/img/ryooLogo.jpg"
       },
       {
         "@context": "https://schema.org",

@@ -2,10 +2,12 @@
 title: 記事
 desc: 他の人と同じ内容を公開してもそこに大きな価値は見出せません。僕はユニークな情報を公開します。
 url: https://ryo.dev/article/all/1/
-schemaArticleImg:
-  - https://ryo.dev/img/schema1-1.png
-  - https://ryo.dev/img/schema4-3.png
-  - https://ryo.dev/img/schema16-9.png
+twCardType: summary
+twCardSite: "@ryoDevWeb"
+twCardImg: https://ryo.dev/img/logo.jpg
+csp: script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; trusted-types default
+icon: /img/favicon.ico
+appleIcon: /img/appleTouchIcon.png
 ---
 
 {% set css %}
@@ -22,20 +24,20 @@ schemaArticleImg:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
   <meta name="description" content="{{ desc }}">
-  <meta name="twitter:card" content="{{ site.twCard.type }}">
-  <meta name="twitter:site" content="{{ site.twCard.site }}">
+  <meta name="twitter:card" content="{{ twCardType }}">
+  <meta name="twitter:site" content="{{ twCardSite }}">
   <meta property="og:description" content="{{ desc }}">
   <meta property="og:title" content="{{ title }} | {{ site.bizName }}">
   <meta property="og:url" content="{{ url }}">
-  <meta property="og:image" content="{{ site.twCard.img }}">
-  <meta http-equiv="Content-Security-Policy" content="{{ site.csp | safe }}">
+  <meta property="og:image" content="{{ twCardImg }}">
+  <meta http-equiv="Content-Security-Policy" content="{{ csp | safe }}">
   <style>
     {{ css | cssmin | safe }}
   </style>
   <link rel="canonical" href="{{ url }}">
   <title>{{ title }} | {{ site.bizName }}</title>
-  <link rel="icon" href="{{ site.img.icon }}">
-  <link rel="apple-touch-icon" href="{{ site.img.appleIcon }}">
+  <link rel="icon" href="{{ icon }}">
+  <link rel="apple-touch-icon" href="{{ appleIcon }}">
 </head>
 
 <body>
