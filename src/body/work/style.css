@@ -1,0 +1,62 @@
+.table-C {overflow: auto;}
+.table-service {width: 975px;}
+[class^="table-seervice-th"],.table-seervice-td {
+  background: #ede8ee;
+  border: 1px solid #bfbfbf;
+  padding: 16px;
+  vertical-align: top;
+}
+.table-seervice-th-body {width: 225px;}
+.table-seervice-td:nth-of-type(1) {width: 320px;}
+.table-seervice-td:nth-of-type(2) {width: 290px;}
+.table-seervice-td:nth-of-type(3) {width: 140px;}
+.table-seervice-th-head {
+  background: #0e376c;
+  color: #fff;
+  padding: 17px 0;
+  text-align: center;
+}
+.fz18 {font-size: 18px;}
+
+.table-tokusyo-th {
+  display: block;
+  text-align: left;
+  border-bottom: 1px solid #b6b6b6;
+  background: #eee;
+  padding: 10px;
+}
+.table-tokusyo-td {
+  display: block;
+  padding: 10px;
+}
+.table-tokusyo {border-collapse: collapse;}
+.table-tokusyo-tr {border: 1px solid #b6b6b6;}
+.fz13 {
+  color: #595959;
+  display: block;
+  font-size: 13px;
+  line-height: 1.3;
+  margin-top: 7px;
+}
+.tokusyo-supplementaryInfo {
+  margin-top: 30px;
+  font-size: 14px;
+}
+.tokusyo-list--pl {padding-left: 1.3rem;}
+
+@media (min-width:650px) {
+  .table-tokusyo-th {
+    border-right: 1px solid #b6b6b6;
+    display: table-cell;
+    padding: 20px;
+    width: 180px;
+  }
+  .table-tokusyo-td {
+    display: table-cell;
+    padding: 20px;
+  }
+}
+@media (min-width:1110px) {
+  .table-C {overflow: visible;}
+  .table-service {transform: translateX(-187.5px);}
+}

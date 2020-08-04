@@ -1,4 +1,5 @@
 ---
+post: true
 schemaArticleImg:
   - https://ryo.dev/img/schema1-1.png
   - https://ryo.dev/img/schema4-3.png
@@ -75,17 +76,29 @@ originalCSSFileName: style
             "position": 1,
             "name": "ホーム",
             "item": "{{ site.hp }}"
-          }, {
+          },
+          {% if post %}
+          {
             "@type": "ListItem",
             "position": 2,
             "name": "記事",
-            "item": "{{ site.hp }}article/?category=all&p=1"
+            "item": "{{ site.articleCategory.all.link }}"
           }, {
             "@type": "ListItem",
             "position": 3,
             "name": "{{ tagJpName }}",
-            "item": "{{ site.hp }}article/?category={{ tags }}&p=1"
+            "item": "/article/{{ tags }}/1/"
           }
+          {% else %}
+            {% for name in breadcrumbListName %}
+            {
+              "@type": "ListItem",
+              "position": {{ loop.index + 1 }},
+              "name": "{{ name }}",
+              "item": "{{ breadcrumbListLink[loop.index0] }}"
+            }{% if loop.last %}{% else %},{% endif %}
+            {% endfor %}
+          {% endif %}
         ]
       }
     ]
@@ -99,8 +112,14 @@ originalCSSFileName: style
     <div class="h1_c">
       <ul aria-label="パンくずリスト" class="breadcrumbs_c">
         <li class="breadcrumbs-list"><a href="/" class="breadcrumbs-list-link">ホーム</a></li>
-        <li class="breadcrumbs-list"><a href="/article/?category=all&p=1" class="breadcrumbs-list-link">記事</a></li>
-        <li class="breadcrumbs-list"><a href="/article/?category={{ tags }}&p=1" class="breadcrumbs-list-link">{{ tagJpName }}</a></li>
+        {% if post %}
+        <li class="breadcrumbs-list"><a href="{{ site.articleCategory.all.link }}" class="breadcrumbs-list-link">記事</a></li>
+        <li class="breadcrumbs-list"><a href="/article/{{ tags }}/1/" class="breadcrumbs-list-link">{{ tagJpName }}</a></li>
+        {% else %}
+          {% for name in breadcrumbListName %}
+          <li class="breadcrumbs-list"><a href="{{ breadcrumbListLink[loop.index0] }}" class="breadcrumbs-list-link">{{ name }}</a></li>
+          {% endfor %}
+        {% endif %}
       </ul>
       <p class="lastUpdated">最終更新日：<time datetime="{{ page.date.toISOString().slice(0, 10) }}">{{ page.date.toISOString().slice(0, 10).replace('-', '.').replace('-', '.') }}</time></p>
       <h1>{{ title }}</h1>

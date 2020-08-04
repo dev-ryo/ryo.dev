@@ -17,7 +17,10 @@ h3 {
 }
 section {margin-bottom: 120px;}
 .h3sec + .h3sec {margin-top: 40px;}
-ul:not([class]),ol:not([class]) {padding-left: 1.7rem;}
+ul:not([class]),ol:not([class]) {
+  padding-left: 1.7rem;
+  margin: 38px 0;
+}
 li:not([class]) + li:not([class]) {margin-top: 6px;}
 picture {display: block;}
 

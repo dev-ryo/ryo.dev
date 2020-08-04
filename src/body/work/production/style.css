@@ -1,0 +1,17 @@
+tr {
+  --p:1.6rem;
+  border-top: 1px solid #dadce0;
+  border-bottom: 1px solid #dadce0
+}
+td {
+  padding-top: var(--p);
+  vertical-align: top;
+}
+td:last-of-type {padding: var(--p) 0 var(--p) 2rem}
+.supplementaryInfo {
+  color: #595959;
+  font-size: calc(1rem - 4px);
+  line-height: 1.2;
+  margin-top: 1.2rem;
+}
+@media (min-width: 728px) {tr {--p:2rem}}

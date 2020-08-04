@@ -1,28 +1,4 @@
-
-
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-  <meta name="description" content="多くの記事で紹介されているフィッシャー–イェーツのアルゴリズムって、ダステンフェルドのアルゴリズムですよね。ともかく、Wikipediaの解説を参考にしながらアルゴリズムを実現するコードを解説します。">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@ryoo_s_s">
-  <meta property="og:description" content="多くの記事で紹介されているフィッシャー–イェーツのアルゴリズムって、ダステンフェルドのアルゴリズムですよね。ともかく、Wikipediaの解説を参考にしながらアルゴリズムを実現するコードを解説します。">
-  <meta property="og:title" content="ダステンフェルドのアルゴリズムを使ったランダムシャッフル | RYO.dev">
-  <meta property="og:url" content="https://ryo.dev/article/js/random-shuffling-using-Dastenfeld&#39;s-algorithm/">
-  <meta property="og:image" content="https://ryo.dev/img/logo.jpg">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; trusted-types default">
-  <style>
-    a,article,blockquote,button,code,dd,div,dl,dt,figcaption,figure,footer,h1,h2,h3,header,input,li,main,nav,ol,p,pre,section,span,svg,table,td,textarea,th,ul{box-sizing:border-box}blockquote,body,figure,h1,h2,h3,p,pre{margin:0}html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{color:#262626;background:#fff;font-family:Arial,"Hiragino Kaku Gothic Pro","BIZ UDPGothic",Meiryo,sans-serif;line-height:1.7;letter-spacing:.5px}button,cite,code,dfn,input,kbd,select,textarea,var{font:inherit}button,dialog,input,select,textarea{color:inherit;-webkit-appearance:none}code,kbd,var{font-family:"Lucida Console","Courier New",monospace}main{width:90%;margin:0 auto}h1,h2,h3{color:#000}a:not([class]){color:#1a73e8}a:not([class]):focus,a:not([class]):hover{text-decoration:none}table{border-collapse:collapse}th{text-align:left}button{cursor:pointer}ol,ul{padding:0;margin:0}header{font-size:0;margin:20px auto 40px;width:90%}.header-link{color:#000;display:inline-block;font-family:"Lucida Console","Courier New",monospace;font-weight:700;text-decoration:none}.logo{height:33px;margin-right:20px;vertical-align:middle}.header-orgName{font-size:20px;vertical-align:middle}main{margin:0 auto 120px;max-width:600px}h1,h2,h3{line-height:1.4}h1{font-size:35px;margin:24px 0}h2{font-size:28px;margin-bottom:27.6px}h3{font-size:24px;margin-bottom:12px}section{margin-bottom:120px}.h3sec+.h3sec{margin-top:40px}ol:not([class]),ul:not([class]){padding-left:1.7rem}li:not([class])+li:not([class]){margin-top:6px}picture{display:block}.p1,p{margin:38px 0}h2+p,h3+p{margin:0}.p2{margin:19px 0}.h1_c{font-size:14px;padding-bottom:60px;border-bottom:1px solid rgba(0,0,0,.12);margin-bottom:60px}.breadcrumbs_c{display:flex;list-style:none;transform:translateX(-10px)}.breadcrumbs-list::after{content:"";display:inline-block;color:#595959;width:6px;height:6px;border-right:1.5px solid #595959;border-bottom:1.5px solid #595959;transform:translate(-2px,-.8px) rotate(-45deg)}.breadcrumbs-list:last-of-type::after{content:none}.breadcrumbs-list-link{color:#595959;display:inline-block;padding:6px 10px;text-decoration:none}.breadcrumbs-list-link:active,.breadcrumbs-list-link:focus{text-decoration:underline}.toc-a:focus,.toc-a:hover{text-decoration:underline}.lastUpdated{color:#595959;margin:0}.tableOfContents{padding-left:30px;border-left:3px solid #1779c6}.toc-li+.toc-li{margin-top:8px}.toc-a{box-sizing:border-box;color:#262626;display:inline-block;overflow:hidden;text-decoration:none;text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;width:100%}.tableOfContents-link:active,.tableOfContents-link:focus{color:#1779c6}.fullWidthImg{border:1px solid rgba(0,0,0,.12);border-radius:3px;width:100%;height:auto}.portraitImg{border:1px solid rgba(0,0,0,.12);border-radius:3px;display:block;margin-left:calc(50% - 140px);margin-left:max(20%,calc(50% - 140px));width:280px;width:min(60%,280px)}blockquote{background:#ececec;padding:20px 5px 20px 20px}.quoteSource{font-size:calc(1rem - 3px);text-align:right;margin-top:10px}.inlineCode{color:#37474f;background:#f1f3f4;border-radius:2px;display:inline-block;letter-spacing:-.3px;line-height:1;padding:2px 4px}pre{font-size:0;padding:20px 2px;background:#2b2b2b;overflow:auto}.blockCode_c{counter-reset:code}.code-line{display:inline-block;color:#f8f8f2;font-size:1rem;letter-spacing:-.3px;line-height:1.5}.code-line::before{border-right:1px solid #4b4b4b;color:#a9aaa5;content:counter(code);counter-increment:code;display:inline-block;padding-right:8px;margin:0 7px 0 0;text-align:right;width:28px}.code-gray{color:#d4d0ab}.code-pink{color:#ffa07a}.code-green{color:#abe338}.code-yellow{color:gold}.code-blue{color:#00e0e0}.code-purple{color:#dcc6e0}.code-orange{color:#f5ab35}@media (min-width:710px){.breadcrumbs-list-link:hover{text-decoration:underline}.tableOfContents-link:hover{color:#1779c6}}.ml1rem{margin-left:1rem}.ml2rem{margin-left:2rem}footer{background:#f8f9fa;padding:40px 0}.footer-ul{list-style:none}.footer-a{display:block;text-decoration:none;color:inherit;padding:15px 0;text-align:center}.footer-a:focus,.footer-a:hover{text-decoration:underline}@media (min-width:750px){footer{padding:70px 0}.footer-ul{display:grid;justify-content:center;grid-template-columns:repeat(6,max-content);grid-gap:46px}}.fs--i{font-style:italic}.fs--n{font-style:normal}.fw--b{font-weight:700}.fw--n{font-weight:400}.fz--0{font-size:0}.lh--1{line-height:1}.ls--n{list-style:none}.p--0{padding:0}.m--0{margin:0}.mb--0{margin-bottom:0}
-  </style>
-  <link rel="canonical" href="https://ryo.dev/article/js/random-shuffling-using-Dastenfeld&#39;s-algorithm/">
-  <title>ダステンフェルドのアルゴリズムを使ったランダムシャッフル | RYO.dev</title>
-  <link rel="icon" href="/img/favicon.ico">
-  <link rel="apple-touch-icon" href="/img/appleTouchIcon.png">
-  <script type="application/ld+json">
-    [
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"><meta name="description" content="多くの記事で紹介されているフィッシャー–イェーツのアルゴリズムって、ダステンフェルドのアルゴリズムですよね。ともかく、Wikipediaの解説を参考にしながらアルゴリズムを実現するコードを解説します。"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@ryoo_s_s"><meta property="og:description" content="多くの記事で紹介されているフィッシャー–イェーツのアルゴリズムって、ダステンフェルドのアルゴリズムですよね。ともかく、Wikipediaの解説を参考にしながらアルゴリズムを実現するコードを解説します。"><meta property="og:title" content="ダステンフェルドのアルゴリズムを使ったランダムシャッフル | RYO.dev"><meta property="og:url" content="https://ryo.dev/article/js/random-shuffling-using-Dastenfeld&#39;s-algorithm/"><meta property="og:image" content="https://ryo.dev/img/logo.jpg"><meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; trusted-types default"><style>a,article,blockquote,button,code,dd,div,dl,dt,figcaption,figure,footer,h1,h2,h3,header,input,li,main,nav,ol,p,pre,section,span,svg,table,td,textarea,th,ul{box-sizing:border-box}blockquote,body,figure,h1,h2,h3,p,pre{margin:0}html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{color:#262626;background:#fff;font-family:Arial,"Hiragino Kaku Gothic Pro","BIZ UDPGothic",Meiryo,sans-serif;line-height:1.7;letter-spacing:.5px}button,cite,code,dfn,input,kbd,select,textarea,var{font:inherit}button,dialog,input,select,textarea{color:inherit;-webkit-appearance:none}code,kbd,var{font-family:"Lucida Console","Courier New",monospace}main{width:90%;margin:0 auto}h1,h2,h3{color:#000}a:not([class]){color:#1a73e8}a:not([class]):focus,a:not([class]):hover{text-decoration:none}table{border-collapse:collapse}th{text-align:left}button{cursor:pointer}ol,ul{padding:0;margin:0}header{font-size:0;margin:20px auto 40px;width:90%}.header-link{color:#000;display:inline-block;font-family:"Lucida Console","Courier New",monospace;font-weight:700;text-decoration:none}.logo{height:33px;margin-right:20px;vertical-align:middle}.header-orgName{font-size:20px;vertical-align:middle}main{margin:0 auto 120px;max-width:600px}h1,h2,h3{line-height:1.4}h1{font-size:35px;margin:24px 0}h2{font-size:28px;margin-bottom:27.6px}h3{font-size:24px;margin-bottom:12px}section{margin-bottom:120px}.h3sec+.h3sec{margin-top:40px}ol:not([class]),ul:not([class]){padding-left:1.7rem;margin:38px 0}li:not([class])+li:not([class]){margin-top:6px}picture{display:block}.p1,p{margin:38px 0}h2+p,h3+p{margin:0}.p2{margin:19px 0}.h1_c{font-size:14px;padding-bottom:60px;border-bottom:1px solid rgba(0,0,0,.12);margin-bottom:60px}.breadcrumbs_c{display:flex;list-style:none;transform:translateX(-10px)}.breadcrumbs-list::after{content:"";display:inline-block;color:#595959;width:6px;height:6px;border-right:1.5px solid #595959;border-bottom:1.5px solid #595959;transform:translate(-2px,-.8px) rotate(-45deg)}.breadcrumbs-list:last-of-type::after{content:none}.breadcrumbs-list-link{color:#595959;display:inline-block;padding:6px 10px;text-decoration:none}.breadcrumbs-list-link:active,.breadcrumbs-list-link:focus{text-decoration:underline}.toc-a:focus,.toc-a:hover{text-decoration:underline}.lastUpdated{color:#595959;margin:0}.tableOfContents{padding-left:30px;border-left:3px solid #1779c6}.toc-li+.toc-li{margin-top:8px}.toc-a{box-sizing:border-box;color:#262626;display:inline-block;overflow:hidden;text-decoration:none;text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;width:100%}.tableOfContents-link:active,.tableOfContents-link:focus{color:#1779c6}.fullWidthImg{border:1px solid rgba(0,0,0,.12);border-radius:3px;width:100%;height:auto}.portraitImg{border:1px solid rgba(0,0,0,.12);border-radius:3px;display:block;margin-left:calc(50% - 140px);margin-left:max(20%,calc(50% - 140px));width:280px;width:min(60%,280px)}blockquote{background:#ececec;padding:20px 5px 20px 20px}.quoteSource{font-size:calc(1rem - 3px);text-align:right;margin-top:10px}.inlineCode{color:#37474f;background:#f1f3f4;border-radius:2px;display:inline-block;letter-spacing:-.3px;line-height:1;padding:2px 4px}pre{font-size:0;padding:20px 2px;background:#2b2b2b;overflow:auto}.blockCode_c{counter-reset:code}.code-line{display:inline-block;color:#f8f8f2;font-size:1rem;letter-spacing:-.3px;line-height:1.5}.code-line::before{border-right:1px solid #4b4b4b;color:#a9aaa5;content:counter(code);counter-increment:code;display:inline-block;padding-right:8px;margin:0 7px 0 0;text-align:right;width:28px}.code-gray{color:#d4d0ab}.code-pink{color:#ffa07a}.code-green{color:#abe338}.code-yellow{color:gold}.code-blue{color:#00e0e0}.code-purple{color:#dcc6e0}.code-orange{color:#f5ab35}@media (min-width:710px){.breadcrumbs-list-link:hover{text-decoration:underline}.tableOfContents-link:hover{color:#1779c6}}.ml1rem{margin-left:1rem}.ml2rem{margin-left:2rem}footer{background:#f8f9fa;padding:40px 0}.footer-ul{list-style:none}.footer-a{display:block;text-decoration:none;color:inherit;padding:15px 0;text-align:center}.footer-a:focus,.footer-a:hover{text-decoration:underline}@media (min-width:750px){footer{padding:70px 0}.footer-ul{display:grid;justify-content:center;grid-template-columns:repeat(6,max-content);grid-gap:46px}}.fs--i{font-style:italic}.fs--n{font-style:normal}.fw--b{font-weight:700}.fw--n{font-weight:400}.fz--0{font-size:0}.lh--1{line-height:1}.ls--n{list-style:none}.p--0{padding:0}.m--0{margin:0}.mb--0{margin-bottom:0}</style><link rel="canonical" href="https://ryo.dev/article/js/random-shuffling-using-Dastenfeld&#39;s-algorithm/"><title>ダステンフェルドのアルゴリズムを使ったランダムシャッフル | RYO.dev</title><link rel="icon" href="/img/favicon.ico"><link rel="apple-touch-icon" href="/img/appleTouchIcon.png"><script type="application/ld+json">[
       {
         "@context": "https://schema.org",
         "@type": "Article",
@@ -59,132 +35,36 @@
             "position": 1,
             "name": "ホーム",
             "item": "https://ryo.dev/"
-          }, {
+          },
+          
+          {
             "@type": "ListItem",
             "position": 2,
             "name": "記事",
-            "item": "https://ryo.dev/article/?category=all&p=1"
+            "item": "/article/all/1/"
           }, {
             "@type": "ListItem",
             "position": 3,
             "name": "JavaScript",
-            "item": "https://ryo.dev/article/?category=js&p=1"
+            "item": "/article/js/1/"
           }
+          
         ]
       }
-    ]
-  </script>
-</head>
-
-<body>
-  <header>
-  <a href="/" class="header-link">
-    <svg viewBox="0 0 550 700" class="logo" role="img" aria-hidden="true">
-      <polyline points="0 0 345 0 0 345" fill="#5991dd"></polyline>
-      <polyline points="0 345 345 700 0 700" fill="#d63535"></polyline>
-      <polyline points="550 0 205 345 550 700" fill="#71c93e"></polyline>
-    </svg>
-    <span class="header-orgName">RYO.dev</span>
-  </a>
-</header>
-
-
-  <main>
-    <div class="h1_c">
-      <ul aria-label="パンくずリスト" class="breadcrumbs_c">
-        <li class="breadcrumbs-list"><a href="/" class="breadcrumbs-list-link">ホーム</a></li>
-        <li class="breadcrumbs-list"><a href="/article/?category=all&p=1" class="breadcrumbs-list-link">記事</a></li>
-        <li class="breadcrumbs-list"><a href="/article/?category=js&p=1" class="breadcrumbs-list-link">JavaScript</a></li>
-      </ul>
-      <p class="lastUpdated">最終更新日：<time datetime="2020-08-03">2020.08.03</time></p>
-      <h1>ダステンフェルドのアルゴリズムを使ったランダムシャッフル</h1>
-
-      <ol class="tableOfContents" aria-label="目次">
-        
-          <li class="toc-li"><a href="#fy" class="toc-a">ランダムシャッフルに使うアルゴリズム</a></li>
-        
-          <li class="toc-li"><a href="#d" class="toc-a">ダステンフェルドのアルゴリズム</a></li>
-        
-        <li class="toc-li"><a href="#feedback" class="toc-a">フィードバック</a></li>
-      </ol>
-    </div>
-    
-<section id="fy">
-  <h2>ランダムシャッフルに使うアルゴリズム</h2>
-  <p>「javascript　ランダムシャッフル」とググって出てきた記事ではたいてい、<strong>フィッシャー–イェーツのシャッフル (Fisher–Yates shuffle)アルゴリズム</strong>を使ってランダムシャッフルを実現しています。</p>
-  <p><a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#:~:text=1%20%E3%81%8B%E3%82%89%20N%20,%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E9%A0%86%E5%88%97%E3%81%A8%E3%81%AA%E3%82%8B%E3%80%82">Wikipedia</a>では、このアルゴリズムを言語化して紹介しています。</p>
-  <blockquote cite="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E3%81%A8%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AB%E3%82%88%E3%82%8B%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0">
-    <ol>
-      <li>1 から <span class="fs--i">N</span> までの数字を書く。</li>
-      <li>まだ消されてない数字の数を数え、1 からその数以下までのランダムな数字 <span class="fs--i">k</span> を選ぶ。</li>
-      <li>残っている数字から k 番目の数字を消し、別の場所にその数字を書き出す。</li>
-      <li>すべての数字が消されるまで手順 2, 3 を繰り返す。</li>
-      <li>手順3で書かれた数列が元の数値からのランダム順列となる。</li>
-    </ol>
-  </blockquote>
-  <p>これと、<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E4%BE%8B">Wikipediaの例</a>をもとに、配列の要素をランダムシャッフルするコードを書いてみるとこうなります。</p>
-  <pre class="p2"><code class="blockCode_c"><span class="code-line"><span class="code-blue">const</span> <var class="code-purple">a</var> <span class="code-pink">=</span> [<span class="code-yellow">"a"</span>, <span class="code-yellow">"b"</span>, <span class="code-yellow">"c"</span>, <span class="code-yellow">"d"</span>];</span>
+    ]</script></head><body><header><a href="/" class="header-link"><svg viewBox="0 0 550 700" class="logo" role="img" aria-hidden="true"><polyline points="0 0 345 0 0 345" fill="#5991dd"></polyline><polyline points="0 345 345 700 0 700" fill="#d63535"></polyline><polyline points="550 0 205 345 550 700" fill="#71c93e"></polyline></svg> <span class="header-orgName">RYO.dev</span></a></header><main><div class="h1_c"><ul aria-label="パンくずリスト" class="breadcrumbs_c"><li class="breadcrumbs-list"><a href="/" class="breadcrumbs-list-link">ホーム</a></li><li class="breadcrumbs-list"><a href="/article/all/1/" class="breadcrumbs-list-link">記事</a></li><li class="breadcrumbs-list"><a href="/article/js/1/" class="breadcrumbs-list-link">JavaScript</a></li></ul><p class="lastUpdated">最終更新日：<time datetime="2020-08-03">2020.08.03</time></p><h1>ダステンフェルドのアルゴリズムを使ったランダムシャッフル</h1><ol class="tableOfContents" aria-label="目次"><li class="toc-li"><a href="#fy" class="toc-a">ランダムシャッフルに使うアルゴリズム</a></li><li class="toc-li"><a href="#d" class="toc-a">ダステンフェルドのアルゴリズム</a></li><li class="toc-li"><a href="#feedback" class="toc-a">フィードバック</a></li></ol></div><section id="fy"><h2>ランダムシャッフルに使うアルゴリズム</h2><p>「javascript　ランダムシャッフル」とググって出てきた記事ではたいてい、<strong>フィッシャー–イェーツのシャッフル (Fisher–Yates shuffle)アルゴリズム</strong>を使ってランダムシャッフルを実現しています。</p><p><a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#:~:text=1%20%E3%81%8B%E3%82%89%20N%20,%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E9%A0%86%E5%88%97%E3%81%A8%E3%81%AA%E3%82%8B%E3%80%82">Wikipedia</a>では、このアルゴリズムを言語化して紹介しています。</p><blockquote cite="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E3%81%A8%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AB%E3%82%88%E3%82%8B%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0"><ol><li>1 から <span class="fs--i">N</span> までの数字を書く。</li><li>まだ消されてない数字の数を数え、1 からその数以下までのランダムな数字 <span class="fs--i">k</span> を選ぶ。</li><li>残っている数字から k 番目の数字を消し、別の場所にその数字を書き出す。</li><li>すべての数字が消されるまで手順 2, 3 を繰り返す。</li><li>手順3で書かれた数列が元の数値からのランダム順列となる。</li></ol></blockquote><p>これと、<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E4%BE%8B">Wikipediaの例</a>をもとに、配列の要素をランダムシャッフルするコードを書いてみるとこうなります。</p><pre class="p2"><code class="blockCode_c"><span class="code-line"><span class="code-blue">const</span> <var class="code-purple">a</var> <span class="code-pink">=</span> [<span class="code-yellow">"a"</span>, <span class="code-yellow">"b"</span>, <span class="code-yellow">"c"</span>, <span class="code-yellow">"d"</span>];</span>
 <span class="code-line"><span class="code-blue">const</span> <var class="code-purple">N</var> <span class="code-pink">=</span> a.length;</span>
 <span class="code-line"></span>
 <span class="code-line"><span class="code-pink">for</span>(<span class="code-blue">let</span> <var>i</var> <span class="code-pink">=</span> N; <var>i</var> <span class="code-pink">&gt;</span> <span class="code-purple">0</span>; <var>i</var><span class="code-pink">--</span>) {</span>
 <span class="code-line">  <span class="code-blue">const</span> <var class="code-purple">k</var> <span class="code-pink">=</span> <span class="code-blue">Math</span>.<span class="code-blue">floor</span>(<span class="code-blue">Math</span>.<span class="code-blue">random</span>() <span class="code-pink">*</span> <var>i</var>);</span>
 <span class="code-line">  <var>a</var>.<span class="code-blue">push</span>(<var>a</var>.<span class="code-blue">splice</span>(<var>k</var>, <span class="code-purple">1</span>).<span class="code-blue">toString</span>());</span>
-<span class="code-line">}</span></code></pre>
-<p><code class="inlineCode">a.splice(k, 1)</code>は、<code class="inlineCode">a[k]</code>の位置から1つの要素を取り除きます。<code class="inlineCode"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">splice()</a></code>メソッドは、取り除かれた要素を含む配列を返します。それを、<code class="inlineCode"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/toString">toString()</a></code>メソッドで文字列に変換します。<code class="inlineCode"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/push">push()</a></code>メソッドを使ってその文字列を配列<code class="inlineCode">a</code>の末尾に追加します。</p>
-<p>...どうですか？<br>あなたが見た記事で紹介されているコードと一緒ですか？</p>
-<p>違うはずです。</p>
-<p>しかし、これがフィッシャーとイェーツのアルゴリズムです。</p>
-<p>あなたがよく目にするコードは<strong>ダステンフェルド</strong>のアルゴリズムです。これは、<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#改良されたアルゴリズム:~:text=%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB%E3%81%AE%E6%94%B9%E8%89%AF%E3%81%95%E3%82%8C%E3%81%9F%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AF%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AE%E4%BD%BF%E7%94%A8%E3%82%92%E6%83%B3%E5%AE%9A%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%80%82%E3%81%9D%E3%82%8C%E3%81%AF%E3%83%AA%E3%83%81%E3%83%A3%E3%83%BC%E3%83%89%E3%83%BB%E3%83%80%E3%82%B9%E3%83%86%E3%83%B3%E3%83%95%E3%82%A7%E3%83%AB%E3%83%89%E3%81%AB%E3%82%88%E3%81%A3%E3%81%A61964%E5%B9%B4%E3%81%AB%E7%B4%B9%E4%BB%8B">コンピュータでの使用を想定してフィッシャーとイェーツのアルゴリズムを改良</a>したものです。</p>
-<p>次のセクションでダステンフェルドのアルゴリズムについて触れていきます。</p>
-</section>
-
-<section id="d">
-  <h2>ダステンフェルドのアルゴリズム</h2>
-  <p><a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E6%94%B9%E8%89%AF%E3%81%95%E3%82%8C%E3%81%9F%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0">Wikipedia</a>ではこのアルゴリズムについて次のように説明しています。</p>
-  <blockquote cite="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E6%94%B9%E8%89%AF%E3%81%95%E3%82%8C%E3%81%9F%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0">要素数が <span class="fs--i">n</span> の配列 <span class="fs--i">a</span> をシャッフルする(添字は0からn-1):
-    <div class="ml1rem"><span class="fs--i">i</span> を <span class="fs--i">n</span> - 1 から 1 まで減少させながら、以下を実行する</div>
-    <div class="ml2rem">
-      <span class="fs--i">j</span> に 0 以上 <span class="fs--i">i</span> 以下のランダムな整数を代入する<br>
-      <span class="fs--i">a</span>[<span class="fs--i">j</span>] と <span class="fs--i">a</span>[<span class="fs--i">i</span>]を交換する
-    </div>
-  </blockquote>
-  <p>では、これをコードで表現してみましょう。次のようになります。</p>
-  <pre><code class="blockCode_c"><span class="code-line"><span class="code-blue">const</span> <var class="code-purple">a</var> <span class="code-pink">=</span> [<span class="code-yellow">"a"</span>, <span class="code-yellow">"b"</span>, <span class="code-yellow">"c"</span>, <span class="code-yellow">"d"</span>];</span>
+<span class="code-line">}</span></code></pre><p><code class="inlineCode">a.splice(k, 1)</code>は、<code class="inlineCode">a[k]</code>の位置から1つの要素を取り除きます。<code class="inlineCode"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">splice()</a></code>メソッドは、取り除かれた要素を含む配列を返します。それを、<code class="inlineCode"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/toString">toString()</a></code>メソッドで文字列に変換します。<code class="inlineCode"><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/push">push()</a></code>メソッドを使ってその文字列を配列<code class="inlineCode">a</code>の末尾に追加します。</p><p>...どうですか？<br>あなたが見た記事で紹介されているコードと一緒ですか？</p><p>違うはずです。</p><p>しかし、これがフィッシャーとイェーツのアルゴリズムです。</p><p>あなたがよく目にするコードは<strong>ダステンフェルド</strong>のアルゴリズムです。これは、<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#改良されたアルゴリズム:~:text=%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB%E3%81%AE%E6%94%B9%E8%89%AF%E3%81%95%E3%82%8C%E3%81%9F%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AF%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E3%81%AE%E4%BD%BF%E7%94%A8%E3%82%92%E6%83%B3%E5%AE%9A%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%80%82%E3%81%9D%E3%82%8C%E3%81%AF%E3%83%AA%E3%83%81%E3%83%A3%E3%83%BC%E3%83%89%E3%83%BB%E3%83%80%E3%82%B9%E3%83%86%E3%83%B3%E3%83%95%E3%82%A7%E3%83%AB%E3%83%89%E3%81%AB%E3%82%88%E3%81%A3%E3%81%A61964%E5%B9%B4%E3%81%AB%E7%B4%B9%E4%BB%8B">コンピュータでの使用を想定してフィッシャーとイェーツのアルゴリズムを改良</a>したものです。</p><p>次のセクションでダステンフェルドのアルゴリズムについて触れていきます。</p></section><section id="d"><h2>ダステンフェルドのアルゴリズム</h2><p><a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E6%94%B9%E8%89%AF%E3%81%95%E3%82%8C%E3%81%9F%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0">Wikipedia</a>ではこのアルゴリズムについて次のように説明しています。</p><blockquote cite="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A3%E3%83%BC%E2%80%93%E3%82%A4%E3%82%A7%E3%83%BC%E3%83%84%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB#%E6%94%B9%E8%89%AF%E3%81%95%E3%82%8C%E3%81%9F%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0">要素数が <span class="fs--i">n</span> の配列 <span class="fs--i">a</span> をシャッフルする(添字は0からn-1):<div class="ml1rem"><span class="fs--i">i</span> を <span class="fs--i">n</span> - 1 から 1 まで減少させながら、以下を実行する</div><div class="ml2rem"><span class="fs--i">j</span> に 0 以上 <span class="fs--i">i</span> 以下のランダムな整数を代入する<br><span class="fs--i">a</span>[<span class="fs--i">j</span>] と <span class="fs--i">a</span>[<span class="fs--i">i</span>]を交換する</div></blockquote><p>では、これをコードで表現してみましょう。次のようになります。</p><pre><code class="blockCode_c"><span class="code-line"><span class="code-blue">const</span> <var class="code-purple">a</var> <span class="code-pink">=</span> [<span class="code-yellow">"a"</span>, <span class="code-yellow">"b"</span>, <span class="code-yellow">"c"</span>, <span class="code-yellow">"d"</span>];</span>
 <span class="code-line"><span class="code-blue">const</span> <var class="code-purple">n</var> <span class="code-pink">=</span> a.length;</span>
 <span class="code-line"></span>
 <span class="code-line"><span class="code-pink">for</span>(<span class="code-blue">let</span> <var>i</var> <span class="code-pink">=</span> n <span class="code-pink">-</span> <span class="code-purple">1</span>; <var>i</var> <span class="code-pink">&gt;</span> <span class="code-purple">0</span>; <var>i</var><span class="code-pink">--</span>) {</span>
   <span class="code-line">  <span class="code-blue">const</span> <var class="code-purple">j</var> <span class="code-pink">=</span> <span class="code-blue">Math</span>.<span class="code-blue">floor</span>(<span class="code-blue">Math</span>.<span class="code-blue">random</span>() <span class="code-pink">*</span> (<var>i</var> <span class="code-pink">+</span> <span class="code-purple">1</span>));</span>
   <span class="code-line">  [<var>a</var>[i], <var>a</var>[j]] <span class="code-pink">=</span> [<var>a</var>[j], <var>a</var>[i]];</span>
-<span class="code-line">}</span></code></pre>
-  <p>「<span class="fs--i">a</span>[<span class="fs--i">j</span>] と <span class="fs--i">a</span>[<span class="fs--i">i</span>]を交換する」コードは以下のコードで実現しています。</p>
-  <pre><code class="blockCode_c"><span class="code-line">[<var>a</var>[i], <var>a</var>[j]] <span class="code-pink">=</span> [<var>a</var>[j], <var>a</var>[i]];</span></code></pre>
-  <p>これは<strong><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">分割代入</a></strong>という手法です。</p>
-</section>
-
-<section id="feedback">
-  <h2>フィードバック</h2>
-  <p>ご意見やお聞きしたいことがございましたら、<a href="https://twitter.com/ryoDevWeb">TwitterのDM</a>か<a href="mailto:roxen@ryo.dev">メール</a>にご連絡ください。</p>
-</section>
-
-  </main>
-
-  <footer>
-  <ul class="footer-ul">
-    <li class="footer-li"><a href="https://twitter.com/ryoDevWeb" class="footer-a">Twitter</a></li>
-    <li class="footer-li"><a href="https://www.instagram.com/ryo.dev/" class="footer-a">Instagram</a></li>
-    <li class="footer-li"><a href="https://www.facebook.com/ryo.dev.web" class="footer-a">Facebook</a></li>
-    <li class="footer-li"><a href="https://chatwork.com/ryoDev" class="footer-a">Chatwork</a></li>
-    <li class="footer-li"><a href="mailto:roxen@ryo.dev" class="footer-a">メール</a></li>
-  </ul>
-</footer>
-
-<script>
-  trustedTypes.createPolicy('default', {
+<span class="code-line">}</span></code></pre><p>「<span class="fs--i">a</span>[<span class="fs--i">j</span>] と <span class="fs--i">a</span>[<span class="fs--i">i</span>]を交換する」コードは以下のコードで実現しています。</p><pre><code class="blockCode_c"><span class="code-line">[<var>a</var>[i], <var>a</var>[j]] <span class="code-pink">=</span> [<var>a</var>[j], <var>a</var>[i]];</span></code></pre><p>これは<strong><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">分割代入</a></strong>という手法です。</p></section><section id="feedback"><h2>フィードバック</h2><p>ご意見やお聞きしたいことがございましたら、<a href="https://twitter.com/ryoDevWeb">TwitterのDM</a>か<a href="mailto:roxen@ryo.dev">メール</a>にご連絡ください。</p></section></main><footer><ul class="footer-ul"><li class="footer-li"><a href="https://twitter.com/ryoDevWeb" class="footer-a">Twitter</a></li><li class="footer-li"><a href="https://www.instagram.com/ryo.dev/" class="footer-a">Instagram</a></li><li class="footer-li"><a href="https://www.facebook.com/ryo.dev.web" class="footer-a">Facebook</a></li><li class="footer-li"><a href="https://chatwork.com/ryoDev" class="footer-a">Chatwork</a></li><li class="footer-li"><a href="mailto:roxen@ryo.dev" class="footer-a">メール</a></li></ul></footer><script>trustedTypes.createPolicy('default', {
     createHTML: (unsafeValue) => {
       return unsafeValue.replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
-  });
-</script>
-
-</body>
-</html>
+  });</script></body></html>

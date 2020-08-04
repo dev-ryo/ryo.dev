@@ -25,35 +25,35 @@
   "articleCategory": {
     "all": {
       "name": "すべてのカテゴリー",
-      "link": "https://ryo.dev/article/all/1/"
+      "link": "/article/all/1/"
     },
     "thinking": {
       "name": "考え",
-      "link": "https://ryo.dev/article/thinking/1/"
+      "link": "/article/thinking/1/"
     },
     "experience": {
       "name": "経験",
-      "link": "https://ryo.dev/article/experience/1/"
+      "link": "/article/experience/1/"
     },
     "myWebServices": {
       "name": "自作Webサービス",
-      "link": "https://ryo.dev/article/myWebServices/1/"
+      "link": "/article/myWebServices/1/"
     },
     "achievements": {
       "name": "実績",
-      "link": "https://ryo.dev/article/achievements/1/"
+      "link": "/article/achievements/1/"
     },
     "coding": {
       "name": "コーディング",
-      "link": "https://ryo.dev/article/coding/1/"
+      "link": "/article/coding/1/"
     },
     "js": {
       "name": "JavaScript",
-      "link": "https://ryo.dev/article/js/1/"
+      "link": "/article/js/1/"
     },
     "php": {
       "name": "PHP",
-      "link": "https://ryo.dev/article/php/1/"
+      "link": "/article/php/1/"
     }
   }
 }

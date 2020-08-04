@@ -7,16 +7,16 @@ module.exports = function(eleventyConfig) {
     return new CleanCSS({}).minify(code).styles;
   });
 
-  // eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
-  //   if( outputPath.endsWith(".html") ) {
-  //     let minified = htmlmin.minify(content, {
-  //       removeComments: true,
-  //       collapseWhitespace: true
-  //     });
-  //     return minified;
-  //   }
-  //   return content;
-  // });
+  eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
+    if( outputPath.endsWith(".html") ) {
+      let minified = htmlmin.minify(content, {
+        removeComments: true,
+        collapseWhitespace: true
+      });
+      return minified;
+    }
+    return content;
+  });
 
   return {
     htmlTemplateEngine: "njk",
@@ -25,8 +25,8 @@ module.exports = function(eleventyConfig) {
       data: "./../data",
       input: "src/body",
       includes: "./../parts",
-      // layouts: "./../parts/layouts",
-      output: "public"
+      output: "public",
+      templateFormats: ["html", "css", "json", "js"]
     }
   };
 };
