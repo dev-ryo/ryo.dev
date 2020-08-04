@@ -1,0 +1,100 @@
+---
+title: Webページを公開したらチェックしたい5つの項目
+desc: サービス最終更新日：ここで紹介する5つの項目、そのうち1つでも問題があったらそのWebページはユーザーにとって使いにくいものになっているかもしれません。
+url: https://ryo.dev/article/thinking/testing-the-web-page/
+tags: thinking
+tagJpName: 考え
+heading:
+  - 概要
+  - コードの文法エラー
+  - ページの読み込み速度
+  - モバイルフレンドリー
+  - URLが「https」から始まる
+  - 全体的なパフォーマンス
+headingId:
+  - overview
+  - syntaxErr
+  - speed
+  - mobileFriendly
+  - https
+  - lh
+datePublished: "2020-04-01"
+date: 2020-08-05
+originalCSS: true
+twCardType: summary_large_image
+twCardImg: https://ryo.dev/article/myWebServices/testPagesTogether/img/tw.jpg
+schemaArticleImg:
+  - https://ryo.dev/article/myWebServices/testPagesTogether/img/schema1-1.jpg
+  - https://ryo.dev/article/myWebServices/testPagesTogether/img/schema4-3.jpg
+  - https://ryo.dev/article/myWebServices/testPagesTogether/img/schema16-9.jpg
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>この記事では、自分のWebページが問題を抱えているかどうかをテストする意義と手段を、専門知識がない方向けに紹介します。</p>
+  <p>ユーザーは<strong>使いやすい</strong>Webページを好みます。問題のあるWebページはユーザーの利便性を損ねます。ユーザーはあなたもしくはあなたの会社・店・組織を信用しなくなり、ページから離脱してしまいます。</p>
+  <p>自力で直せるなら迅速に直しましょう。難しいようでしたら、Web制作に精通している個人や会社に依頼して早急に対処すべきです。僕も改良のお仕事をお引き受けできます。</p>
+  <p>なお、僕が作った「<strong>Caitoc</strong>」というサービスを使えば、以降のセクションで紹介する5つのテストをまとめて行うことができます。よかったら使ってみてください。</p>
+  <a href="https://ryo.dev/service/testPagesTogether/" class="toService">Caitocを使ってみる</a>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <p><a href="https://www8.cao.go.jp/shougai/suishin/law_h25-65.html#:~:text=%E7%AC%AC%E4%BA%94%E6%9D%A1%E3%80%80,%E7%92%B0%E5%A2%83%E3%81%AE%E6%95%B4%E5%82%99%E3%81%AB%E5%8A%AA%E3%82%81%E3%81%AA%E3%81%91%E3%82%8C%E3%81%B0%E3%81%AA%E3%82%89%E3%81%AA%E3%81%84%E3%80%82">障害者差別解消法</a>の第五条では、行政機関等および事業者は差別の解消に向けて環境の整備に努めなければいけないと記してあります。</p>
+  <p><a href="https://www8.cao.go.jp/shougai/suishin/sabekai/kihonhoushin/honbun.html">障害を理由とする差別の解消の推進に関する基本方針</a>によると、「<dfn id="bp">事業者</dfn>」とは<span role="definition" aria-labelledby="bp">商業その他の事業を行う者であり、目的の営利・非営利、個人・法人の別を問わず、同種の行為を反復継続する意思をもって行う者</span>であると定義されています。したがって、個人事業主やNPOも含みます。さらに、「環境の整備」には、<q cite="https://www8.cao.go.jp/shougai/suishin/sabekai/kihonhoushin/honbun.html#mainContents:~:text=%E5%AF%BE%E8%B1%A1%E3%81%A8%E3%81%AA%E3%82%8B%E4%BA%8B%E6%A5%AD%E8%80%85%E3%81%AF,%E5%AF%BE%E8%B1%A1%E3%81%A8%E3%81%AA%E3%82%8B%E3%80%82">障害者による円滑な情報の取得・利用・発信のための情報アクセシビリティの向上</q>も含まれます。</p>
+  <p>したがって、<strong>アクセシビリティを高めることが法的に求められています</strong>。</p>
+  <p>アクセシビリティを高めると、あらゆる人がWebページを利用できるようになります。あらゆる人とは例えば、障害者、高齢者、スマホユーザー、PCユーザー、図書館にいる人、遅いインターネット接続を使用している人などが含まれます。いかなる状況に置かれているユーザーでも制限なく利用できるWebページは「アクセシビリティが高い」と言えます。</p>
+  <p>WebページはHTMLやCSSといった専門的な言語で作られています。これらの言語には仕様があります。トリセツのことです。仕様に準拠していないコードを書いた場合に<strong>文法エラー</strong>となります。</p>
+  <p><strong>コードの文法エラーをなくすことはアクセシビリティの確保につながります</strong>。アクセシビリティのガイドラインであるJISX8341-3:2016では、仕様に従ったコードを書くように求めているからです。</p>
+  <p>というわけで、コードの文法エラーの有無をテストすることは意義があります。</p>
+  <p>文法エラーの有無を確認するために、仕様書を作成しているW3Cという団体が公開している以下のサービスを使います。上がHTMLのコードの、下がCSSのコードの文法エラーをテストします。</p>
+  <ul class="testServices">
+    <li><a href="https://validator.w3.org/">The W3C Markup Validation Service</a></li>
+    <li><a href="https://jigsaw.w3.org/css-validator/validator.html.ja">W3C CSS 検証サービス</a></li>
+  </ul>
+  <p>正確なコードであってもエラー判定をされてしまうことがあります。それ以外のエラーは修正すべきです。</p>
+</section>
+
+<section id="{{ headingId[2] }}">
+  <h2>{{ heading[2] }}</h2>
+  <p>インターネットに存在するWebページや画像などを検索する機能である検索エンジン。<abbr title="Search Engine Optimization">SEO</abbr>とは、検索エンジン最適化（<dfn id="seo-exp">Search Engine Optimization</dfn>）の略であり、<span role="definition" aria-labelledby="seo-exp">検索結果での可視性を向上させること、または、その手法の総称</span>のことです。</p>
+  <p><a href="https://webmaster-ja.googleblog.com/2018/01/using-page-speed-in-mobile-search.html">読み込み速度があまりにも遅いWebページはSEO的に不利になります</a>。SEOの一環として読み込み速度を早くすることで、検索結果でユーザーの目につくことが多くなり、あなたのWebページをよく見てもらえるようになります。</p>
+  <p>また、<a href="https://developers.google.com/web/fundamentals/performance/why-performance-matters/">読み込み速度を上げたことでビジネスにメリットをもたらした</a>事例が多数報告されています。</p>
+  <p>というわけで、読み込み速度をテストすることは意義があります。このテストには、Googleが公開している以下のサービスを使います。</p>
+  <p class="testServices"><a href="https://developers.google.com/speed/pagespeed/insights/">PageSpeed Insights</a></p>
+  <p>「このスコア以下はダメ」という絶対的な基準はありません。ただ、スコアが89以下だった場合は修正を検討すべきでしょう。</p>
+</section>
+
+<section id="{{ headingId[3] }}">
+  <h2>{{ heading[3] }}</h2>
+  <p>スマホでも文字が小さすぎずズームすることなく快適に利用できるWebページはモバイルフレンドリーであると言えます。</p>
+  <p><a href="https://www.soumu.go.jp/johotsusintokei/statistics/statistics05b1.html">総務省の通信利用動向調査の平成30年報告書</a>によると、インターネット利用者を利用機器別にみると、「スマートフォン」が 74.5％と最も高く、次いで、「パソコン」が60.4％となっており、「スマートフォン」が「パソコン」を上回っています。また、年齢階層別にみると、6歳から59歳までの各年齢階層では、「スマートフォン」の利用割合が「パソコン」を上回っています。モバイルフレンドリーなWebページを作ることで多くの人が快適に利用することができます。</p>
+  <p>また、<a href="https://webmaster-ja.googleblog.com/2015/02/finding-more-mobile-friendly-search.html">モバイルフレンドリーであるWebページはSEO的に有利になります</a>。</p>
+  <p>というわけで、モバイルフレンドリーかどうかをテストすることは意義があります。このテストには、Googleが公開している以下のサービスを使います。</p>
+  <p class="testServices"><a href="https://search.google.com/test/mobile-friendly">モバイル フレンドリー テスト</a></p>
+  <p>「このページはモバイル フレンドリーです」と表示されていれば問題はありません。そうではない場合はエラーが検出されているので、早急に対処すべきです。</p>
+</section>
+
+<section id="{{ headingId[4] }}">
+  <h2>{{ heading[4] }}</h2>
+  <p>ご自分のWebページのURLをどこかにコピペしてください。「http」から始まっていますか？「https」から始まっていますか？</p>
+  <p>「https」から始まっている場合はとりあえずは大丈夫です。しかし、「http」から始まっている場合はそのWebページはセキュリティが甘いことを意味しています。</p>
+  <p>サイトを<strong>SSL化</strong>することで、URLは「https」から始まるようになります。</p>
+  <p>「http」から始まるサイト（＝SSL化していないサイト）は、通信内容の盗聴や改ざんをされるおそれがあります。また、ブラウザのアドレスバーに「保護されていない通信」というようなネガティブなラベルが付きます。ユーザー視点に立つと、心象はよくありませんし、不安になりませんか？</p>
+  <p>また、<a href="https://webmaster-ja.googleblog.com/2014/08/https-as-ranking-signal.html">SSL化しているサイトはSEO的に有利になります</a>。</p>
+  <p>SSL化していない場合は早急にSSL化し、セキュリティを担保しましょう。</p>
+</section>
+
+<section id="{{ headingId[5] }}">
+  <h2>{{ heading[5] }}</h2>
+  <p><a href="https://web.dev/measure/">Measure</a>を使うと、読み込み速度を含めたパフォーマンス、アクセシビリティ、SEOなどを一括でテストできます。</p>
+  <p>目視で確認しなければいけない点もあるので、このテストでスコアが高いからといって全く問題がないわけではありません。ただ、スコアが低い場合は問題があることは明らかなので、修正すべきです。</p>
+  <p class="testServices"><a href="https://web.dev/measure/">Measure</a></p>
+  <p>「このスコア以下はダメ」という絶対的な基準はありません。ただ、スコアが89以下だった場合は修正を検討すべきでしょう。</p>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>もし誤った情報を見つけたりお聞きしたいことがあったりした場合は、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>

@@ -1,0 +1,25 @@
+.toService {
+  border: 2px solid #0f54b2;
+  color: #0f54b2;
+  display: block;
+  font-size: 18px;
+  line-height: 1;
+  margin: 0 auto;
+  outline: 0;
+  padding: 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: .2s;
+  width: 220px;
+}
+.toService:focus,
+.toService:hover {
+  background: #0f54b2;
+  color: #fff;
+}
+.testServices {
+  background: #e1f5fe;
+  padding: 27px;
+}
+ul.testServices {padding-left: 54px;}
+ul.p2 {padding-left: 43px;}
