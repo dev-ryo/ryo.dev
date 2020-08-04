@@ -1,0 +1,11 @@
+.testServices {
+  background: #e1f5fe;
+  border-radius: 2px;
+  padding: 27px;
+}
+.testServices-goal::before {
+  content: "🚩 目標：";
+  font-weight: bold;
+}
+ul:not([class]) {margin: 19px 0 0;}
+.testServices a {color: #1330B3;}
