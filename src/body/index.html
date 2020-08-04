@@ -79,9 +79,9 @@ eleventyExcludeFromCollections: true
     <section>
       <h2 data-secTitle="ARTICLE">記事</h2>
       <ul class="sec-cont ls--n">
-        <?php foreach($me['articleCategory'] as $cate): ?>
-          <li class="sec-cont-li"><a href="/<?=str_replace($me['hp'], "", $cate['link']); ?>" class="ul-a"><?=$cate['name']; ?></a></li>
-        <?php endforeach; ?>
+        {% for cateSlug, cateInfo in site.articleCategory -%}
+          <li class="sec-cont-li"><a href="{{ cateInfo.link }}" class="ul-a">{{ cateInfo.name }}</a></li>
+        {% endfor -%}
       </ul>
     </section>
 
