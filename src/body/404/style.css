@@ -1,0 +1,38 @@
+header {margin-bottom: 0;}
+main {
+  align-content: center;
+  display: grid;
+  grid-template-rows: repeat(3, max-content);
+  height: calc(100vh - 251px);
+  justify-items: center;
+}
+.sorry {
+  color: rgba(0,0,0,.4);
+  font-size: 45px;
+}
+h1 {
+  font-size: 18px;
+  margin: 20px 0 10px;
+}
+.toTop-a {
+  border-radius: 4px;
+  color: #1a73e8;
+  display: inline-block;
+  font-size: 14px;
+  height: 36px;
+  left: 50%;
+  line-height: 36px;
+  padding: 0 16px;
+  text-decoration: none;
+}
+
+.toTop-a:hover,
+.toTop-a:focus {background: rgba(26,115,232,.2);}
+
+@media (min-width:650px) {
+  .sorry {font-size: 86px;}
+  h1 {
+    font-size: 23px;
+    margin: 30px 0;
+  }
+}
