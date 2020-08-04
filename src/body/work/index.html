@@ -29,7 +29,7 @@ layout: layouts/article1.html
   <p><span role="definition" aria-labelledby="coding">専門的な言語を使ってWebページを作ること</span>を<dfn id="coding">コーディング</dfn>といいます。<strong>コーディング関係の仕事でしたらなんでもいいです</strong>。</p>
   <p>分かりやすく大別すると、下の3種類の仕事をよく依頼されます。なお、「Webページの制作」と「Webページの改良」の料金と納期はあくまで一例です。作るものによって料金は変動します。</p>
   <div class="table-C p1">
-    <table class="table-service">
+    <table class="table-service" tabindex="0">
       <colgroup span="4"></colgroup>
       <thead>
         <tr>
@@ -77,9 +77,9 @@ layout: layouts/article1.html
   <h2>{{ heading[1] }}</h2>
   <ul>
     <li><strong class="fz18">ユーザーにとっての使いやすさが最優先</strong><br>「ユーザーに焦点を絞れば、他のものはみな後からついてくる」。これは、<a href="https://www.google.com/about/philosophy.html?hl=ja#content:~:text=%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AB%E7%84%A6%E7%82%B9%E3%82%92%E7%B5%9E%E3%82%8C%E3%81%B0%E3%80%81%E4%BB%96%E3%81%AE%E3%82%82%E3%81%AE%E3%81%AF%E3%81%BF%E3%81%AA%E5%BE%8C%E3%81%8B%E3%82%89%E3%81%A4%E3%81%84%E3%81%A6%E3%81%8F%E3%82%8B%E3%80%82">Google が掲げる 10 の事実</a>の1つです。僕の理念も同じです。ユーザーにとってベストな形を追求していきます。僕が作るWebページは一瞬で表示され、セキュリティが担保されており、知りたい情報をすぐに見つけられます。</li>
-    <li><strong class="fz18">Webに関する知識が正確</strong><br>知識の質に自信があります。なぜなら、Webの知識を学習するとき、僕は信頼性のあるソースを参照するからです。検索エンジンのことならGoogleの情報を、Webページを作るコードのことであれば仕様書を確認します。<a href="{{ site.articleCategory.all.link }}">僕が書いた記事</a>や<a href="{{ site.contact.tw2 }}">Twitter</a>を見ていただけるとそれを実感できるでしょう。</li>
-    <li><strong class="fz18">企業より安く、個人より高い</strong><br>取引において、依頼主さんの不安感を最小化し、満足感を最大化するための配慮を常に心がけています。それが功を奏したのか、<a href="rating">70件以上の5段階評価の平均は4.9を超えています</a>。これは、僕の提供サービスの質が高いことを示す根拠になります。したがって、料金も高くなります。しかし、僕は個人事業主で1人で活動をしているため、人件費や外注費を頂くことはありません。そのため、企業ほど高額ではありません。</li>
-    <li><strong class="fz18">着手金はいただきません</strong><br>着手金等の事前に支払う料金は一切ありません。料金はすべての業務が終わったら頂きます。ただし、取引を途中解約する際は、取引開始時点からの作業量に応じた料金をお支払いいただく場合があります。詳しくは<a href="terms_of_service#cancel">コーディング関連サービス利用規約</a>を参照ください。</li>
+    <li class="p1"><strong class="fz18">Webに関する知識が正確</strong><br>知識の質に自信があります。なぜなら、Webの知識を学習するとき、僕は信頼性のあるソースを参照するからです。検索エンジンのことならGoogleの情報を、Webページを作るコードのことであれば仕様書を確認します。<a href="{{ site.articleCategory.all.link }}">僕が書いた記事</a>や<a href="{{ site.contact.tw2 }}">Twitter</a>を見ていただけるとそれを実感できるでしょう。</li>
+    <li class="p1"><strong class="fz18">企業より安く、個人より高い</strong><br>取引において、依頼主さんの不安感を最小化し、満足感を最大化するための配慮を常に心がけています。それが功を奏したのか、<a href="rating">70件以上の5段階評価の平均は4.9を超えています</a>。これは、僕の提供サービスの質が高いことを示す根拠になります。したがって、料金も高くなります。しかし、僕は個人事業主で1人で活動をしているため、人件費や外注費を頂くことはありません。そのため、企業ほど高額ではありません。</li>
+    <li><strong class="fz18">着手金はいただきません</strong><br>着手金等の事前に支払う料金は一切ありません。料金はすべての業務が終わったら頂きます。ただし、取引を途中解約する際は、取引開始時点からの作業量に応じた料金をお支払いいただく場合があります。詳しくは<a href="terms-of-service/#cancel">コーディング関連サービス利用規約</a>を参照ください。</li>
   </ul>
 </section>
 
@@ -87,12 +87,12 @@ layout: layouts/article1.html
   <h2>{{ heading[2] }}</h2>
   <ol>
     <li class="p1"><a href="https://ryo.dev/article/thinking/work_policy/">仕事のポリシー</a>をご確認ください。そのページに書かれている方針で仕事をさせていただきます。</li>
-    <li class="p1"><a href="https://twitter.com/ryoo_s_s">Twitter</a>のDM、<a href="https://m.me/web.dev.ryo">Facebook</a>のメッセンジャー、<a href="mailto:roxen@ryo.dev">メール</a>のいずれかの手段を使って僕に依頼したい旨をお伝えください。</li>
+    <li class="p1"><a href="{{ site.contact.tw1 }}">Twitter</a>のDM、<a href="https://m.me/web.dev.ryo">Facebook</a>のメッセンジャー、<a href="mailto:roxen@ryo.dev">メール</a>のいずれかの手段を使って僕に依頼したい旨をお伝えください。</li>
     <li class="p1">
       <p class="p2">話し合いを通して、依頼内容を深掘りしたり、料金や納期といった取引に必要な事項を決めていき、<strong>取引詳細書</strong>を作成します。なお、話し合い方法は、対面、Twitter、Facebook、メール、電話などなんでも構いません。</p>
       <p class="p2">お互いが満足して取引するために、妥協する必要はありません。話し合いの途中で1つでも合意できない内容がございましたら、その場で依頼を中断いたしましょう。もちろんお金はかかりません（取引が始まってからの取引の解約は有償になります）。</p>
     </li>
-    <li class="p1"><a href="https://ryo.dev/work/terms_of_service">利用規約</a>と取引詳細書のすべての内容に対する依頼主さんの同意意思を確認します。</li>
+    <li class="p1"><a href="https://ryo.dev/work/terms-of-service/">利用規約</a>と取引詳細書のすべての内容に対する依頼主さんの同意意思を確認します。</li>
     <li class="p1">依頼主さんの同意意思を確認したら<strong>取引が開始</strong>となります。</li>
     <li class="p1">取引詳細書に記載されている業務内容のすべてを完遂したら<strong>取引が終了</strong>となります。</li>
     <li class="p1">依頼主さんに料金をお支払いいただきます。</li>
@@ -117,19 +117,19 @@ layout: layouts/article1.html
     </tr>
     <tr class="table-tokusyo-tr">
       <th scope="row"  class="table-tokusyo-th">料金</th>
-      <td class="table-tokusyo-td"><a href="#price">料金</a>のセクションに記載しています。取引の解約におけるキャンセル料については<a href="https://ryo.dev/work/terms_of_service#cancel">利用規約の「取引の解約」セクション</a>に記載しています。返金は致しません。<span class="fz13">サービスの性質上、依頼内容により料金が変動するため、実際にいくらでお引き受けするかは取引詳細書を作るための話し合いの段階で提示いたします。また、制作物はメール等の電磁的方法で送信するため、「送料」という概念はありません。</span></td>
+      <td class="table-tokusyo-td"><a href="#services">提供サービス</a>のセクションに記載しています。取引の解約におけるキャンセル料については<a href="https://ryo.dev/work/terms-of-service/#cancel">利用規約の「取引の解約」セクション</a>に記載しています。返金は致しません。<span class="fz13">サービスの性質上、依頼内容により料金が変動するため、実際にいくらでお引き受けするかは取引詳細書を作るための話し合いの段階で提示いたします。また、制作物はメール等の電磁的方法で送信するため、「送料」という概念はありません。</span></td>
     </tr>
     <tr class="table-tokusyo-tr">
       <th scope="row"  class="table-tokusyo-th">料金の支払い時期・方法</th>
-      <td class="table-tokusyo-td"><a href="https://ryo.dev/work/terms_of_service#settlement">利用規約の「決済」セクション</a>に記載しています。</td>
+      <td class="table-tokusyo-td"><a href="https://ryo.dev/work/terms-of-service/#settlement">利用規約の「決済」セクション</a>に記載しています。</td>
     </tr>
     <tr class="table-tokusyo-tr">
       <th scope="row"  class="table-tokusyo-th">役務の提供時期</th>
-      <td class="table-tokusyo-td"><a href="https://ryo.dev/work/terms_of_service#contract_period">利用規約の「契約期間」セクション</a>に記載しています。</td>
+      <td class="table-tokusyo-td"><a href="https://ryo.dev/work/terms-of-service/#contract_period">利用規約の「契約期間」セクション</a>に記載しています。</td>
     </tr>
     <tr class="table-tokusyo-tr">
       <th scope="row"  class="table-tokusyo-th">取引の解約</th>
-      <td class="table-tokusyo-td"><a href="https://ryo.dev/work/terms_of_service#cancel">利用規約の「取引の解約」セクション</a>に記載しています。なお、取引詳細書制作のための話し合いの途中で依頼を中断する場合はお金は一切かかりません。</td>
+      <td class="table-tokusyo-td"><a href="https://ryo.dev/work/terms-of-service/#cancel">利用規約の「取引の解約」セクション</a>に記載しています。なお、取引詳細書制作のための話し合いの途中で依頼を中断する場合はお金は一切かかりません。</td>
     </tr>
     <tr class="table-tokusyo-tr">
       <th scope="row"  class="table-tokusyo-th">動作環境</th>
@@ -141,7 +141,7 @@ layout: layouts/article1.html
     </tr>
     <tr class="table-tokusyo-tr">
       <th scope="row"  class="table-tokusyo-th">瑕疵担保責任</th>
-      <td class="table-tokusyo-td"><a href="https://ryo.dev/work/terms_of_service#post-trade_amendments">利用規約の「取引終了後の修正」セクション</a>に記載しています。</td>
+      <td class="table-tokusyo-td"><a href="https://ryo.dev/work/terms-of-service/#post-trade_amendments">利用規約の「取引終了後の修正」セクション</a>に記載しています。</td>
     </tr>
   </table>
   <div class="tokusyo-supplementaryInfo">
