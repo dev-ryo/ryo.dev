@@ -1,0 +1,96 @@
+---
+title: 【概要】Caitoc
+desc: サービス最終更新日：2020.08.05　テストしたいページのURLをコピペしてテストボタンを押すだけで、各種WebページテストツールでそのURLをテストしたときの結果ページへのリンクを生成します。
+url: https://ryo.dev/article/myWebServices/testPagesTogether/
+tags: thinking
+tagJpName: 考え
+heading:
+  - 思い
+  - どんなサービスか？
+  - Caitocで使用するテストツール
+  - Caitoc、名前の由来
+  - 注意
+headingId:
+  - thought
+  - about
+  - wts
+  - origin
+  - note
+datePublished: "2020-03-13"
+date: 2020-08-05
+originalCSS: true
+twCardType: summary_large_image
+twCardImg: https://ryo.dev/article/myWebServices/testPagesTogether/img/tw.jpg
+schemaArticleImg:
+  - https://ryo.dev/article/myWebServices/testPagesTogether/img/schema1-1.jpg
+  - https://ryo.dev/article/myWebServices/testPagesTogether/img/schema4-3.jpg
+  - https://ryo.dev/article/myWebServices/testPagesTogether/img/schema16-9.jpg
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>Webページをテストするためのツール（以下「テストツール」）がネット上にはいくつもあります。例えば、読み込み速度を評価するものやコードの文法ミスを指摘してくれるものなどがあります。</p>
+  <p>以前の僕はWebページを作るたびに、いくつかのテストツールを使ってテストをしていました。それらのテストツールはすべてブックマークしていました。テストするときはブックマークからサービスのページを開き、作成したWebページのURLをコピペして、テスト開始ボタンを押してテストをしました。この作業を各テストツールごとに行います。</p>
+  <p>...<strong>だるい</strong>。ちまちまちまちま単調な作業を繰り返し行うのは苦痛です。</p>
+  <p>ということでこれらの作業を自動化したのが<strong>Caitoc</strong>（ケイトック）です。</p>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <figure>
+    <p>まずは、テストしたいページのURLを入力し、「テストする」ボタンを押します。</p>
+    <p>
+      <picture>
+        <source srcset="img/tw.webp" type="image/webp">
+        <source srcset="img/tw.jpg" type="image/jpg">
+        <img src="img/tw.jpg" alt="テストしたいURLを入力" width="1200" height="630" class="fullWidthImg">
+      </picture>
+    </p>
+  </figure>
+  <figure class="p1">
+    <p>すると、下のような画面になります。縦に並んでいるのはテストツールの結果ページに飛ぶためのリンクです。例えば、一番上の「HTMLの有効性」を押すと、「The W3C Markup Validation Service」でそのURLをテストしたときの結果ページに飛びます。</p>
+    <p>
+      <picture>
+        <source srcset="img/result.webp" type="image/webp">
+        <source srcset="img/result.jpg" type="image/jpg">
+        <img src="img/result.jpg" alt="テストしたいURLを入力して「テストをする」ボタンを押した後に表示される結果画面"  width="1200" height="630" class="fullWidthImg">
+      </picture>
+    </p>
+  </figure>
+  <p>これまでの手間のかかる作業を大幅に減らすことができ、このサービス上から各種テストツールのテスト結果ページに移動できるようになりました。僕が欲しくて自作したものですが、正直めちゃくちゃありがたいサービスです。</p>
+  <p>
+    <a href="https://ryo.dev/service/testPagesTogether/" class="toService">使ってみる</a>
+  </p>
+</section>
+
+<section id="{{ headingId[2] }}">
+  <h2>{{ heading[2] }}</h2>
+  <ul>
+    <li>HTMLの有効性：<a href="https://validator.w3.org/">The W3C Markup Validation Service</a></li>
+    <li>CSSの有効性：<a href="https://jigsaw.w3.org/css-validator/">W3C CSS 検証サービス</a></li>
+    <li>読み込み速度：<a href="https://developers.google.com/speed/pagespeed/insights/">PageSpeed Insights</a></li>
+    <li>モバイルフレンドリーの有効性：<a href="https://search.google.com/test/mobile-friendly">モバイル フレンドリー テスト</a></li>
+    <li>構造化データの有効性：<a href="https://search.google.com/test/rich-results">リッチリザルト テスト</a></li>
+    <li>Twitterカードの有効性：<a href="https://cards-dev.twitter.com/validator">Card Validator</a></li>
+    <li>AMPの有効性：<a href="https://search.google.com/test/amp">AMP テスト</a></li>
+    <li>全体的なパフォーマンス：<a href="https://web.dev/measure/">Measure</a></li>
+  </ul>
+</section>
+
+<section id="{{ headingId[3] }}">
+  <h2>{{ heading[3] }}</h2>
+  <p>アルファベットをランダムに並べてたまたま出てきた文字列です。</p>
+  <p>「Caitoc」を「ケイトック」と読むのは、Google翻訳では「Caitoc」を「ケイトック」と読み上げたからです。その読みが英語的に正しいかどうかは知りません。</p>
+  <p>重要なのは、そのサービスでどんな課題を解決できるのか、ということです。だから名前はどうでもいいです。どうでもいいことに時間と労力を費やすのは合理的ではないので、名前は適当につけました。</p>
+</section>
+
+<section id="{{ headingId[4] }}">
+  <h2>{{ heading[4] }}</h2>
+  <p>「Twitterカードの有効性」と「全体的なパフォーマンス」は自分でURLをコピペしないといけません。</p>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>もしサービスをよりよくする案を思いついたり、不具合を見つけたり、お聞きしたいことがあったりした場合は、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>
