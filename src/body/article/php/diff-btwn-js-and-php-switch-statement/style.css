@@ -1,0 +1,25 @@
+.summary-C {
+  background: linear-gradient(80deg, #F7D23C 50%, #7477AE 50%);
+  display: flex;
+  padding: 70px 0 34px;
+  position: relative;
+}
+.summary-title {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
+  font-size: 18px;
+  left: 50%;
+  line-height: 1;
+  padding: 8px 13px;
+  position: absolute;
+  top: 7px;
+  transform: translateX(-50%);
+}
+.summary-la {
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.1;
+  text-align: center;
+  width: 50%;
+}
+.summary-symbol {font-size: 70px;}

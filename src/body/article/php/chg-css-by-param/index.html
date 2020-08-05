@@ -1,0 +1,108 @@
+---
+title: URLパラメーターの値によってCSSを変更する
+desc: Content-Typeヘッダーを指定することでPHPファイルをCSSファイルとして出力することができます。パラメータの値によって出力するCSSを自在に変えられます。
+url: https://ryo.dev/article/php/chg-css-by-param/
+tags: coding
+tagJpName: コーディング
+heading:
+  - どういうこと？
+  - コード
+  - コードの解説
+headingId:
+  - what
+  - code
+  - exp
+datePublished: "2020-04-30"
+date: 2020-08-05
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>例えば、次の3つのCSSファイルがあったとします。</p>
+  <ul>
+    <li>https://sample.com/style?css=h</li>
+    <li>https://sample.com/style?css=li</li>
+    <li>https://sample.com/style?css=h-li</li>
+  </ul>
+  <p>プロトコル名からパス名まで全く一緒です。パラメーターの値のみが違います。</p>
+  <p>パラメーターの値を変えることで出力させるCSSを変えることができます。PHPを使えばね。</p>
+  <p>この記事では、どのようなコードでそれを実現するのかを紹介します。</p>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <pre><code class="blockCode_c"><span class="code-line">&lt;php</span>
+<span class="code-line"><var>$param</var> <span class="code-pink">=</span> $_GET[<span class="code-yellow">"css"</span>];</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-pink">if</span>(<var>$param</var> <span class="code-pink">!==</span> <span class="code-purple">null</span>) {</span>
+<span class="code-line">  <span class="code-blue">header</span>(<span class="code-yellow">"Content-Type: text/css; charset=utf-8"</span>);</span>
+<span class="code-line">  <span class="code-blue">header</span>(<span class="code-yellow">"X-Content-Type-Options: nosniff"</span>);</span>
+<span class="code-line"></span>
+<span class="code-line">  <var>$cssArr</var> <span class="code-pink">=</span> [</span>
+<span class="code-line">    <span class="code-yellow">"h"</span> <span class="code-pink">=></span> <span class="code-yellow">"/h.css"</span>,</span>
+<span class="code-line">    <span class="code-yellow">"li"</span> <span class="code-pink">=></span> <span class="code-yellow">"/li.css"</span></span>
+<span class="code-line">  ];</span>
+<span class="code-line">  <var>$root</var> <span class="code-pink">=</span> $_SERVER[<span class="code-yellow">"DOCUMENT_ROOT"</span>];</span>
+<span class="code-line">  <var>$paramArr</var> <span class="code-pink">=</span> <span class="code-blue">explode</span>(<span class="code-yellow">"-"</span>, <span class="code-blue">htmlspecialchars</span>(<var>$param</var>));</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-pink">foreach</span> (<var>$paramArr</var> <span class="code-pink">as</span> <var>$type</var>) {</span>
+<span class="code-line">    <span class="code-pink">if</span>(<span class="code-blue">array_key_exists</span>(<var>$type</var>, <var>$cssArr</var>)) <span class="code-green">include</span>(<var>$root</var><span class="code-pink">.</span><var>$cssArr</var>[<var>$type</var>]);</span>
+<span class="code-line">  }</span>
+<span class="code-line">} <span class="code-pink">else</span> {</span>
+<span class="code-line">  <span class="code-blue">echo</span> <span class="code-yellow">"有効なパラメーターを入力してください。"</span>;</span>
+<span class="code-line">}</span></code></pre>
+</section>
+
+<section id="{{ headingId[2] }}">
+  <h2>{{ heading[2] }}</h2>
+  <p>パラメーターの値をいずれいろいろな処理に使っていきたいので、まずは変数<code class="inlineCode"><var>$param</var></code>にパラメーターの値を代入します。<a href="https://www.php.net/manual/ja/reserved.variables.get.php"><code class="inlineCode">$_GET</code>について詳しくはこちら</a>。</p>
+  <pre><code class="blockCode_c"><span class="code-line"><var>$param</var> <span class="code-pink">=</span> $_GET[<span class="code-yellow">"css"</span>];</span></code></pre>
+
+  <p>cssパラメーターがない時、すなわち<code class="inlineCode"><var>$param</var></code>が<code class="inlineCode">null</code>の時はエラーメッセージを返すようにします。それ以外の時はCSSを出力する処理をします。この条件分岐は<code class="inlineCode">if</code>文を使います。<a href="https://www.php.net/manual/ja/control-structures.if.php"><code class="inlineCode">if</code>文について詳しくはこちら</a>。</p>
+  <pre><code class="blockCode_c"><span class="code-line"><span class="code-pink">if</span>(<var>$param</var> <span class="code-pink">!==</span> <span class="code-purple">null</span>) {</span>
+<span class="code-line code-gray">  // CSS出力用の処理</span>
+<span class="code-line">} <span class="code-pink">else</span> {</span>
+<span class="code-line">  <span class="code-blue">echo</span> <span class="code-yellow">"有効なパラメーターを入力してください。"</span>;</span>
+<span class="code-line">}</span></code></pre>
+  <p>次の2つのURLだとエラー文が表示されます。</p>
+  <ul>
+    <li>https://sample.com/style?csss=h</li>
+    <li>https://sample.com/style?css</li>
+  </ul>
+
+  <p>次にCSS出力用の処理に関するコードについて説明していきます。</p>
+  <p><code class="inlineCode">header()</code>関数を使うとHTTPヘッダーを送信できます。<dfn id="httpheader">HTTPヘッダー</dfn>とは、<span role="definition" aria-labelledby="httpheader">Webページを表示させるためにクライアントとサーバー間の通信の中でやり取りされる、ブラウザやページに関する付加的な情報のことを指します。</span></p>
+
+  <p><code class="inlineCode">Content-Type</code>ヘッダーを指定することで、サーバーからどんな形式のファイルを受け取るのかを示します。形式はMIMEタイプで記述します。今回のコードで言えば<code class="inlineCode">text/css</code>となります。以下のコードをstyle.phpに指定することで、サーバーはstyle.phpをCSSファイルとしてクライアントに返します。</p>
+  <pre><code class="blockCode_c"><span class="code-line"><span class="code-blue">header</span>(<span class="code-yellow">"Content-Type: text/css; charset=utf-8"</span>);</span></code></pre>
+
+  <p><code class="inlineCode">X-Content-Type-Options</code>ヘッダーを指定しているのは<a href="https://developer.mozilla.org/ja/docs/Web/HTTP/Basics_of_HTTP/MIME_types#MIME_sniffing">MIMEスニッフィング</a>を防止するためです。<dfn id="mime">MIMEスニッフィング</dfn>とは、<span role="definition" aria-labelledby="mime">ブラウザがリソースを確認してMIMEタイプを推測してしまう挙動のことです。</span>以下のコードを指定することで、MIMEスニッフィングを防止し、<code class="inlineCode">Content-Type</code>ヘッダーで示したMIMEタイプに従うようブラウザに伝えます。</p>
+  <pre><code class="blockCode_c"><span class="code-line"><span class="code-blue">header</span>(<span class="code-yellow">"X-Content-Type-Options: nosniff"</span>);</span></code></pre>
+
+  <p>style.phpに出力したいCSSはそれぞれ個別のCSSファイルに書いておきます。<code class="inlineCode"><var>$cssArr</var></code>変数にはCSSファイルのパスとパスを識別するための文字（以下「トリガー文字」）のセットを配列で格納しておきます。CSSファイルのパスはルートディレクトリからのパスを書きます。</p>
+  <pre><code class="blockCode_c"><span class="code-line"><var>$cssArr</var> <span class="code-pink">=</span> [</span>
+<span class="code-line">  <span class="code-yellow">"h"</span> <span class="code-pink">=></span> <span class="code-yellow">"/h.css"</span>,</span>
+<span class="code-line">  <span class="code-yellow">"li"</span> <span class="code-pink">=></span> <span class="code-yellow">"/li.css"</span></span>
+<span class="code-line">];</span></code></pre>
+
+  <p>出力したいCSSに対応するトリガー文字をcssパラメーターの値として指定します。複数あるときはハイフン区切りで指定します。そうすることでincludeするCSSファイルを識別できます。includeするときに必要になるため、ルートディレクトリのパスも<code class="inlineCode"><var>$root</var></code>変数に格納しておきます。</p>
+  <pre><code class="blockCode_c"><span class="code-line"><var>$root</var> <span class="code-pink">=</span> $_SERVER[<span class="code-yellow">"DOCUMENT_ROOT"</span>];</span></code></pre>
+
+  <p>ハイフン区切りで連結されたトリガー文字を分解して配列にするために、<code class="inlineCode">explode()</code>関数を使います。配列にする理由は<code class="inlineCode">foreach</code>を使ってループでそれぞれのCSSファイルをincludeするためです。<a href="https://www.php.net/manual/ja/function.explode.php"><code class="inlineCode">explode()</code>関数について詳しくはこちら</a>。エスケープ処理のために<code class="inlineCode"><var>htmlspecialchars()</var></code>関数を使っていますが、必要なのかどうかは分かりません...。</p>
+  <pre><code class="blockCode_c"><span class="code-line"><var>$paramArr</var> <span class="code-pink">=</span> <span class="code-blue">explode</span>(<span class="code-yellow">"-"</span>, <span class="code-blue">htmlspecialchars</span>(<var>$param</var>));</span></code></pre>
+  <p>トリガー文字が1つの時（e.g. ?css=h）は要素数が1である配列が<code class="inlineCode"><var>$paramArr</var></code>変数に格納されます。</p>
+
+  <p class="p2"><code class="inlineCode"><var>$paramArr</var></code>変数にはトリガー文字が配列形式で格納されているので、<code class="inlineCode">foreach</code>を使って各トリガー文字に対応するCSSファイルをincludeします。ただ、<code class="inlineCode"><var>$cssArr</var></code>変数に含まれていないトリガー文字を含んでいる可能性もあるので、<code class="inlineCode">array_key_exists()</code>関数を使って<code class="inlineCode"><var>$paramArr</var></code>変数内のトリガー文字が<code class="inlineCode"><var>$cssArr</var></code>変数のkeyとして存在しているかどうかを確認します。存在している場合のみCSSファイルをincludeします。<a href="https://www.php.net/manual/ja/function.array-key-exists.php"><code class="inlineCode">array_key_exists()</code>関数について詳しくはこちら</a>。</p>
+  <pre class="p2"><code class="blockCode_c"><span class="code-line"><span class="code-pink">foreach</span> (<var>$paramArr</var> <span class="code-pink">as</span> <var>$type</var>) {</span>
+<span class="code-line">  <span class="code-pink">if</span>(<span class="code-blue">array_key_exists</span>(<var>$type</var>, <var>$cssArr</var>)) <span class="code-green">include</span>(<var>$root</var><span class="code-pink">.</span><var>$cssArr</var>[<var>$type</var>]);</span>
+<span class="code-line">}</span></code></pre>
+
+  <p class="p2">以下のURLのパラメーターは「?css=g-h-li」ですが、「g」はトリガー文字として不適切です。しかし<code class="inlineCode">array_key_exists()</code>関数を使っているため、エラーなくCSSが出力されるはずです。</p>
+  <p class="p2">https://sample.com/style?css=g-h-li</p>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>もし誤った情報を見つけたり、お聞きしたいことがあったり、より良いコードを見つけた場合は、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>
