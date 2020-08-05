@@ -100,12 +100,12 @@ h2 + p,h3 + p {margin: 0 0 38px;}
 
 blockquote {
   background: #ececec;
-  padding: 20px 5px 20px 20px;
+  padding: 20px;
 }
 .quoteSource {
   font-size: calc(1rem - 3px);
   text-align: right;
-  margin-top: 10px;
+  margin: 10px 0 0;
 }
 
 .inlineCode {

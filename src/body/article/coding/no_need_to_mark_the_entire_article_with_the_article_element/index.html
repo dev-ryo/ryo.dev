@@ -1,0 +1,51 @@
+---
+title: 記事全体をarticle要素で囲む必要はないのでは？
+desc: 仕様書によると、ページの主要コンテンツが1つの自己完結型の構成である場合は、主要コンテンツをarticle要素で囲むのは技術的に冗長であるという見解らしいです。
+url: https://ryo.dev/article/coding/no_need_to_mark_the_entire_article_with_the_article_element/
+tags: coding
+tagJpName: コーディング
+heading:
+  - 仕様書によると...
+  - 僕なりの解釈
+headingId:
+  - spec
+  - idea
+datePublished: "2020-02-05"
+date: 2020-08-05
+originalCSS: true
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p><code class="inlineCode">article</code>要素について、仕様書には次のように書いてあります。</p>
+  <blockquote cite="https://momdo.github.io/html/sections.html#the-article-element">
+    <p class="m--0">ページの主な内容（すなわち、フッタ, ヘッダ, ナビブロック, サイドバーを除外した部分）すべてが，全体として単独の自己完結的な構成になるとき、それを <code class="codeInQuote">article</code> でマークすることは — そうしてもよいが — 形の上では冗長になる（それは単独の文書を成し，ページが単独の構成であることは自明になるので）。</p>
+    <p class="quoteSource"><cite><a href="https://momdo.github.io/html/sections.html#the-article-element">HTML Standard 日本語訳</a></cite></p>
+  </blockquote>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <p><q cite="https://momdo.github.io/html/sections.html#the-article-element">ページの主な内容すべてが，全体として単独の自己完結的な構成</q>というのは、<strong>ブログや記事</strong>を含むのではないでしょうか。ブログや記事は1ページ1テーマが基本形です。HTMLとCSSの書き方についての内容と先週の九州旅行の思い出の内容を1つの記事に書く人はいないでしょう。</p>
+  <p>ということは、ブログや記事の場合、次のようにマークアップする必要はないのでは？</p>
+  <pre class="p1"><code class="blockCode_c"><span class="code-line">&lt;<span class="code-pink">header</span>&gt;&lt;/<span class="code-pink">header</span>&gt;</span>
+<span class="code-line">&lt;<span class="code-pink">main</span>&gt;</span>
+<span class="code-line">  &lt;<span class="code-pink">article</span>&gt;&lt;/<span class="code-pink">article</span>&gt;</span>
+<span class="code-line">&lt;/<span class="code-pink">main</span>&gt;</span>
+<span class="code-line">&lt;<span class="code-pink">footer</span>&gt;&lt;/<span class="code-pink">footer</span>&gt;</span></code></pre>
+    <pre><code class="blockCode_c"><span class="code-line">&lt;<span class="code-pink">article</span>&gt;</span>
+<span class="code-line">  &lt;<span class="code-pink">header</span>&gt;&lt;/<span class="code-pink">header</span>&gt;</span>
+<span class="code-line">  &lt;<span class="code-pink">main</span>&gt;&lt;/<span class="code-pink">main</span>&gt;</span>
+<span class="code-line">  &lt;<span class="code-pink">footer</span>&gt;&lt;/<span class="code-pink">footer</span>&gt;</span>
+<span class="code-line">&lt;/<span class="code-pink">article</span>&gt;</span></code></pre>
+  <p>このようにマークアップすればいいでしょう。</p>
+  <pre><code class="blockCode_c"><span class="code-line">&lt;<span class="code-pink">header</span>&gt;&lt;/<span class="code-pink">header</span>&gt;</span>
+<span class="code-line">&lt;<span class="code-pink">main</span>&gt;&lt;/<span class="code-pink">main</span>&gt;</span>
+<span class="code-line">&lt;<span class="code-pink">footer</span>&gt;&lt;/<span class="code-pink">footer</span>&gt;</span></code></pre>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>もし誤った情報を見つけたりお聞きしたいことがあったりした場合は、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>
