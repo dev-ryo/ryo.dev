@@ -1,0 +1,88 @@
+---
+title: WordPressサイトのトップページに、3つのカテゴリーの記事を最新のものから5つ表示させました
+desc: WordPressで作られた着物屋さんのサイトの一部修正をしました。トップページに、3つのカテゴリーの記事を投稿日順に最新のものから5つ取得して表示させました。
+url: https://ryo.dev/article/achievements/202004022044/
+tags: achievements
+tagJpName: 実績
+heading:
+  - 依頼内容
+  - 制作物
+  - 料金と納期、その他
+  - 制作過程
+headingId:
+  - desc
+  - production
+  - others
+  - process
+datePublished: "2020-04-07"
+date: 2020-08-05
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>WordPressで作られた着物屋さんのサイトを一部修正しました。</p>
+  <figure>
+    <figcaption class="p2">このサイトのトップページには元々「イベント」カテゴリーの記事が投稿順に5つ並んで表示されていました。今回の依頼は、「イベント」と「お知らせ」と「新商品情報」の3つのカテゴリの記事を投稿順に5つ表示させてほしいというものでした。下の画像のようなデザインで制作するよう依頼されました。なお、依頼主さんの要望により、記事タイトルにはぼかしをいれています。</figcaption>
+    <picture class="p2">
+      <source srcset="img/design.webp" type="image/webp">
+      <source srcset="img/design.jpg" type="image/jpg">
+      <img src="img/design.jpg" alt="依頼主さんから貰ったデザイン案画像" class="fullWidthImg">
+    </picture>
+  </figure>
+  <p>また、記事タイトルは1行で表示させ、枠外に出てしまう場合は末尾を「･･･」と表示する仕様にしてほしいとも依頼されました。</p>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <p>下の画像は僕が実際に作ったもののスクショです。依頼主さんの要望により、記事タイトルにはぼかしをいれています。</p>
+  <picture>
+    <source srcset="img/product.webp" type="image/webp">
+    <source srcset="img/product.jpg" type="image/jpg">
+    <img src="img/product.jpg" alt="僕が実際に作ったもののスクショ" class="fullWidthImg">
+  </picture>
+  <p><a href="https://cdpn.io/Mryoo/debug/KKpEROw">サンプルはこちらから確認できます</a>。上の画像のものとはコードが一部違うので、フォントや色や文字の大きさなどは全く同じではありません。記事タイトルは<a href="https://www.nims.go.jp/">NIMSさんのサイト</a>から拝借しました。ありがとうございますm(__)m</p>
+</section>
+
+<section id="{{ headingId[2] }}">
+  <h2>{{ heading[2] }}</h2>
+  <ul>
+    <li><span class="fw--b">料金</span>：￥10000</li>
+    <li><span class="fw--b">取引開始から終了までの期間</span>：38時間</li>
+    <li><span class="fw--b">URL</span>：依頼主さんの要望で非公開にしています。</li>
+  </ul>
+</section>
+
+<section id="{{ headingId[3] }}">
+  <h2>{{ heading[3] }}</h2>
+  <p>このセクションは、Webサイト制作に携わっている方向けの内容になりますので、専門的な話になります。</p>
+  <ol>
+    <li class="p1">修正対象のサイトをローカル環境で再現するためにLocal by Flywheelで新しいサイトを制作しました。</li>
+    <li class="p1">依頼主さんに教えていただいたFTP情報をもとにFTPサーバーへ接続しました。/wp-content/themesの中から現在使用しているテーマファイル一式を、Local by Flywheelのサイトのテーマファイル保存場所へダウンロードしました。</li>
+    <li class="p1">依頼主さんに教えていただいたWordPressログイン情報をもとに管理画面に入り、記事をエクスポートしました。また、ローカル環境へインポートしました。なお、ここまでの手順は<a href="https://haniwaman.com/wordpress-trace/">本番のWordPress環境を自分のローカル環境にトレース（再現）する時の手順 | HPcode</a>で解説している手順とほぼ同じです。</li>
+    <li class="p1">
+      <p>front-page.phpファイルを編集しました。「3つのカテゴリーの記事を投稿日順に5つ取得する」というプログラムには以下のコードを使いました。</p>
+      <pre class="p2"><code class="blockCode_c"><span class="code-line">$args <span class="code-pink">=</span> <span class="code-blue">array</span>(</span>
+<span class="code-line">  <span class="code-yellow">'posts_per_page'</span> <span class="code-pink">=></span> <span class="code-purple">5</span>,</span>
+<span class="code-line">  <span class="code-yellow">'category__in'</span> <span class="code-pink">=></span> <span class="code-blue">array</span>(<span class="code-yellow">"8"</span>, <span class="code-yellow">"952"</span>, <span class="code-yellow">"947"</span>)</span>
+<span class="code-line">);</span>
+<span class="code-line">$the_query <span class="code-pink">= new</span> <span class="code-blue">WP_Query</span>($args);</span>
+<span class="code-line"><span class="code-pink">while</span>($the_query<span class="code-pink">-></span><span class="code-green">have_posts</span>()): $the_query<span class="code-pink">-></span><span class="code-green">the_post</span>();</span></code></pre>
+      <p>あとは配列をまわして、カテゴリーIDごとに背景色を変えたり、<code class="inlineCode">the_time('Y.m.d');</code>で投稿日時を取得したり、<code class="inlineCode">the_permalink();</code>で投稿のURLを取得したりしながら、値をセットしていきました。</p>
+    </li>
+  </ol>
+  <p>今回作ったものは汎用性がありそうなので、スニペットとして保存しておこうと思います。コードはCodePenに投稿しています。</p>
+  <div>
+    <p class="codepen" data-height="454" data-theme-id="37501" data-default-tab="result" data-user="Mryoo" data-slug-hash="KKpEROw" style="height: 454px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="News">
+    <span>See the Pen <a href="https://codepen.io/Mryoo/pen/KKpEROw">
+      News</a> by RYO (<a href="https://codepen.io/Mryoo">@Mryoo</a>)
+      on <a href="https://codepen.io">CodePen</a>.</span>
+    </p>
+    <script async src="https://static.codepen.io/assets/embed/ei.js" nonce="<?=$parts['nonce']; ?>"></script>
+  </div>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>ご意見やお聞きしたいことがございましたら、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>

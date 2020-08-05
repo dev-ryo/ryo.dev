@@ -1,0 +1,134 @@
+---
+title: Webページに動画を埋め込む依頼を引き受けた話
+desc: RICHKAで作った動画をWebページに埋め込む方法を教えてほしいと依頼されました。この記事では、その依頼の紹介に加えて、動画をvideo要素で表示させる方法とiframe要素で埋め込む方法ともっと簡単に埋め込む方法を紹介します。
+url: https://ryo.dev/article/achievements/202004171154/
+tags: achievements
+tagJpName: 実績
+heading:
+  - 依頼内容
+  - 役務内容
+  - 料金と納期、その他
+  - まとめ
+headingId:
+  - desc
+  - services
+  - others
+  - summary
+datePublished: "2020-04-17"
+date: 2020-08-05
+originalCSS: true
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>動作作成サービス<a href="https://richka.co/">RICHKA</a>で作った動画をWebページに表示させる方法を教えてほしいという依頼でした。動画はループ再生をさせ、かつ、レスポンシブ対応もさせたいとのことでした。</p>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <p>RICHKAの動画をWebページに表示させる方法は2つあります。</p>
+  <ol>
+    <li>動画をダウンロードしてサーバーにアップロードし、<code class="inlineCode">video</code>要素で表示させる</li>
+    <li>RICHKA内で作れる埋め込みタグで表示させる</li>
+  </ol>
+  <p>この2通りの方法を説明し、質問をされたらそれに答えました。以下では上の2つの方法を説明します。</p>
+
+  <section class="h3sec">
+    <h3><code class="inlineCode fw--n">video</code>要素を使う方法</h3>
+    <ol>
+      <li class="p1">制作した動画をダウンロードします。<a href="http://richka.xbiz.jp/reference/%e5%8b%95%e7%94%bb%e3%81%ae%e3%83%80%e3%82%a6%e3%83%b3%e3%83%ad%e3%83%bc%e3%83%89/">ダウンロード方法はこちら</a>。そしてサーバーにアップロードします。</li>
+      <li class="p1">
+        <p class="p2">HTMLは次のようにコードを書きます。</p>
+        <pre class="p2"><code class="blockCode_c"><span class="code-line">&lt;<span class="code-pink">video</span> <span class="code-green">src</span>=<span class="code-yellow">"img/sample.mp4"</span> <span class="code-green">loop</span> <span class="code-green">controls</span> <span class="code-green">class</span>=<span class="code-yellow">"sampleVideo"</span>&gt;&lt;/<span class="code-pink">video</span>&gt;</span></code></pre>
+        <p class="p2">属性の意味については<a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/video#Attributes">&lt;video&gt;:動画埋め込み要素 - HTML: HyperText Markup Language | MDN</a>を参考にしてください。ちなみに、ループ再生をさせる場合は<code class="inlineCode">autoplay</code>属性だけでなく、<code class="inlineCode">muted</code>属性も必要です。</p>
+        <p class="p2"><code class="inlineCode">loop</code>属性や<code class="inlineCode">controls</code>属性はboolean attributeと呼ばれる種類の属性です（<a href="https://html.spec.whatwg.org/multipage/media.html#the-video-element">ソース</a>）。trueであれば属性を適用させ、falseであれば適用させません。boolean attributeはその属性があればtrue、なければfalseと解釈されるため、<code class="inlineCode">="～"</code>を書く必要はありません（<a href="https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes">ソース</a>）。</p>
+      </li>
+      <li class="p1">
+        <p class="p2">レスポンシブ対応させるために、以下のCSSを指定します。</p>
+        <pre class="p2"><code class="blockCode_c"><span class="code-line"><span class="code-green">.sampleVideo</span> {</span>
+<span class="code-line">  <span class="code-blue">display</span>: <span class="code-blue">block</span>;</span>
+<span class="code-line">  <span class="code-blue">margin</span>: <span class="code-purple">0</span> <span class="code-blue">auto</span>;</span>
+<span class="code-line">  <span class="code-blue">max-width</span>: <span class="code-purple">480</span><span class="code-pink">px</span>;</span>
+<span class="code-line">  <span class="code-blue">width</span>: <span class="code-purple">100</span><span class="code-pink">%</span>;</span>
+<span class="code-line">}</span></code></pre>
+      </li>
+      <li class="p1">
+        <p class="p2">こちらがサンプルです（この動画はRICHKAで作った動画ではありません）。</p>
+        <video src="img/sample.mp4" loop controls class="p2 sampleVideo"></video>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h3>埋め込みタグを使う方法</h3>
+    <ol>
+      <li class="p1">埋め込みタグを作ります。<a href="http://richka.xbiz.jp/reference/%e5%9f%8b%e3%82%81%e8%be%bc%e3%81%bf%e3%82%bf%e3%82%b0%e3%81%a8%e3%81%af/">埋め込みタグの作り方はこちら</a>。</li>
+      <li class="p1">
+        <p class="p2">動画を表示させたい場所に<code class="inlineCode">div</code>要素を作り、その中に埋め込みタグを貼り付けます。埋め込みタグは<code class="inlineCode">iframe</code>要素になっているはずです。</p>
+        <pre class="p2"><code class="blockCode_c"><span class="code-line">&lt;<span class="code-pink">div</span> <span class="code-green">class</span>=<span class="code-yellow">"sampleIframe-C"</span>&gt;</span>
+<span class="code-line code-gray">  &lt;!-- 埋め込みタグをコピペ --&gt;</span>
+<span class="code-line">  &lt;<span class="code-pink">iframe</span> ～ <span class="code-green">class</span>=<span class="code-yellow">"sampleIframe"</span>&gt;&lt;<span class="code-pink">iframe</span>&gt;</span>
+<span class="code-line">&lt;/<span class="code-pink">div</span>&gt;</span></code></pre>
+      </li>
+      <li class="p1">
+        <p class="p2">レスポンシブ対応させるために、以下のCSSを指定します。</p>
+        <pre class="p2"><code class="blockCode_c"><span class="code-line"><span class="code-green">.sampleIframe-C</span> {</span>
+<span class="code-line">  <span class="code-blue">margin</span>: <span class="code-purple">0</span> <span class="code-blue">auto</span>;</span>
+<span class="code-line">  <span class="code-blue">max-width</span>: <span class="code-purple">480</span><span class="code-pink">px</span>;</span>
+<span class="code-line">  <span class="code-blue">position</span>: <span class="code-blue">relative</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"><span class="code-green">.sampleIframe-C::after</span> {</span>
+<span class="code-line">  <span class="code-blue">content</span>: <span class="code-yellow">""</span>;</span>
+<span class="code-line">  <span class="code-blue">display</span>: <span class="code-blue">block</span>;</span>
+<span class="code-line">  <span class="code-blue">padding-top</span>: <span class="code-blue">calc</span>(<span class="code-purple">100</span><span class="code-pink">% * </span><span class="code-purple">315</span> <span class="code-pink">/</span> <span class="code-purple">560</span>);</span>
+<span class="code-line">}</span>
+<span class="code-line"><span class="code-green">.sampleIframe</span> {</span>
+<span class="code-line">  <span class="code-blue">height</span>: <span class="code-purple">100</span><span class="code-pink">%</span>;</span>
+<span class="code-line">  <span class="code-blue">position</span>: <span class="code-blue">absolute</span>;</span>
+<span class="code-line">  <span class="code-blue">width</span>: <span class="code-purple">100</span><span class="code-pink">%</span>;</span>
+<span class="code-line">}</span></code></pre>
+        <p class="p2">こちらがサンプルです。この動画はRICHKAで作った動画ではなくYouTubeの動画です。YouTubeも埋め込みタグが<code class="inlineCode">iframe</code>要素なので代替として使います。</p>
+        <div class="sampleIframe-C p2">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/a_IA-8nQ4FY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="sampleIframe"></iframe>
+        </div>
+        <p class="p2">アスペクト比を固定させたまま画面幅に応じて拡大縮小させたいときによく使うコードです。上のコードの場合、画面幅がどうであれ、<code class="inlineCode">iframe</code>要素の幅：高さは常に560：315になります。このコードの仕組みを抽象的に表すと、<code class="inlineCode">.sampleIframe-C</code>で<code class="inlineCode">iframe</code>要素と同じアスペクト比の入れ物を作り、その中に<code class="inlineCode">iframe</code>要素をぴったりはめるイメージです。</p>
+        <p class="p2">この仕組みを実現するために重要なコードが<code class="inlineCode">padding-top</code>プロパティです。<a href="https://developer.mozilla.org/ja/docs/Web/CSS/padding-top"><code class="inlineCode">padding-top</code>の値を%で書くとその大きさは、親要素の幅に対する割合として解釈されます</a>。<code class="inlineCode">.sampleIframe-C::after</code>は<code class="inlineCode">.sampleIframe-C</code>の子要素として扱われるので、<code class="inlineCode">.sampleIframe-C::after</code>に<code class="inlineCode">padding-top</code>を%表記で指定すると、<code class="inlineCode">.sampleIframe-C</code>の幅の割合分の大きさになります。</p>
+        <p class="p2">あとは<code class="inlineCode">iframe</code>要素のアスペクト比を元に<code class="inlineCode">padding-top</code>プロパティに適切な値を指定するとアスペクト比が固定されたままとなり、レイアウトを崩すことなくきれいにレスポンシブ対応できるというわけです。</p>
+      </li>
+      <li class="p1">
+        <p class="p2">実はもう少し簡単なコードでレスポンシブ化することもできます。まず、HTMLは埋め込みタグだけで大丈夫です。</p>
+        <pre class="p2"><code class="blockCode_c"><span class="code-line">&lt;<span class="code-pink">iframe</span> ～ <span class="code-green">class</span>=<span class="code-yellow">"sampleIframe2"</span>&gt;&lt;<span class="code-pink">iframe</span>&gt;</span></code></pre>
+        <p class="p2">次に、以下のCSSを指定します。先ほどよりかは少しコンパクトになりました。</p>
+        <pre class="p2"><code class="blockCode_c"><span class="code-line"><span class="code-green">.sampleIframe2</span> {</span>
+<span class="code-line">  <span class="code-blue">display</span>: <span class="code-blue">block</span>;</span>
+<span class="code-line">  <span class="code-blue">height</span>: <span class="code-blue">calc</span>(<span class="code-purple">80</span><span class="code-pink">vw * </span><span class="code-purple">315</span> <span class="code-pink">/</span> <span class="code-purple">560</span>);</span>
+<span class="code-line">  <span class="code-blue">margin</span>: <span class="code-purple">0</span> <span class="code-blue">auto</span>;</span>
+<span class="code-line">  <span class="code-blue">max-height</span>: <span class="code-purple">270</span><span class="code-pink">px</span>;</span>
+<span class="code-line">  <span class="code-blue">max-width</span>: <span class="code-purple">480</span><span class="code-pink">px</span>;</span>
+<span class="code-line">  <span class="code-blue">width</span>: <span class="code-purple">80</span><span class="code-pink">vw</span>;</span>
+<span class="code-line">}</span></code></pre>
+        <p class="p2">こちらがサンプルです。</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/a_IA-8nQ4FY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="sampleIframe2 p2"></iframe>
+        <p class="p2">このコードのポイントは<code class="inlineCode">width</code>と<code class="inlineCode">height</code>で<code class="inlineCode">vw</code>を使っていることでしょう。<code class="inlineCode">vw</code>でなくても<code class="inlineCode">vh</code>でも<code class="inlineCode">vmax</code>でも<code class="inlineCode">vmin</code>でもいいですが、とりあえず単位を合わせることが重要です。</p>
+      </li>
+    </ol>
+  </section>
+</section>
+
+<section id="{{ headingId[2] }}">
+  <h2>{{ heading[2] }}</h2>
+  <ul>
+    <li><span class="fw--b">料金</span>：￥3000</li>
+    <li><span class="fw--b">取引開始から終了までの期間</span>：3日</li>
+  </ul>
+</section>
+
+<section id="{{ headingId[3] }}">
+  <h2>{{ heading[3] }}</h2><p>ネコかわいいよね。飼いたいよね。</p>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>ご意見やお聞きしたいことがございましたら、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>

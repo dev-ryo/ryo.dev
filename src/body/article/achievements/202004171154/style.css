@@ -1,0 +1,31 @@
+.sampleVideo {
+  display: block;
+  margin: 0 auto;
+  max-width: 480px;
+  width: 100%;
+}
+
+.sampleIframe-C {
+  margin: 0 auto;
+  max-width: 480px;
+  position: relative;
+}
+.sampleIframe-C::after {
+  content: "";
+  display: block;
+  padding-top: calc(100% * 315 / 560);
+}
+.sampleIframe {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.sampleIframe2 {
+  display: block;
+  height: calc(80vw * 315 / 560);
+  margin: 0 auto;
+  max-height: 270px;
+  max-width: 480px;
+  width: 80vw;
+}

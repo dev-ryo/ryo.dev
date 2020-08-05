@@ -1,0 +1,106 @@
+---
+title: Google フォームの使い方をレクチャーしました
+desc: Google フォームの使い方をSkypeで教えました。依頼主さんに画面を共有していただき、僕の説明をもとに自力でフォームを作っていただきました。レクチャーは1時間2000円でお引き受けしました。
+url: https://ryo.dev/article/achievements/202006051309/
+tags: achievements
+tagJpName: 実績
+heading:
+  - 依頼内容
+  - 実際の取り組み
+  - 料金
+headingId:
+  - desc
+  - work
+  - others
+datePublished: "2020-06-08"
+date: 2020-08-05
+originalCSS: true
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>Google フォームに関する以下の内容について、Skypeによるレクチャーを依頼されました。いわゆるオンライン授業ですね。</p>
+  <ul>
+    <li>基本機能の使い方</li>
+    <li>簡易ログインの実装方法</li>
+    <li>回答に応じて質問を表示する方法</li>
+    <li>回答者が自分の回答を修正する方法</li>
+    <li>公開方法（Googleログインを要求されないように）</li>
+    <li>回答をcsv形式で出力（文字化けしないように）</li>
+    <li>Google サイトへの埋め込み方法</li>
+  </ul>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <p>依頼主さんに画面を共有していただきました。僕の説明を聞いて依頼主さんが自ら操作をし、上の要件を満たすフォームを作っていただきました。</p>
+  <p>レクチャー内容について具体的に説明します。</p>
+  <p>なお、レクチャーした内容と<a href="https://support.google.com/docs/topic/9055404">Google フォームのヘルプページ</a>が被っているところは、ヘルプページへのリンクのみの記載とさせていただきます。</p>
+  <dl>
+    <div class="p1">
+      <dt class="fw--b">基本機能の使い方</dt>
+      <dd class="m--0">フォームのタイトルや説明の表示場所、質問の作り方、ラジオボタンとチェックボックスの使い分け方、記述式と段落の使い分け、質問の複製・移動・削除の方法をレクチャーしました。</dd>
+    </div>
+    <div class="p1">
+      <dt class="fw--b">簡易ログインの実装方法</dt>
+      <dd class="m--0">
+        <p class="p2">以下の機能を組み合わせることで、簡易的なログイン機能を作れます。</p>
+        <ul>
+          <li><a href="https://support.google.com/docs/answer/7322334">[記述式]の質問形式</a></li>
+          <li><a href="https://support.google.com/docs/answer/3378864">[回答の検証]機能（検証ルールは[正規表現]）</a></li>
+          <li><a href="https://support.google.com/docs/answer/2839737">セクションの追加</a></li>
+        </ul>
+        <p class="p2"><a href="https://forms.gle/F1QsEEeCZuk1C9zg6">簡易ログインのサンプル</a>です。</p>
+        <p class="p2">フォームに入った回答者はまず、パスワード入力セクションに直面します。回答者はある決まったパターンの文字列を入力したら次のセクションに進むことができます。</p>
+        <p class="p2">ただ、<strong>この簡易ログインはセキュリティがゆるゆる</strong>です。なぜなら、回答者はGoogle フォームのソースコードを見て、作成者がどんなパターンを指定したのかを簡単に確認することができるからです。</p>
+        <picture class="p2">
+          <source srcset="img/code.webp" type="image/webp">
+          <source srcset="img/code.jpg" type="image/jpg">
+          <img src="img/code.jpg" alt="Google フォームのコード" class="fullWidthImg">
+        </picture>
+        <p class="p2">フォーム作成者はパスワードのパターンを<a href="https://murashun.jp/blog/20190215-01.html">正規表現</a>で指定します。つまり、正規表現に関する知識があれば、ソースコードからパターンを確認し、パターン通りの文字列を入力することで突破できてしまいます。</p>
+        <p class="p2">ソースコードの確認方法と正規表現の読み方はググれば出てきます。ソースコード上のどこにパターンが書いてあるのかもすぐ分かります。<strong>誰にでも突破できます</strong>。</p>
+      </dd>
+    </div>
+    <div class="p1">
+      <dt class="fw--b">回答に応じて質問を表示する方法</dt>
+      <dd class="m--0">例えば、最初の質問でイヌ派かネコ派か聞き、イヌ派と答えた人にはイヌの好みを深掘りするセクションへ、ネコ派と答えた人にはネコの好みを深掘りするセクションへ移動する、という感じのフォームの作り方をレクチャーしました。<a href="https://support.google.com/docs/answer/141062">作り方はこちら</a>。</dd>
+    </div>
+    <div class="p1">
+      <dt class="fw--b">回答者が自分の回答を修正する方法</dt>
+      <dd class="m--0">
+        <p class="p2">方法については、<a href="https://support.google.com/docs/answer/2839588">回答者に回答の編集を許可するセクション</a>をご覧ください。</p>
+        <p class="p2">すべての質問への回答が終わると、「回答を編集」リンクが表示されます。そのURLに入ると回答を編集できます。</p>
+      </dd>
+    </div>
+    <div class="p1">
+      <dt class="fw--b">公開方法（Googleログインを要求されないように）</dt>
+      <dd class="m--0">
+        <p class="p2"><a href="https://support.google.com/docs/answer/2839588">フォームの送信方法はこちら</a>。</p>
+        <p class="p2">Googleへのログインを求められるのは、<a href="https://support.google.com/docs/answer/2839588#one_response">回答の送信を1回に制限</a>する場合、もしくは、<a href="https://support.google.com/docs/answer/7322334">回答者がファイルをアップロード</a>する場合のどちらかです。</p>
+      </dd>
+    </div>
+    <div class="p1">
+      <dt class="fw--b">回答をcsv形式で出力（文字化けしないように）</dt>
+      <dd class="m--0">
+        <p class="p2"><a href="https://support.google.com/docs/answer/139706#csv">すべての回答をcsv形式でダウンロードする方法はこちら</a>。</p>
+        <p class="p2"><a href="https://kuniaki.hatenablog.com/entry/20190729googleform">文字化けしてしまう場合の対処方法はこちら</a>。</p>
+      </dd>
+    </div>
+    <div class="p1">
+      <dt class="fw--b">Google サイトへの埋め込み方法</dt>
+      <dd class="m--0"><a href="https://support.google.com/sites/answer/90569">Google サイトにGoogle フォームを埋め込む方法はこちら</a>。</dd>
+    </div>
+  </dl>
+</section>
+
+<section id="{{ headingId[2] }}">
+  <h2>{{ heading[2] }}</h2>
+  <p>2000円／1時間 × 5時間 = 10000円</p>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>ご意見やお聞きしたいことがございましたら、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>

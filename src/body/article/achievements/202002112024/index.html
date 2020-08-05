@@ -1,0 +1,58 @@
+---
+title: WordPressで作られたサイトにインスタグラムの投稿を埋め込みました。
+desc: WordPressで作られた着物屋さんのサイトのトップページのヘッダー下に、インスタグラムの投稿を埋め込みました。画像をクリックするとインスタの投稿に移動します。
+url: https://ryo.dev/article/achievements/202002112024/
+tags: achievements
+tagJpName: 実績
+heading:
+  - 依頼内容
+  - 制作物
+  - 料金と納期、その他
+  - 制作過程
+headingId:
+  - desc
+  - production
+  - others
+  - process
+datePublished: "2020-04-07"
+date: 2020-08-05
+originalCSS: true
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>WordPressで作られた着物屋さんのサイトのトップページにインスタグラムの投稿を埋め込んでほしいという依頼でした。スマホで見たときは画像を4 × 2で表示させ、パソコンで見たときは5 × 2で表示させる形式を希望していました。</p>
+  <p>また、マウスでホバーしたときのエフェクト（例えば、投稿日時が表示されるなど）は特に必要なく、クリックしたらインスタの投稿に飛ぶような仕様で制作をお願いされました。</p>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <p>依頼主さんの要望により画像を載せられないのですが、下のようなシンプルなデザインでした。グレーの部分にはインスタの画像が入ります。画像は正方形で表示されており、クリックするとインスタの投稿に飛びます。</p>
+  <div class="insta"></div>
+  <p>上の図はハーマングリッドみたいで気持ち悪いですが、実際はそのような錯視は起こっていませんでした(笑)</p>
+</section>
+
+<section id="{{ headingId[2] }}">
+  <h2>{{ heading[2] }}</h2>
+  <ul>
+    <li><span class="fw--b">料金</span>：￥3000</li>
+    <li><span class="fw--b">取引開始から終了までの期間</span>：5日と1時間</li>
+    <li><span class="fw--b">URL</span>：依頼主さんの要望で非公開にしています。</li>
+    <li><span class="fw--b">注意</span>：今同じような依頼をされたとしても同じくらいの金額で引き受けるとは限りません。</li>
+  </ul>
+</section>
+
+<section id="{{ headingId[3] }}">
+  <h2>{{ heading[3] }}</h2>
+  <p>このセクションは、Webサイト制作に携わっている方向けの内容になりますので、専門的な話になります。</p>
+  <p>埋め込みを支援するサービスとしてInstaWidgetや<a href="https://snapwidget.com/">SnapWidget</a>といったものがあります。ちょちょいと設定するだけで簡単にインスタの投稿を埋め込むことができる便利サービスです。僕もこれを利用しようと考えていました。これらのサービスはインスタグラムが提供しているInstagram APIという機能を利用しています。しかし調べたところ、<a href="https://snapwidget.com/">2020年3月2日にInstagram APIが廃止される</a>という情報がありました。これらのサービスを利用してインスタを埋め込んでも、この日付以降はインスタが表示されなくなる可能性もあるため、代わりに<a href="https://developers.facebook.com/docs/instagram-api/?locale=ja_JP">Instagram Graph API</a> を使用して投稿を埋め込むことにしました。</p>
+  <p>Instagram Graph APIを利用するにはインスタグラムのビジネスIDとFacebookページのアクセストークンが必要になります。これは依頼主さんに用意していただきました。これらの2つの情報を得るにはインスタグラムとFacebookにログインする必要があります。ログイン情報を他人に教えるのもリスキーだと思うので、もし依頼主さんが自分でできそうであればしていただいた方がいいと思いました。解説ページはたくさんあるので、その中の1つを伝えて依頼主さんに2つの情報を用意していただきました。</p>
+  <p>その2つの情報さえわかれば後はAPIからデータを引っ張ってきて、配列で回すだけです。</p>
+  <p><a href="https://developers.facebook.com/docs/instagram-api/?locale=ja_JP">ドキュメント</a>を見ても内容がさっぱりだったので、APIの使い方を解説したページをいろいろと参考にしながら作りました。</p>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>ご意見やお聞きしたいことがございましたら、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>

@@ -1,0 +1,13 @@
+.insta {
+  --m: 10px;
+  background: #968a8a;
+}
+
+.insta::after {
+  content: "";
+  background:
+    linear-gradient(to top, transparent calc(50% - var(--m) / 2), #fff calc(50% - var(--m) / 2), #fff calc(50% + var(--m) / 2), transparent calc(50% + var(--m) / 2)),
+    repeating-linear-gradient(to left, #968a8a, #968a8a calc(20% - var(--m) * 0.8), #fff calc(20% - var(--m) * 0.8), #fff calc(20% - var(--m) * 0.8 + var(--m)),  #968a8a calc(20% - var(--m) * 0.8 + var(--m)));
+  display: block;
+  padding-top: calc(40% - var(--m) * 1.6 + var(--m));
+}
