@@ -1,0 +1,121 @@
+---
+title: switch文の比較、JavaScriptは===、PHPは==
+desc: Content-switch文の挙動はJavaScriptとPHPで若干異なります。式の値とcase節の比較において、JSでは厳密等価演算子を使い、PHPでは等価演算子を使います。
+url: https://ryo.dev/article/php/diff-btwn-js-and-php-switch-statement/
+tags: php
+tagJpName: PHP
+heading:
+  - JavaScriptのswitch文
+  - PHPのswitch文
+  - まとめ
+  - PHPでも厳密に比較したい
+headingId:
+  - js
+  - php
+  - summary
+  - php-strict
+datePublished: "2020-05-12"
+date: 2020-08-05
+originalCSS: true
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>JavaScriptでは、式の値と<code class="inlineCode">case</code>節を<strong>厳密等価演算子（===）</strong>を使って比較します（<a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/switch#Description">ソース</a>）。コードで確かめてみましょう。</p>
+  <pre><code class="blockCode_c"><span class="code-line"><span class="code-blue">function</span> <span class="code-green">compareSwitch</span>(<span class="code-orange">num</span>) {</span>
+<span class="code-line">  <span class="code-pink">switch</span>(num) {</span>
+<span class="code-line">    <span class="code-pink">case</span> <span class="code-purple">5</span>:</span>
+<span class="code-line">      console.<span class="code-blue">log</span>(<span class="code-yellow">'数値の5'</span>);</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">    <span class="code-pink">default</span>:</span>
+<span class="code-line">      console.<span class="code-blue">log</span>(<span class="code-yellow">'該当なし'</span>);</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-pink">switch</span>(num) {</span>
+<span class="code-line">    <span class="code-pink">case</span> <span class="code-yellow">'5'</span>:</span>
+<span class="code-line">      console.<span class="code-blue">log</span>(<span class="code-yellow">'文字列の5'</span>);</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">    <span class="code-pink">default</span>:</span>
+<span class="code-line">      console.<span class="code-blue">log</span>(<span class="code-yellow">'該当なし'</span>);</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></code></pre>
+  <p><code class="inlineCode">compareSwitch</code>関数の引数に<strong>数値の5</strong>を指定して呼び出す、すなわち<code class="inlineCode">compareSwitch(5)</code>を呼び出したときの結果は次のようになります。</p>
+  <pre><code class="blockCode_c"><span class="code-line">数値の5</span>
+<span class="code-line">該当なし</span></code></pre>
+  <p><code class="inlineCode">compareSwitch</code>関数の引数に<strong>文字列の5</strong>を指定して呼び出す、すなわち<code class="inlineCode">compareSwitch('5')</code>を呼び出したときの結果は次のようになります。</p>
+  <pre><code class="blockCode_c"><span class="code-line">該当なし</span>
+<span class="code-line">文字列の5</span></code></pre>
+  <p class="p1">この結果から、JavaScriptでは確かに厳密等価演算子（===）を使って式の値（ここでは<code class="inlineCode">num</code>）と<code class="inlineCode">case</code>節を比較していることが分かりますね。</p>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <p>PHPでは、式の値と<code class="inlineCode">case</code>節を<strong>等価演算子（==）</strong>を使って比較します（<a href="https://www.php.net/manual/ja/control-structures.switch.php">ソース</a>）。コードで確かめてみましょう。</p>
+  <pre><code class="blockCode_c"><span class="code-line"><span class="code-blue">function</span> <span class="code-green">compareSwitch</span>($num) {</span>
+<span class="code-line">  <span class="code-pink">switch</span>($num) {</span>
+<span class="code-line">    <span class="code-pink">case</span> <span class="code-purple">5</span>:</span>
+<span class="code-line">      <span class="code-blue">echo</span> <span class="code-yellow">'数値の5'</span>;</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">    <span class="code-pink">default</span>:</span>
+<span class="code-line">      <span class="code-blue">echo</span> <span class="code-yellow">'該当なし'</span>;</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-pink">switch</span>($num) {</span>
+<span class="code-line">    <span class="code-pink">case</span> <span class="code-yellow">'5'</span>:</span>
+<span class="code-line">      <span class="code-blue">echo</span> <span class="code-yellow">'文字列の5'</span>;</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">    <span class="code-pink">default</span>:</span>
+<span class="code-line">      <span class="code-blue">echo</span> <span class="code-yellow">'該当なし'</span>;</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></code></pre>
+  <p><code class="inlineCode">compareSwitch</code>関数の引数に<strong>数値の5</strong>を指定して呼び出す、すなわち<code class="inlineCode">compareSwitch(5)</code>を呼び出したときの結果は次のようになります。</p>
+  <pre><code class="blockCode_c"><span class="code-line">数値の5</span>
+<span class="code-line">文字列の5</span></code></pre>
+  <p><code class="inlineCode">compareSwitch</code>関数の引数に<strong>文字列の5</strong>を指定して呼び出す、すなわち<code class="inlineCode">compareSwitch('5')</code>を呼び出したときの結果は次のようになります。</p>
+  <pre><code class="blockCode_c"><span class="code-line">数値の5</span>
+<span class="code-line">文字列の5</span></code></pre>
+  <p class="p1">この結果から、PHPでは確かに等価演算子（==）を使って式の値（ここでは<code class="inlineCode">$num</code>）と<code class="inlineCode">case</code>節を比較していることが分かりますね。</p>
+</section>
+
+<section id="{{ headingId[2] }}">
+  <h2>{{ heading[2] }}</h2>
+  <div class="summary-C">
+    <p class="summary-title">switch文</p>
+    <p class="summary-la">JS<br><span class="summary-symbol">===</span></p>
+    <p class="summary-la">PHP<br><span class="summary-symbol">==</span></p>
+  </div>
+</section>
+
+<section id="{{ headingId[3] }}">
+  <h2>{{ heading[3] }}</h2>
+  <p>次のようなコードを書くことで、<code class="inlineCode">compareSwitch(5)</code>と<code class="inlineCode">compareSwitch('5')</code>を呼び出したときの結果は<a href="#js">JSの時</a>と同じになります。</p>
+  <pre><code class="blockCode_c"><span class="code-line"><span class="code-blue">function</span> <span class="code-green">compareSwitch</span>($num) {</span>
+<span class="code-line">  <span class="code-pink">switch</span>(<span class="code-purple">true</span>) {</span>
+<span class="code-line">    <span class="code-pink">case</span> $num <span class="code-pink">===</span> <span class="code-purple">5</span>:</span>
+<span class="code-line">      <span class="code-blue">echo</span> <span class="code-yellow">'数値の5'</span>;</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">    <span class="code-pink">default</span>:</span>
+<span class="code-line">      <span class="code-blue">echo</span> <span class="code-yellow">'該当なし'</span>;</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-pink">switch</span>(<span class="code-purple">true</span>) {</span>
+<span class="code-line">    <span class="code-pink">case</span> $num <span class="code-pink">===</span> <span class="code-yellow">'5'</span>:</span>
+<span class="code-line">      <span class="code-blue">echo</span> <span class="code-yellow">'文字列の5'</span>;</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">    <span class="code-pink">default</span>:</span>
+<span class="code-line">      <span class="code-blue">echo</span> <span class="code-yellow">'該当なし'</span>;</span>
+<span class="code-line">      <span class="code-pink">break</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></code></pre>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>もし誤った情報を見つけたり、お聞きしたいことがあったりした場合は、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>
