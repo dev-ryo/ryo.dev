@@ -1,0 +1,7 @@
+.parent {border: 1px solid #787878;}
+.children {
+  background: #1E88E5;
+  height: 100px;
+  margin: 25px auto;
+  width: 100px;
+}

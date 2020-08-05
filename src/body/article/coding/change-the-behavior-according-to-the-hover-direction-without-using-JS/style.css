@@ -1,0 +1,52 @@
+.hoverJudge {
+  background: #eee;
+  font-size: calc(1rem + 2px);
+  font-weight: bold;
+  line-height: 100px;
+  position: relative;
+  text-align: center;
+}
+.upperHalf,
+.lowerHalf {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  z-index: 1;
+}
+.upperHalf {top: 0;}
+.lowerHalf {bottom: 0;}
+.hoverJudge-txt::after {
+  content: "どっちからホバーしたかな？";
+  display: block;
+  width: 100%;
+  height: 100px;
+}
+.upperHalf:hover,
+.lowerHalf:hover{
+  height: 100%;
+  z-index: 2;
+}
+.upperHalf:hover ~ .hoverJudge-txt::after {
+  content: "上から！";
+  background: #e25a5a;
+}
+.lowerHalf:hover ~ .hoverJudge-txt::after {
+  content: "下から！";
+  background: #03a9f4;
+}
+.howItWorks-exp::before,
+.howItWorks-exp::after {
+  content: "";
+  box-sizing: border-box;
+  height: 50%;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+.howItWorks-exp::before {border: 2px solid #e25a5a;}
+.howItWorks-exp::after {
+  border: 2px solid #03a9f4;
+  bottom: 0;
+}
+.exp2:hover {height: 50%;}
+.exp3:hover {z-index: 1;}
