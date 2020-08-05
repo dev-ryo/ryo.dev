@@ -1,0 +1,42 @@
+---
+title: ブレークポイントはコンテンツの内容に基づいて決める
+desc: 「スマホやPCの主流の画面幅は〇〇pxだから、ブレークポイントはこの値にしよう！」と解説しているサイトを散見しますが、Googleはそれを推奨していません。
+url: https://ryo.dev/article/coding/determine_breakpoints_based_on_content_content/
+tags: coding
+tagJpName: コーディング
+heading:
+  - ブレークポイントの決め方
+headingId:
+  - how-to-determine
+datePublished: "2020-02-06"
+date: 2020-08-05
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>「スマホやPCの主流の画面幅は〇〇pxだから、ブレークポイントはこの値にしよう！」と解説しているサイトを散見しますが、Googleはそれを推奨していません。</p>
+  <p>なぜなら、<a href="https://developers.google.com/web/fundamentals/design-and-ux/responsive/#:~:text=%E7%8F%BE%E5%9C%A8%E4%BD%BF%E7%94%A8,%E3%81%AB%E3%81%AA%E3%82%8B%E5%8F%AF%E8%83%BD%E6%80%A7"><q cite="https://developers.google.com/web/fundamentals/design-and-ux/responsive/#:~:text=%E7%8F%BE%E5%9C%A8%E4%BD%BF%E7%94%A8,%E3%81%AB%E3%81%AA%E3%82%8B%E5%8F%AF%E8%83%BD%E6%80%A7">メンテナンスが非常に大変になる可能性があ</q></a>るからだとGoogleは説明しています。例えば、「横幅768pxのタブレットのシェア率が最多だから」という理由で、ブレークポイントを768pxとしてコーディングしたとします。では、今後販売されるタブレットの主流の横幅は変わらずに768pxである保証はあるのでしょうか？　もし横幅840pxタブレットが主流になったらどうなるでしょう。またコーディングし直しますか？　メンテナンスが非常に大変になるとはこのことを言っているのでしょう。</p>
+  <p>ではブレークポイントをどのように決めるかというと、その点もGoogleが説明してくれています。ざっと説明します。</p>
+  <ol>
+    <li>
+      <p class="p2">狭い横幅のままレイアウト崩れが起きないようにコーディングします。ちなみに僕は<a href="https://developers.google.com/web/tools/chrome-devtools/device-mode?hl=ja#device">デベロッパーツールのDevice Mode</a>で「iPhone 5/SE（横幅320px）」を選択してコーディングしています。</p>
+      <p class="p2">
+        <picture>
+          <source srcset="img/iphone5SE-1650.webp" type="image/webp">
+          <source srcset="img/iphone5SE-1650.jpg" type="image/jpg">
+          <img src="img/iphone5SE-1650.jpg" alt="デベロッパーツールのDevice Modeで「iPhone 5/SE（横幅320px）」を選択したときのスクショ" class="fullWidthImg">
+        </picture>
+      </p>
+    </li>
+    <li>画面幅を少しずつ広げながら、デザインがおかしくないかを確認します。「デザインがおかしくないか」というのは例えば、文字サイズが小さくないか、余白が広くないか、画像が大きくないかなどです。</li>
+    <li>もしデザインがおかしい箇所があったら、その時点での画面幅をブレークポイントとし、デザインを調整します。</li>
+  </ol>
+  <p>まぁ、詳しくは<a href="https://developers.google.com/web/fundamentals/design-and-ux/responsive/?hl=ja#%E3%83%96%E3%83%AC%E3%83%BC%E3%82%AF%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%81%AE%E6%B1%BA%E3%82%81%E6%96%B9">「レスポンシブ ウェブデザインの基本  |  Web  |  Google Developers」の「ブレークポイントの決め方」</a>の章を見てください。画像付きで分かりやすく解説しています。Googleさんがご丁寧に解説しているので僕が改めて詳しく解説する必要もありませんからね。</p>
+  <p>ちなみに、WCAG2.1の<a href="https://www.w3.org/TR/2018/REC-WCAG21-20180605/#reflow">Success Criterion 1.4.10 Reflow</a>（レベルAA、<a href="https://waic.jp/docs/WCAG21/#reflow">日本語訳はこちら</a>）では、幅320pxで情報や機能が損なわず、かつ、スクロールせずにコンテンツを表示できることを求めています。なので、アクセシビリティを考慮するのであれば、320px幅からコーディングを始めるといいかもしれません。</p>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>もし誤った情報を見つけたりお聞きしたいことがあったりした場合は、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>
