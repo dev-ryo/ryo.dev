@@ -1,0 +1,69 @@
+.accordion_c {
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.accordion-eMenu {
+  padding: 0 23px;
+  position: relative;
+}
+.accordion-eMenu::after {
+  content: "";
+  background: #dadce0;
+  bottom: 0;
+  height: 1px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+.accordion-eMenu:last-of-type::after {content: none;}
+.accordion-title {
+  background: none;
+  border: none;
+  font-size: calc(1rem + 1px);
+  outline: 0;
+  padding: 20px 30px 20px 0;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+.accordion-title::before {
+  content: "";
+  display: block;
+  height: 100%;
+  left: -23px;
+  position: absolute;
+  top: 0;
+  width: calc(100% + 46px);
+  z-index: -1;
+}
+.accordion-title:hover::before,
+.accordion-title:focus::before {background: #efefef;}
+.accordion-title::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-left: 1.5px solid #1a73e8;
+  border-top: 1.5px solid #1a73e8;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) rotate(-135deg);
+  transition: .2s;
+}
+.accordion-title[aria-expanded="true"]::after {transform: translateY(-50%) rotate(45deg);}
+.accordion-panel {
+  border-top: 1px solid #dadce0;
+  font-size: calc(1rem - 1px);
+  position: relative;
+  max-height: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform .2s, max-height .2s, padding .1s .1s;
+}
+.accordion-open {
+  padding: 27px 0;
+  max-height: 1500px;
+  transform: scaleY(1);
+  transition: transform .2s, max-height .2s, padding .1s .1s;
+}
