@@ -1,0 +1,48 @@
+---
+title: なぜ ::before と ::after にはcontentプロパティを指定するの？
+desc: 「そういうものだから」。以前の僕はそう考えていました。しかし、「なぜ」について調べる機会があり、そこには論理的な理由があることを知りました。
+url: https://ryo.dev/article/coding/why-specify-contentProperty-for-PE/
+tags: coding
+tagJpName: コーディング
+heading:
+  - なぜ？
+  - コードをチェック
+headingId:
+  - y
+  - check
+datePublished: "2020-01-26"
+date: 2020-08-05
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p><code class="inlineCode">content</code>プロパティの初期値は<code class="inlineCode">normal</code>です（<a href="https://drafts.csswg.org/css-content-3/#content-property">ソース</a>）。</p>
+  <p><code class="inlineCode">::before</code>と<code class="inlineCode">::after</code>に<code class="inlineCode">content: normal;</code>が指定されていると、<code class="inlineCode">content: none;</code>を指定したのと同じ状態になります（<a href="https://drafts.csswg.org/css-content-3/#valdef-content-normal">ソース</a>）。</p>
+  <p><code class="inlineCode">::before</code>と<code class="inlineCode">::after</code>に<code class="inlineCode">content: none;</code>が指定されていると、<code class="inlineCode">display: none;</code>を指定されたかのように要素が表示されなくなります（<a href="https://drafts.csswg.org/css-content-3/#valdef-content-none">ソース</a>）。</p>
+  <p><code class="inlineCode">::before</code>と<code class="inlineCode">::after</code>の<code class="inlineCode">content</code>プロパティの値が<code class="inlineCode">none</code>ではないとき、擬似要素は、擬似要素を指定している元の要素の直接の子要素であるかのようにふるまい、他の要素と同様にCSSでスタイリングできます（<a href="https://drafts.csswg.org/css-pseudo-4/#generated-content">ソース</a>）。</p>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <div>
+    <p class="m--0"><code class="inlineCode">content: "";</code>の場合...</p>
+    <img src="img/blank.jpg" alt="contentプロパティに空欄を指定してレンダリングした" class="fullWidthImg p2">
+    <p class="m--0"><strong>擬似要素あり！</strong></p>
+  </div>
+  <div class="p1">
+    <p class="m--0"><code class="inlineCode">content: none;</code>の場合...</p>
+    <img src="img/none.jpg" alt="contentプロパティにnoneを指定してレンダリングした" class="fullWidthImg p2">
+    <p class="m--0"><strong>擬似要素なし！</strong></p>
+  </div>
+  <div>
+    <p class="m--0"><code class="inlineCode">content: normal;</code>の場合...</p>
+    <img src="img/normal.jpg" alt="contentプロパティにnormalを指定してレンダリングした" class="fullWidthImg p2">
+    <p class="m--0"><strong>擬似要素なし！</strong></p>
+  </div>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>もし誤った情報を見つけたりお聞きしたいことがあったりした場合は、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>
