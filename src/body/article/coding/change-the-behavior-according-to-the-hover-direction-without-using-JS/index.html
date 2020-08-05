@@ -1,0 +1,133 @@
+---
+title: JavaScriptを使わずに、上からホバーしたときと下からホバーしたときで動作を変える
+desc: ある要素に上からホバーしてきた時はその要素を手前に向かって立体回転させ、下からホバーしたときは奥に向かって立体回転させる。このような挙動はHTMLとCSSのみで作れるんです。JavaScriptは必要ありません。
+url: https://ryo.dev/article/coding/change-the-behavior-according-to-the-hover-direction-without-using-JS/
+tags: coding
+tagJpName: コーディング
+heading:
+  - 概要
+  - コード
+  - 仕組み
+  - 需要
+headingId:
+  - overview
+  - code
+  - howItWorks
+  - demand
+datePublished: "2020-03-24"
+date: 2020-08-05
+originalCSS: true
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>上からホバーしたときと下からホバーしたときで動作を変えるのはJavaScriptを使わないとできないもんだと勝手に思い込んでいましたが、JSを使わずにHTMLとCSSのみで実現できる方法をふと思いつきました。下にサンプルを置きます。</p>
+  <div class="hoverJudge p1">
+    <div class="upperHalf"></div>
+    <div class="lowerHalf"></div>
+    <p class="hoverJudge-txt m--0"></p>
+  </div>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <pre><code class="blockCode_c"><span class="code-line">&lt;<span class="code-pink">div</span> <span class="code-green">class</span>=<span class="code-yellow">"hoverJudge"</span>&gt;</span>
+<span class="code-line">  &lt;<span class="code-pink">div</span> <span class="code-green">class</span>=<span class="code-yellow">"upperHalf"</span>&gt;&lt;/<span class="code-pink">div</span>&gt;</span>
+<span class="code-line">  &lt;<span class="code-pink">div</span> <span class="code-green">class</span>=<span class="code-yellow">"lowerHalf"</span>&gt;&lt;/<span class="code-pink">div</span>&gt;</span>
+<span class="code-line">  &lt;<span class="code-pink">p</span> <span class="code-green">class</span>=<span class="code-yellow">"hoverJudge-txt"</span>&gt;&lt;/<span class="code-pink">p</span>&gt;</span>
+<span class="code-line">&lt;/<span class="code-pink">div</span>&gt;</span></code></pre>
+
+  <pre class="p1"><code class="blockCode_c"><span class="code-line"><span class="code-green">.hoverJudge</span> {</span>
+<span class="code-line">  <span class="code-blue">background</span>: <span class="code-purple">#eee</span>;</span>
+<span class="code-line">  <span class="code-blue">font-size</span>: <span class="code-blue">calc</span>(<span class="code-purple">1</span><span class="code-pink">rem +</span> <span class="code-purple">2</span><span class="code-pink">px</span>);</span>
+<span class="code-line">  <span class="code-blue">font-weight</span>: <span class="code-blue">bold</span>;</span>
+<span class="code-line">  <span class="code-blue">line-height</span>: <span class="code-purple">100</span><span class="code-pink">px</span>;</span>
+<span class="code-line">  <span class="code-blue">position</span>: <span class="code-blue">relative</span>;</span>
+<span class="code-line">  <span class="code-blue">text-align</span>: <span class="code-blue">center</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"><span class="code-green">.upperHalf</span>,</span>
+<span class="code-line"><span class="code-green">.lowerHalf</span> {</span>
+<span class="code-line">  <span class="code-blue">width</span>: <span class="code-purple">100</span><span class="code-pink">%</span>;</span>
+<span class="code-line">  <span class="code-blue">height</span>: <span class="code-purple">50</span><span class="code-pink">%</span>;</span>
+<span class="code-line">  <span class="code-blue">position</span>: <span class="code-blue">absolute</span>;</span>
+<span class="code-line">  <span class="code-blue">z-index</span>: <span class="code-purple">1</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"><span class="code-green">.upperHalf</span> {<span class="code-blue">top</span>: <span class="code-purple">0</span>;}</span>
+<span class="code-line"><span class="code-green">.lowerHalf</span> {<span class="code-blue">bottom</span>: <span class="code-purple">0</span>;}</span>
+<span class="code-line"><span class="code-green">.hoverJudge-txt::after</span> {</span>
+<span class="code-line">  <span class="code-blue">content</span>: <span class="code-yellow">"どっちからホバーしたかな？"</span>;</span>
+<span class="code-line">  <span class="code-blue">display</span>: <span class="code-blue">block</span>;</span>
+<span class="code-line">  <span class="code-blue">width</span>: <span class="code-purple">100</span><span class="code-pink">%</span>;</span>
+<span class="code-line">  <span class="code-blue">height</span>: <span class="code-purple">100</span><span class="code-pink">px</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"><span class="code-green">.upperHalf:hover,</span></span>
+<span class="code-line"><span class="code-green">.lowerHalf:hover</span>{</span>
+<span class="code-line">  <span class="code-blue">height</span>: <span class="code-purple">100</span><span class="code-pink">%</span>;</span>
+<span class="code-line">  <span class="code-blue">z-index</span>: <span class="code-purple">2</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"><span class="code-green">.upperHalf:hover</span> <span class="code-pink">~</span> <span class="code-green">.hoverJudge-txt::after</span> {</span>
+<span class="code-line">  <span class="code-blue">content</span>: <span class="code-yellow">"上から！"</span>;</span>
+<span class="code-line">  <span class="code-blue">background</span>: <span class="code-purple">#e25a5a</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"><span class="code-green">.lowerHalf:hover</span> <span class="code-pink">~</span> <span class="code-green">.hoverJudge-txt::after</span> {</span>
+<span class="code-line">  <span class="code-blue">content</span>: <span class="code-yellow">"下から！"</span>;</span>
+<span class="code-line">  <span class="code-blue">background</span>: <span class="code-purple">#03a9f4</span>;</span>
+<span class="code-line">}</span></code></pre>
+</section>
+
+<section id="{{ headingId[2] }}">
+  <h2>{{ heading[2] }}</h2>
+  <p class="p1">特徴は大きく分けて3つあります。</p>
+
+  <section>
+    <h3>特徴1</h3>
+    <p><code class="inlineCode">.hoverJudge-txt::after</code>がグレーの部分全体です。<code class="inlineCode">.upperHalf</code>（赤枠）をその上半分に、<code class="inlineCode">.lowerHalf</code>（青枠）をその下半分に被せています。</p>
+    <div class="hoverJudge p1 howItWorks-exp">どっちからホバーしたかな？</div>
+    <p>グレーの部分にマウスを持ってくるとき、上からホバーしたときは最初に<code class="inlineCode">.upperHalf</code>の部分を通ることになります。また、下からホバーしたときは最初に<code class="inlineCode">.lowerHalf</code>の部分を通ることになります。したがって、<code class="inlineCode">.upperHalf:hover</code>と<code class="inlineCode">.lowerHalf:hover</code>をセレクタにすることで、上からホバーしたときと下からホバーしたときで条件分岐できます。</p>
+  </section>
+
+  <section>
+    <h3>特徴2</h3>
+    <p>デフォルトでは、<code class="inlineCode">.upperHalf</code>と<code class="inlineCode">.lowerHalf</code>の<code class="inlineCode">height</code>はいずれも<code class="inlineCode">.hoverJudge-txt::after</code>の<code class="inlineCode">height</code>の半分にしています。しかし、ホバーしたときは、ホバーした要素の<code class="inlineCode">height</code>が<code class="inlineCode">.hoverJudge-txt::after</code>の<code class="inlineCode">height</code>と同じになるようにしています。</p>
+    <pre><code class="blockCode_c"><span class="code-line"><span class="code-green">.upperHalf</span>,</span>
+<span class="code-line"><span class="code-green">.lowerHalf</span> {<span class="code-blue">height</span>: <span class="code-purple">50</span><span class="code-pink">%</span>;}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-green">.hoverJudge-txt::after</span> {<span class="code-blue">height</span>: <span class="code-purple">100</span><span class="code-pink">px</span>;}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-green">.upperHalf:hover</span>,</span>
+<span class="code-line"><span class="code-green">.lowerHalf:hover</span> {<span class="code-blue">height</span>: <span class="code-purple">100</span><span class="code-pink">%</span>;}</span></code></pre>
+    <p>なぜなら、しないとこうなるからです。</p>
+    <div class="hoverJudge">
+      <div class="upperHalf exp2"></div>
+      <div class="lowerHalf exp2"></div>
+      <p class="hoverJudge-txt"></p>
+    </div>
+  </section>
+
+  <section>
+    <h3>特徴3</h3>
+    <p><code class="inlineCode">.upperHalf</code>と<code class="inlineCode">.lowerHalf</code>は、デフォルトでは<code class="inlineCode">z-index</code>を<code class="inlineCode">1</code>にしています。しかし、ホバーしたときは、ホバーした要素の<code class="inlineCode">z-index</code>を<code class="inlineCode">2</code>にしています。</p>
+    <pre><code class="blockCode_c"><span class="code-line"><span class="code-green">.upperHalf</span>,</span>
+<span class="code-line"><span class="code-green">.lowerHalf</span> {<span class="code-blue">z-index</span>: <span class="code-purple">1</span>;}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-green">.upperHalf:hover</span>,</span>
+<span class="code-line"><span class="code-green">.lowerHalf:hover</span> {<span class="code-blue">z-index</span>: <span class="code-purple">2</span>;}</span></code></pre>
+    <p>デフォルトの要素の重なり順は、<code class="inlineCode">.upperHalf</code>が後ろで<code class="inlineCode">.lowerHalf</code>が前です。<code class="inlineCode">.upperHalf</code>にホバーしたときに<code class="inlineCode">height</code>を<code class="inlineCode">.hoverJudge-txt::after</code>と同じにしたとしても、<code class="inlineCode">.lowerHalf</code>が前にいるので、<code class="inlineCode">.lowerHalf</code>と重なる部分は見えなくなってしまうのです。</p>
+    <div class="hoverJudge">
+      <div class="upperHalf exp3"></div>
+      <div class="lowerHalf exp3"></div>
+      <p class="hoverJudge-txt"></p>
+    </div>
+  </section>
+</section>
+
+<section id="{{ headingId[3] }}">
+  <h2>{{ heading[3] }}</h2>
+  <p>あるなら教えてほしいです。</p>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>もし誤った情報を見つけたりお聞きしたいことがあったりした場合は、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>
