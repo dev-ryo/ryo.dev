@@ -1,0 +1,9 @@
+.campFireFrame {
+  display: block;
+  margin: 18px auto 0;
+}
+.gmap {
+  border: none;
+  height: min(90vw, 600px);
+  width: 100%;
+}

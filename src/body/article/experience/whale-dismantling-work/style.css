@@ -1,0 +1,16 @@
+.lastUpdated {margin-bottom: 0}
+.w60p {
+  margin: 0 auto;
+  width: 60%
+}
+.youtube-C {position: relative;}
+.youtube-C::after {
+  content: "";
+  display: block;
+  padding-top: calc(100% * 315 / 560)
+}
+iframe {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
