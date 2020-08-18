@@ -6,7 +6,7 @@
 
 テンプレートエンジンは[Nunjucks](https://mozilla.github.io/nunjucks/)です。
 
-ホスティングサービスには[Netlify](https://www.netlify.com/)を使っています。
+ホスティングサービスには[firebase hosting](https://firebase.google.com/docs/hosting?hl=ja)を使っています。
 
 ## ディレクトリ構成
     public
@@ -27,9 +27,9 @@
         ├ header
         ├ layouts
         └ resetCSS
-    
+
 | ディレクトリ | 説明 |
-----|---- 
+----|----
 | public | 公開用のHTMLファイルはここに書き込まれる。11tyの`_site`に相当。 |
 | public/article | 記事を保存 |
 | public/service | 自作のWebサービスを保存 |
