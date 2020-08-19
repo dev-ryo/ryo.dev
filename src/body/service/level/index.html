@@ -1,0 +1,81 @@
+---
+title: 水平器
+desc: ブラウザ上で使える水平器です。スマホを置くだけで傾きがどのくらいあるのかを計測できます。
+url: https://ryo.dev/service/level/
+twCardType: summary
+twCardSite: "@ryoDevWeb"
+twCardImg: https://ryo.dev/article/myWebServices/level/img/tw.jpg
+csp: script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; trusted-types default
+icon: /img/favicon.ico
+appleIcon: /img/appleTouchIcon.png
+eleventyExcludeFromCollections: true
+---
+
+{% set css %}
+  {% include 'resetCSS/v1.css' %}
+  {% include '../../../body' + page.url + 'style.css' %}
+{% endset %}
+
+{% include 'head/v1.html' %}
+
+<main>
+  <p>メモリの最大角度：<input type="number" min="0" max="90" value="10" onInput="chgMaxAng(this)" onfocus="this.select();"></p>
+  <div class="leveler"><div class="pointer"></div></div>
+  <div class="panel-C">
+    <section>
+      <h2>X軸基準の傾き</h2>
+      <p class="result-beta">取得できません。</p>
+    </section>
+    <section>
+      <h2>Y軸基準の傾き</h2>
+      <p class="result-gamma">取得できません。</p>
+    </section>
+  </div>
+  <p class="note">スマホを縦画面にしてご利用くださいm(__)m</p>
+</main>
+
+<footer>
+  <ul>
+    <li><a href="/article/myWebServices/level/">トリセツ</a></li>
+    <li><a href="/">制作者のHP</a></li>
+  </ul>
+</footer>
+
+<script>
+  const pointerE = document.querySelector('.pointer');
+  const levelerE = document.querySelector('.leveler');
+  const resultBetaE = document.querySelector('.result-beta');
+  const resultGammaE = document.querySelector('.result-gamma');
+  const levelerHalfW = levelerE.getBoundingClientRect().width / 2;
+  let maxAng = 10;
+
+  window.addEventListener('deviceorientation', (e) => {
+  const x = e.gamma;
+  const y = e.beta;
+
+  if(Math.sign(x) === 1 && Math.sign(y) === -1) {
+    adjustPointer(x, y, "lb");
+  } else if(Math.sign(x) === 1 && Math.sign(y) === 1) {
+    adjustPointer(x, y, "lt");
+  } else if(Math.sign(x) === -1 && Math.sign(y) === 1) {
+    adjustPointer(x, y, "rt");
+  } else if(Math.sign(x) === -1 && Math.sign(y) === -1) {
+    adjustPointer(x, y, "rb");
+  }
+  });
+
+  function adjustPointer(x, y, quadrant) {
+  pointerE.className = "pointer-" + quadrant;
+  pointerE.style.width = Math.abs(x) / maxAng * levelerHalfW + "px";
+  pointerE.style.height = Math.abs(y) / maxAng * levelerHalfW + "px";
+  resultBetaE.textContent = Math.round(y * 100000000) / 100000000 + "°";
+  resultGammaE.textContent = Math.round(x * -100000000) / 100000000 + "°";
+  }
+
+  function chgMaxAng(obj) {
+  console.log(obj.value);
+  if(obj.value > 0 && obj.value <= 90) {
+    maxAng = obj.value;
+  }
+  }
+</script>

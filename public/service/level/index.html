@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"><meta name="description" content="ブラウザ上で使える水平器です。スマホを置くだけで傾きがどのくらいあるのかを計測できます。"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@ryoDevWeb"><meta property="og:description" content="ブラウザ上で使える水平器です。スマホを置くだけで傾きがどのくらいあるのかを計測できます。"><meta property="og:title" content="水平器 | RYO.dev"><meta property="og:url" content="https://ryo.dev/service/level/"><meta property="og:image" content="https://ryo.dev/article/myWebServices/level/img/tw.jpg"><meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; trusted-types default"><style>a,article,blockquote,button,code,dd,div,dl,dt,figcaption,figure,footer,h1,h2,h3,header,input,li,main,nav,ol,p,pre,section,span,svg,table,td,textarea,th,ul{box-sizing:border-box}blockquote,body,figure,h1,h2,h3,p,pre{margin:0}html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{color:#262626;background:#fff;font-family:Arial,"Hiragino Kaku Gothic Pro","BIZ UDPGothic",Meiryo,sans-serif;line-height:1.7;letter-spacing:.5px}button,cite,code,dfn,input,kbd,select,textarea,var{font:inherit}button,dialog,input,select,textarea{color:inherit;-webkit-appearance:none}code,kbd,var{font-family:"Lucida Console","Courier New",monospace}main{width:90%;margin:0 auto}h1,h2,h3{color:#000}a:not([class]){color:#1a73e8}a:not([class]):focus,a:not([class]):hover{text-decoration:none}table{border-collapse:collapse}th{text-align:left}button{cursor:pointer}ol,ul{padding:0;margin:0}main{margin-top:15px}p:not([class]){text-align:right}[type=number]{border:none;border-bottom:2px solid #b5b5b5;outline:0;margin-left:6px;width:90px}[type=number]:focus{border-color:#673ab7}.leveler{background:linear-gradient(to left,transparent calc(50% - .5px),#fff calc(50% - .5px),#fff calc(50% + .5px),transparent calc(50% + .5px)),linear-gradient(to top,#4caf50 calc(50% - .5px),#fff calc(50% - .5px),#fff calc(50% + .5px),#4caf50 calc(50% + .5px));overflow:hidden;position:relative;margin:5px auto 30px;width:90vw;width:100%}.leveler:after{content:"";display:block;padding-top:100%}[class^=pointer-]{border-bottom:1px solid #000;border-right:1px solid #000;left:50%;position:absolute;top:50%;transform-origin:top left}.pointer-rt{transform:rotateX(180deg)}.pointer-lb{transform:rotateY(180deg)}.pointer-lt{transform:rotate(180deg)}.panel-C{display:grid;grid-gap:20px;grid-template-columns:max-content;justify-content:center;margin-bottom:30px}h2{background:#3f51b5;border-radius:3px;color:#fff;display:inline-block;font-size:14px;font-weight:400;padding:0 5px;margin-bottom:8px}[class^=result-]{color:#000;font-size:30px;font-weight:700;line-height:1}ul{display:flex;justify-content:center;list-style:none}a{display:inline-block;font-size:14px;padding:10px}.note{display:none}@media (min-width:500px){.leveler,.panel-C,p{display:none}.note{display:block;padding:100px 0;text-align:center}}</style><link rel="canonical" href="https://ryo.dev/service/level/"><title>水平器 | RYO.dev</title><link rel="icon" href="/img/favicon.ico"><link rel="apple-touch-icon" href="/img/appleTouchIcon.png"></head><body><main><p>メモリの最大角度：<input type="number" min="0" max="90" value="10" oninput="chgMaxAng(this)" onfocus="this.select();"></p><div class="leveler"><div class="pointer"></div></div><div class="panel-C"><section><h2>X軸基準の傾き</h2><p class="result-beta">取得できません。</p></section><section><h2>Y軸基準の傾き</h2><p class="result-gamma">取得できません。</p></section></div><p class="note">スマホを縦画面にしてご利用くださいm(__)m</p></main><footer><ul><li><a href="/article/myWebServices/level/">トリセツ</a></li><li><a href="/">制作者のHP</a></li></ul></footer><script>const pointerE = document.querySelector('.pointer');
+  const levelerE = document.querySelector('.leveler');
+  const resultBetaE = document.querySelector('.result-beta');
+  const resultGammaE = document.querySelector('.result-gamma');
+  const levelerHalfW = levelerE.getBoundingClientRect().width / 2;
+  let maxAng = 10;
+
+  window.addEventListener('deviceorientation', (e) => {
+  const x = e.gamma;
+  const y = e.beta;
+
+  if(Math.sign(x) === 1 && Math.sign(y) === -1) {
+    adjustPointer(x, y, "lb");
+  } else if(Math.sign(x) === 1 && Math.sign(y) === 1) {
+    adjustPointer(x, y, "lt");
+  } else if(Math.sign(x) === -1 && Math.sign(y) === 1) {
+    adjustPointer(x, y, "rt");
+  } else if(Math.sign(x) === -1 && Math.sign(y) === -1) {
+    adjustPointer(x, y, "rb");
+  }
+  });
+
+  function adjustPointer(x, y, quadrant) {
+  pointerE.className = "pointer-" + quadrant;
+  pointerE.style.width = Math.abs(x) / maxAng * levelerHalfW + "px";
+  pointerE.style.height = Math.abs(y) / maxAng * levelerHalfW + "px";
+  resultBetaE.textContent = Math.round(y * 100000000) / 100000000 + "°";
+  resultGammaE.textContent = Math.round(x * -100000000) / 100000000 + "°";
+  }
+
+  function chgMaxAng(obj) {
+  console.log(obj.value);
+  if(obj.value > 0 && obj.value <= 90) {
+    maxAng = obj.value;
+  }
+  }</script></body></html>
