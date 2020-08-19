@@ -1,0 +1,115 @@
+---
+title: 動画倍速再生
+desc: 動画の再生速度を自由に変更できます。会員登録不要、動画をドラッグ＆ドロップするだけです。動画はどこにも保存されないのでご安心ください。
+url: https://ryo.dev/service/double-speed-video-playback/
+twCardType: summary_large_image
+twCardSite: "@ryoDevWeb"
+twCardImg: https://ryo.dev/article/myWebServices/double-speed-video-playback/img/play.jpg
+csp: script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; trusted-types default
+icon: /img/favicon.ico
+appleIcon: /img/appleTouchIcon.png
+eleventyExcludeFromCollections: true
+---
+
+{% set css %}
+  {% include 'resetCSS/v1.css' %}
+  {% include '../../../body' + page.url + 'style.css' %}
+{% endset %}
+
+{% include 'head/v1.html' %}
+
+
+<input type="file" accept="video/*" id="video">
+<label for="video" class="dropArea">
+  <img src="img/video.svg" alt="" class="videoImg">
+  <span class="select-exp">
+    <span class="marker">ドラッグ＆ドロップ</span>
+    <span class="select-or">&nbsp;or&nbsp;</span>
+    <span class="marker">ビデオを選択</span>
+  </span>
+  <p class="ryodev"><a href="/">制作者</a> ｜ <a href="/article/myWebServices/double-speed-video-playback/">About</a></p>
+</label>
+
+<div class="video-C">
+  <div class="ctrl-C">
+    <p><i class="fas fa-tachometer-alt"></i>再生速度</p>
+    <button type="button" class="speed-down">再生速度を下げる</button>
+    <p class="ctrl-val">1.0x</p>
+    <button type="button" class="speed-up">再生速度を上げる</button>
+  </div>
+  <a href="" class="chgVideo"><i class="fas fa-arrow-left"></i>動画を変更する</a>
+</div>
+<script src="https://kit.fontawesome.com/784b878249.js" crossorigin="anonymous"></script>
+<script>
+  const inputE = document.querySelector('#video');
+  const dropareaE = document.querySelector('.dropArea');
+  const videoCE = document.querySelector('.video-C');
+  const downE = document.querySelector('.speed-down');
+  const upE = document.querySelector('.speed-up');
+  const speedValE = document.querySelector('.ctrl-val');
+  const windowRatio = window.innerWidth / window.innerHeight;
+  const fileTypes = ["audio/flac", "video/mp4", "video/ogg", "video/webm"];
+
+  if(!localStorage.getItem("playbackSpeed")) {localStorage.setItem("playbackSpeed", 1);}
+  let iniSpeed = Number(localStorage.getItem("playbackSpeed"));
+  speedValE.textContent = `${iniSpeed.toFixed(1)}x`;
+
+  inputE.addEventListener('change', () => {
+    loadVideo(inputE.files);
+  });
+
+
+  dropareaE.addEventListener('dragover', (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'copy';
+  });
+
+  dropareaE.addEventListener('drop', (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    loadVideo(event.dataTransfer.files);
+  });
+
+  function loadVideo(fileList) {
+    if(fileList.length === 1 && fileTypes.includes(fileList[0].type)) {
+      let videoRatio;
+      const video = document.createElement('video');
+      video.src = window.URL.createObjectURL(fileList[0]);
+      video.setAttribute('controls', true);
+      videoCE.appendChild(video);
+
+      dropareaE.classList.add('dropArea-hidden');
+      videoCE.classList.add('video-C-appear');
+
+      video.addEventListener('loadedmetadata', () => {
+        videoRatio = video.videoWidth / video.videoHeight;
+
+        if(windowRatio < videoRatio) {
+          videoCE.style.width = "75%";
+          video.style.width = "100%";
+        }
+        else {
+          videoCE.style.height = "calc(100% - 190px)";
+          video.style.height = "100%";
+        }
+      });
+
+      downE.addEventListener('click', () => {chgSpeed("down", video);});
+      upE.addEventListener('click', () => {chgSpeed("up", video);});
+    } else {
+      alert("1つの動画ファイルのみをドラッグ＆ドロップしてください。");
+    }
+  }
+
+  function chgSpeed(type, video) {
+    let curSpeed = Number(localStorage.getItem("playbackSpeed"));
+    let calculatedSpeed;
+    if(type === "up") {calculatedSpeed = curSpeed + 0.1;}
+    else {calculatedSpeed = curSpeed - 0.1;}
+    calculatedSpeed = Math.round(calculatedSpeed * 10) / 10;
+    video.playbackRate = calculatedSpeed;
+    speedValE.textContent = `${calculatedSpeed.toFixed(1)}x`;
+    localStorage.setItem("playbackSpeed", calculatedSpeed);
+  }
+</script>

@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"><meta name="description" content="動画の再生速度を自由に変更できます。会員登録不要、動画をドラッグ＆ドロップするだけです。動画はどこにも保存されないのでご安心ください。"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@ryoDevWeb"><meta property="og:description" content="動画の再生速度を自由に変更できます。会員登録不要、動画をドラッグ＆ドロップするだけです。動画はどこにも保存されないのでご安心ください。"><meta property="og:title" content="動画倍速再生 | RYO.dev"><meta property="og:url" content="https://ryo.dev/service/double-speed-video-playback/"><meta property="og:image" content="https://ryo.dev/article/myWebServices/double-speed-video-playback/img/play.jpg"><meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; trusted-types default"><style>a,article,blockquote,button,code,dd,div,dl,dt,figcaption,figure,footer,h1,h2,h3,header,input,li,main,nav,ol,p,pre,section,span,svg,table,td,textarea,th,ul{box-sizing:border-box}blockquote,body,figure,h1,h2,h3,p,pre{margin:0}html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{color:#262626;background:#fff;font-family:Arial,"Hiragino Kaku Gothic Pro","BIZ UDPGothic",Meiryo,sans-serif;line-height:1.7;letter-spacing:.5px}button,cite,code,dfn,input,kbd,select,textarea,var{font:inherit}button,dialog,input,select,textarea{color:inherit;-webkit-appearance:none}code,kbd,var{font-family:"Lucida Console","Courier New",monospace}main{width:90%;margin:0 auto}h1,h2,h3{color:#000}a:not([class]){color:#1a73e8}a:not([class]):focus,a:not([class]):hover{text-decoration:none}table{border-collapse:collapse}th{text-align:left}button{cursor:pointer}ol,ul{padding:0;margin:0}body{height:100vh}#video{opacity:0;position:absolute}.dropArea{align-content:center;background:repeating-linear-gradient(-45deg,#d5d5d5,#d5d5d5 30px,#eaeaea 30px,#eaeaea 60px);cursor:pointer;display:grid;grid-gap:60px;grid-template-rows:max-content max-content;height:100%;justify-items:center}.dropArea-hidden{filter:blur(6px) grayscale(.7);pointer-events:none}.videoImg{width:min(70%,370px)}.select-exp{font-size:33px;text-align:center;line-height:1.3}.marker{background:linear-gradient(to top,#7e77f3 10px,transparent 10px)}.select-or{display:block}.ryodev{bottom:2px;font-size:14px;left:50%;position:absolute;transform:translateX(-50%)}.video-C{left:50%;opacity:0;position:absolute;top:50%;transform:translate(-50%,-50%);transition:opacity .2s;visibility:hidden}.video-C-appear{opacity:1;visibility:visible}video{box-shadow:0 2px 12px 0 rgba(0,0,0,.3);display:block}.ctrl-C{align-items:center;background:#3b3d3e;border-radius:2px;bottom:calc(100% + 4px);color:#fff;display:flex;padding-left:17px;position:absolute}.fas{margin-right:7px}[class^=speed-]{background:0 0;border:none;font-size:0;height:48px;line-height:48px;padding:0;position:relative;width:48px}[class^=speed-]::after{border-bottom:2px solid #fff;border-left:2px solid #fff;content:"";height:8px;position:absolute;top:50%;width:8px}.speed-down::after{left:50%;transform:translateY(-50%) rotate(45deg)}.speed-up::after{right:50%;transform:translateY(-50%) rotate(-135deg)}.ctrl-val{font-size:20px}.chgVideo{color:inherit;position:absolute;text-decoration:none;top:calc(100% + 4px)}@media (min-width:630px){.select-or{display:inline}}</style><link rel="canonical" href="https://ryo.dev/service/double-speed-video-playback/"><title>動画倍速再生 | RYO.dev</title><link rel="icon" href="/img/favicon.ico"><link rel="apple-touch-icon" href="/img/appleTouchIcon.png"></head><body><input type="file" accept="video/*" id="video"> <label for="video" class="dropArea"><img src="img/video.svg" alt="" class="videoImg"> <span class="select-exp"><span class="marker">ドラッグ＆ドロップ</span> <span class="select-or">&nbsp;or&nbsp;</span> <span class="marker">ビデオを選択</span></span><p class="ryodev"><a href="/">制作者</a> ｜ <a href="/article/myWebServices/double-speed-video-playback/">About</a></p></label><div class="video-C"><div class="ctrl-C"><p><i class="fas fa-tachometer-alt"></i>再生速度</p><button type="button" class="speed-down">再生速度を下げる</button><p class="ctrl-val">1.0x</p><button type="button" class="speed-up">再生速度を上げる</button></div><a href="" class="chgVideo"><i class="fas fa-arrow-left"></i>動画を変更する</a></div><script src="https://kit.fontawesome.com/784b878249.js" crossorigin="anonymous"></script><script>const inputE = document.querySelector('#video');
+  const dropareaE = document.querySelector('.dropArea');
+  const videoCE = document.querySelector('.video-C');
+  const downE = document.querySelector('.speed-down');
+  const upE = document.querySelector('.speed-up');
+  const speedValE = document.querySelector('.ctrl-val');
+  const windowRatio = window.innerWidth / window.innerHeight;
+  const fileTypes = ["audio/flac", "video/mp4", "video/ogg", "video/webm"];
+
+  if(!localStorage.getItem("playbackSpeed")) {localStorage.setItem("playbackSpeed", 1);}
+  let iniSpeed = Number(localStorage.getItem("playbackSpeed"));
+  speedValE.textContent = `${iniSpeed.toFixed(1)}x`;
+
+  inputE.addEventListener('change', () => {
+    loadVideo(inputE.files);
+  });
+
+
+  dropareaE.addEventListener('dragover', (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'copy';
+  });
+
+  dropareaE.addEventListener('drop', (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    loadVideo(event.dataTransfer.files);
+  });
+
+  function loadVideo(fileList) {
+    if(fileList.length === 1 && fileTypes.includes(fileList[0].type)) {
+      let videoRatio;
+      const video = document.createElement('video');
+      video.src = window.URL.createObjectURL(fileList[0]);
+      video.setAttribute('controls', true);
+      videoCE.appendChild(video);
+
+      dropareaE.classList.add('dropArea-hidden');
+      videoCE.classList.add('video-C-appear');
+
+      video.addEventListener('loadedmetadata', () => {
+        videoRatio = video.videoWidth / video.videoHeight;
+
+        if(windowRatio < videoRatio) {
+          videoCE.style.width = "75%";
+          video.style.width = "100%";
+        }
+        else {
+          videoCE.style.height = "calc(100% - 190px)";
+          video.style.height = "100%";
+        }
+      });
+
+      downE.addEventListener('click', () => {chgSpeed("down", video);});
+      upE.addEventListener('click', () => {chgSpeed("up", video);});
+    } else {
+      alert("1つの動画ファイルのみをドラッグ＆ドロップしてください。");
+    }
+  }
+
+  function chgSpeed(type, video) {
+    let curSpeed = Number(localStorage.getItem("playbackSpeed"));
+    let calculatedSpeed;
+    if(type === "up") {calculatedSpeed = curSpeed + 0.1;}
+    else {calculatedSpeed = curSpeed - 0.1;}
+    calculatedSpeed = Math.round(calculatedSpeed * 10) / 10;
+    video.playbackRate = calculatedSpeed;
+    speedValE.textContent = `${calculatedSpeed.toFixed(1)}x`;
+    localStorage.setItem("playbackSpeed", calculatedSpeed);
+  }</script></body></html>

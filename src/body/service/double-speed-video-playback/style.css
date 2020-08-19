@@ -1,0 +1,105 @@
+body {height: 100vh}
+#video {
+  opacity: 0;
+  position: absolute;
+}
+.dropArea {
+  align-content: center;
+  background: repeating-linear-gradient(-45deg, #D5D5D5, #D5D5D5 30px, #eaeaea 30px, #eaeaea 60px);
+  cursor: pointer;
+  display: grid;
+  grid-gap: 60px;
+  grid-template-rows: max-content max-content;
+  height: 100%;
+  justify-items: center;
+}
+.dropArea-hidden {
+  filter: blur(6px) grayscale(0.7);
+  pointer-events: none;
+}
+.videoImg {
+  width: min(70%, 370px);
+}
+.select-exp {
+  font-size: 33px;
+  text-align: center;
+  line-height: 1.3;
+}
+.marker {background: linear-gradient(to top, #7e77f3 10px, transparent 10px);}
+.select-or {display: block;}
+.ryodev {
+  bottom: 2px;
+  font-size: 14px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.video-C {
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity .2s;
+  visibility: hidden;
+}
+.video-C-appear {
+  opacity: 1;
+  visibility: visible;
+}
+video {
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.3);
+  display: block;
+}
+.ctrl-C {
+  align-items: center;
+  background: #3b3d3e;
+  border-radius: 2px;
+  bottom: calc(100% + 4px);
+  color: #fff;
+  display: flex;
+  padding-left: 17px;
+  position: absolute;
+}
+.fas {margin-right: 7px;}
+[class^="speed-"] {
+  background: none;
+  border: none;
+  font-size: 0;
+  height: 48px;
+  line-height: 48px;
+  padding: 0;
+  position: relative;
+  width: 48px;
+}
+[class^=speed-]::after {
+  border-bottom: 2px solid #fff;
+  border-left: 2px solid #fff;
+  content: "";
+  height: 8px;
+  position: absolute;
+  top: 50%;
+  width: 8px;
+}
+.speed-down::after {
+  left: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+.speed-up::after {
+  right: 50%;
+  transform: translateY(-50%) rotate(-135deg);
+}
+.ctrl-val {
+  font-size: 20px;
+}
+.chgVideo {
+  color: inherit;
+  position: absolute;
+  text-decoration: none;
+  top: calc(100% + 4px);
+}
+
+@media (min-width:630px) {
+  .select-or {display: inline;}
+}
