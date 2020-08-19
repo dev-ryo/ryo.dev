@@ -1,0 +1,90 @@
+---
+title: 【概要】動画倍速再生
+desc: サービス最終更新日：2020.08.19　動画をドラッグ＆ドロップするだけでブラウザ上で好みの速さで再生できます。会員登録不要。
+url: https://ryo.dev/article/myWebServices/testPagesTogether/
+tags: myWebServices
+tagJpName: 自作Webサービス
+heading:
+  - 動画を倍速で再生するサービスを作りました！
+  - きっかけ
+  - 特徴
+  - 画像・アイコン・コード
+  - 謝辞
+headingId:
+  - about
+  - reason
+  - feature
+  - item
+  - thanks
+datePublished: "2020-05-22"
+date: 2020-08-19
+originalCSS: true
+twCardType: summary_large_image
+twCardImg: https://ryo.dev/article/myWebServices/double-speed-video-playback/img/play.jpg
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>動画をドラッグ＆ドロップしてください。もしくは、画面をクリックするとデバイスのストレージが開くので、動画を選択してください。</p>
+  <picture>
+    <source srcset="img/top.webp" type="image/webp">
+    <source srcset="img/top.jpg" type="image/jpg">
+    <img src="img/top.jpg" alt="動画倍速サービスのトップページ" class="fullWidthImg">
+  </picture>
+  <p>その動画をブラウザ上で再生できます。しかも、<strong>再生速度を変えられます</strong>！</p>
+  <picture>
+    <source srcset="img/play.webp" type="image/webp">
+    <source srcset="img/play.jpg" type="image/jpg">
+    <img src="img/play.jpg" alt="動画倍速サービスの動画再生画面" class="fullWidthImg">
+  </picture>
+  <p>作ったきっかけやサービスの特徴などを紹介します。</p>
+  <p><a href="/service/double-speed-video-playback/" class="toService">使ってみる</a></p>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <p>僕には大学生の弟がいます。新型コロナウイルスの影響で弟はオンライン授業を受講しています。教授から送られてくる講義動画を見て勉強しているのですが、先生の話スピードが遅いことに不満を感じていました。</p>
+  <p>自分でもいろいろ試行錯誤していたようです。動画を飛ばし飛ばししてみたものの内容が理解できない。音声をスマホで録音して倍速再生してみたものの講義動画は数十分の長さがあるので手間がかかりすぎるし映像とマッチさせるのが面倒。</p>
+  <p>僕がパッと思いついたのはYouTubeにアップロードすることでした。YouTubeなら倍速再生できますからね。ただ、一般公開するのは問題ありそうなので、自分だけしか見れないように設定する必要がありますが。これも手間がかかりますね。じゃあ動画を倍速再生するWebサービスはないのだろうか。検索してみた。1分くらい探しましたが、ソフトインストール型のものしか見つかりませんでした。</p>
+  <p>「じゃあ作るか」</p>
+  <p>もしかしたら弟と同じ悩みを持つ学生がいるかもしれません。そんな彼らにはきっと需要があるはずだと考え、作ることにしました。</p>
+</section>
+
+<section id="{{ headingId[2] }}">
+  <h2>{{ heading[2] }}</h2>
+  <ul>
+    <li>会員登録不要。</li>
+    <li>トリセツ不要。秒で使いこなせます。</li>
+    <li>動画はどこにも保存されません。</li>
+    <li>再生速度は0.1刻みで自由に指定できます。</li>
+  </ul>
+</section>
+
+<section id="{{ headingId[3] }}">
+  <h2>{{ heading[3] }}</h2>
+  <p>トップページの文字上の画像は<a href="https://undraw.co/illustrations">unDraw</a>さんから拝借しました。</p>
+  <p>メーターアイコンと左矢印アイコンは<a href="https://fontawesome.com/">Font Awesome</a>さんから拝借しました。</p>
+  <p>ドラッグ＆ドロップのコードは<a href="https://web.dev/read-files/#select-dnd">Read files in JavaScript</a>の記事を参考にしました。</p>
+  <p>ファイルを読み込んで表示させるためのコードは<a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/Input/file">&lt;input type="file"&gt; - HTML: HyperText Markup Language | MDN</a>の記事を参考にしました。</p>
+  <p>本サービスの機能を作るコードはすべてJavaScriptなので、デベロッパーツールからコードを確認できます。</p>
+</section>
+
+<section id="{{ headingId[4] }}">
+  <h2>{{ heading[4] }}</h2>
+  <figure>
+    <figcaption class="p1">このサービスについて<a href="https://twitter.com/ryoo_s_s/status/1263746576096415751">Twitterで紹介</a>したところ、明治大学で教鞭をとっておられる水田周平先生（<a href="https://twitter.com/Johnevang">@Johnevang</a>）にリツイートしていただきました！</figcaption>
+    <picture>
+      <source srcset="img/retweet.webp" type="image/webp">
+      <source srcset="img/retweet.jpg" type="image/jpg">
+      <img src="img/retweet.jpg" alt="このサービスの紹介ツイートを水田先生がリツイート" class="fullWidthImg">
+    </picture>
+  </figure>
+  <p class="rtDate m--0">RT日時：2020.06.10</p>
+  <p>ありがとうございましたm(__)m</p>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>もしサービスをよりよくする案を思いついたり、不具合を見つけたり、お聞きしたいことがあったりした場合は、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>
