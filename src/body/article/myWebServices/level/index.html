@@ -1,0 +1,74 @@
+---
+title: 【概要】水平器
+desc: 最終更新日：2020.08.19　ブラウザ上で使える水平器です。スマホを置くだけで傾きがどのくらいあるのかを計測できます。
+url: https://ryo.dev/article/myWebServices/level/
+tags: myWebServices
+tagJpName: 自作Webサービス
+heading:
+  - 作ったもの
+  - 使い方
+  - 注意
+headingId:
+  - product
+  - how2use
+  - note
+datePublished: "2020-04-11"
+date: 2020-08-19
+originalCSS: true
+twCardType: summary
+twCardImg: https://ryo.dev/article/myWebServices/level/img/tw.jpg
+layout: layouts/article1.html
+---
+
+<section id="{{ headingId[0] }}">
+  <h2>{{ heading[0] }}</h2>
+  <p>水平器を作りました。傾きを測るためのサービスです。アプリインストール不要、会員登録不要、ブラウザ上で利用できるサービスです。</p>
+  <picture class="w60p">
+    <source srcset="img/screenshot.webp" type="image/webp">
+    <source srcset="img/screenshot.jpg" type="image/jpg">
+    <img src="img/screenshot.jpg" alt="自作水平器のスクショ" class="fullWidthImg">
+  </picture>
+  <p>
+    <a href="/service/level/" class="toService">使ってみる</a>
+  </p>
+</section>
+
+<section id="{{ headingId[1] }}">
+  <h2>{{ heading[1] }}</h2>
+  <p>スマホの画面を上にして、傾きを測りたいものの上に置くだけです。なお、スマホは縦向きにしてください。傾きが原因で画面が横向きになってしまう場合は縦向きで固定してください。</p>
+  <p>緑のタイルの箇所では傾き具合を視覚的に確認できます。白の横線がX軸で、右が正の向きです。白の縦線がY軸で、上が正の向きです。軸の値は傾きの角度を表しています。</p>
+  <div class="leveler" aria-hidden="true">
+    <span class="leveler-exp-axis">X軸</span>
+    <span class="leveler-exp-axis">Y軸</span>
+  </div>
+  <p>水平位置からX軸を基準に自分側に向けて傾けると、角度が大きくなるにつれて黒の縦線はY軸正の方向へ伸びていきます。逆に、自分と反対側に向けて傾けると、角度が大きくなるにつれて黒の縦線はY軸負の方向へ伸びていきます。また、水平位置からY軸を基準に左に傾けると、角度が大きくなるにつれて黒の横線はX軸正の方向へ伸びていきます。逆に、右に傾けると、角度が大きくなるにつれて黒の横線はX軸負の方向へ伸びていきます。</p>
+  <p>軸の端の値（下図赤丸部分）は緑のタイルの右上の「メモリの最大角度」と関連しています。「メモリの最大角度」の初期値は「10」ですが、変更することも可能です。「メモリの最大角度」が「10」の場合、X軸とY軸の最大値は10°になり、最小値は-10°になります。</p>
+  <div>
+    <p class="leveler-exp-rt">メモリの最大角度： <span class="leveler-exp-input">10</span></p>
+    <div class="leveler" aria-hidden="true">
+      <span class="leveler-exp-maxAng"></span>
+      <span class="leveler-exp-maxAng"></span>
+    </div>
+  </div>
+  <p>例えば、「メモリの最大角度」が「10」で、X軸を基準に5°、Y軸を基準に-3°傾けた場合、緑のタイルは以下のような表示になります。</p>
+  <div class="leveler" aria-hidden="true">
+    <span class="leveler-sample"></span>
+    <span class="leveler-sample-5">5°</span>
+    <span class="leveler-sample-3">-3°</span>
+  </div>
+  <p>つまり、「メモリの最大角度」が小さい値のときに黒線を2辺に持つ長方形の面積が小さいほど、より水平に近いということです。</p>
+</section>
+
+<section id="{{ headingId[2] }}">
+  <h2>{{ heading[2] }}</h2>
+  <ul>
+    <li>スマホでのみ利用できます。正確には、画面幅500ピクセル以下のデバイスで使えます。</li>
+    <li>加速度センサーが付いていないデバイスでは傾きを検出できません。</li>
+    <li>精度はスマホの加速度センサーの精度に依存します。</li>
+  </ul>
+</section>
+
+<section id="feedback">
+  <h2>フィードバック</h2>
+  <p>もしサービスをよりよくする案を思いついたり、不具合を見つけたり、お聞きしたいことがあったりした場合は、<a href="{{ site.contact.tw1 }}">TwitterのDM</a>か<a href="mailto:{{ site.contact.mail }}">メール</a>にご連絡ください。</p>
+</section>

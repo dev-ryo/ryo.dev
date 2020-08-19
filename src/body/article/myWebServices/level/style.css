@@ -1,0 +1,100 @@
+.w60p {
+  width: 60%;
+  margin: 2.4rem auto;
+  max-width: 270px;
+}
+.toService {
+  border: 2px solid #0f54b2;
+  color: #0f54b2;
+  display: block;
+  font-size: 18px;
+  line-height: 1;
+  margin: 0 auto;
+  outline: 0;
+  padding: 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: .2s;
+  width: 138px;
+}
+.toService:focus,
+.toService:hover {
+  background: #0f54b2;
+  color: #fff;
+}
+.leveler {
+  background: linear-gradient(to left, transparent calc(50% - 0.5px), #fff calc(50% - 0.5px), #fff calc(50% + 0.5px), transparent calc(50% + 0.5px)), linear-gradient(to top, #4caf50 calc(50% - 0.5px), #fff calc(50% - 0.5px), #fff calc(50% + 0.5px), #4caf50 calc(50% + 0.5px));
+  position: relative;
+  margin: 0 auto;
+  max-width: 300px;
+}
+.leveler:after {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+.leveler-exp-axis {
+  color: #fff;
+  position: absolute;
+}
+.leveler-exp-axis:first-of-type {
+  bottom: 50%;
+  right: 0;
+}
+.leveler-exp-axis:last-of-type {
+  left: 51%;
+  top: 0;
+}
+.leveler-exp-maxAng::after,
+.leveler-exp-maxAng::before {
+  border: 2px solid red;
+  border-radius: 50%;
+  content: "";
+  height: 15px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 15px;
+}
+.leveler-exp-maxAng:first-of-type::after {left: 50%;}
+.leveler-exp-maxAng:first-of-type::before {
+  left: 100%;
+  top: 50%;
+}
+.leveler-exp-maxAng:last-of-type::after {top: 50%;}
+.leveler-exp-maxAng:last-of-type::before {
+  top: 100%;
+  left: 50%;
+}
+.leveler-exp-rt {
+  margin: 0 auto 5px;
+  max-width: 300px;
+  text-align: right;
+}
+.leveler-exp-input {
+  border-bottom: 2px solid #b5b5b5;
+  display:inline-block;
+  text-align:left;
+  width:50px;
+}
+.leveler-sample {
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  bottom: 50%;
+  height: 25%;
+  position: absolute;
+  right: 50%;
+  width: 15%;
+}
+[class^="leveler-sample-"] {
+  position: absolute;
+}
+.leveler-sample-5 {
+  left: 51%;
+  top: 25%;
+  transform: translateY(-50%);
+}
+.leveler-sample-3 {
+  left: 35%;
+  top: 50%;
+  transform: translateX(-50%);
+}
